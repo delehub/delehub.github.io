@@ -1,0 +1,2290 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="野火STM32F1开发板 IIC 0.96OLED 波形显示, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>野火STM32F1开发板 IIC 0.96OLED 波形显示 | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">野火STM32F1开发板 IIC 0.96OLED 波形显示</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                <span class="chip bg-color">嵌入式</span>
+                            </a>
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                            <a href="/tags/OLED/">
+                                <span class="chip bg-color">OLED</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">软件开发</span>
+                            </a>
+                        
+                            <a href="/tags/IIC/">
+                                <span class="chip bg-color">IIC</span>
+                            </a>
+                        
+                            <a href="/tags/STM32-ARM/">
+                                <span class="chip bg-color">STM32 ARM</span>
+                            </a>
+                        
+                            <a href="/tags/ADC/">
+                                <span class="chip bg-color">ADC</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%87%8E%E7%81%AB%E3%80%81/">
+                                <span class="chip bg-color">野火、</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C/" class="post-category">
+                                C
+                            </a>
+                        
+                            <a href="/categories/C/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-category">
+                                软件开发
+                            </a>
+                        
+                            <a href="/categories/C/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/IIC/" class="post-category">
+                                IIC
+                            </a>
+                        
+                            <a href="/categories/C/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/IIC/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                嵌入式
+                            </a>
+                        
+                            <a href="/categories/C/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/IIC/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32-ARM/" class="post-category">
+                                STM32 ARM
+                            </a>
+                        
+                            <a href="/categories/C/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/IIC/%E5%B5%8C%E5%85%A5%E5%BC%8F/STM32-ARM/ADC/" class="post-category">
+                                ADC
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-28
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="野火STM32F1开发板-IIC-0-96OLED-ADC模拟-波形显示"><a href="#野火STM32F1开发板-IIC-0-96OLED-ADC模拟-波形显示" class="headerlink" title="野火STM32F1开发板 IIC 0.96OLED ADC模拟 波形显示"></a>野火STM32F1开发板 IIC 0.96OLED ADC模拟 波形显示</h1><a id="more"></a>
+<h1 id="硬件连接"><a href="#硬件连接" class="headerlink" title="硬件连接"></a>硬件连接</h1><p><img src="https://img-blog.csdnimg.cn/20200728101746954.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="软件代码"><a href="#软件代码" class="headerlink" title="软件代码"></a>软件代码</h1><h3 id="bsp-adc-c"><a href="#bsp-adc-c" class="headerlink" title="bsp_adc.c"></a>bsp_adc.c</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_adc.h"</span></span>
+
+uint16_t ConvData<span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ADCx_GPIO_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    GPIO_InitTypeDef GPIO_InitStruct<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*开时钟*/</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>ADCx_PORT_CLK<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*配置参数*/</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin<span class="token operator">=</span>ADCx_PIN<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode<span class="token operator">=</span>GPIO_Mode_AIN<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*模拟输入模式*/</span>
+    <span class="token comment" spellcheck="true">/*写入寄存器*/</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>ADCx_PORT<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ADCx_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ADC_InitTypeDef ADC_InitStruct<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*打开ADC时钟*/</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>ADCx_CLK<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*配置参数*/</span>
+    ADC_InitStruct<span class="token punctuation">.</span>ADC_Mode<span class="token operator">=</span>ADC_Mode_Independent<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*独立模式*/</span>
+    ADC_InitStruct<span class="token punctuation">.</span>ADC_ContinuousConvMode<span class="token operator">=</span>ENABLE<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*连续转换*/</span>
+    ADC_InitStruct<span class="token punctuation">.</span>ADC_DataAlign<span class="token operator">=</span>ADC_DataAlign_Right<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*数据右对齐*/</span>
+    ADC_InitStruct<span class="token punctuation">.</span>ADC_ExternalTrigConv<span class="token operator">=</span>ADC_ExternalTrigConv_None<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*不使用外部硬件触发*/</span>
+    ADC_InitStruct<span class="token punctuation">.</span>ADC_NbrOfChannel<span class="token operator">=</span>ADCx_CHx<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*ADC是哪个通道*/</span>
+    ADC_InitStruct<span class="token punctuation">.</span>ADC_ScanConvMode<span class="token operator">=</span>DISABLE<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*不使用连续扫描*/</span>
+    <span class="token comment" spellcheck="true">/*将参数写入寄存器*/</span>
+    <span class="token function">ADC_Init</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ADC_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*设置ADC_CLK*/</span>
+    <span class="token function">RCC_ADCCLKConfig</span><span class="token punctuation">(</span>RCC_PCLK2_Div6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*规则通道设置，通道，采样顺序，采样时间*/</span>
+    <span class="token function">ADC_RegularChannelConfig</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">,</span> ADCx_CHx<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> ADC_SampleTime_1Cycles5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*ADC使能*/</span>
+    <span class="token function">ADC_Cmd</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*校验ADC*/</span>
+    <span class="token function">ADC_StartCalibration</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">ADC_GetCalibrationStatus</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">)</span><span class="token operator">==</span>RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*DMA设置*/</span>
+    <span class="token function">ADC_DMACmd</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*ADC软件触发，开始转换*/</span>
+    <span class="token function">ADC_SoftwareStartConvCmd</span><span class="token punctuation">(</span>ADC_x<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ADCx_DMA_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    DMA_InitTypeDef DMA_InitStruct<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*打开DMA时钟*/</span>
+  <span class="token function">RCC_AHBPeriphClockCmd</span><span class="token punctuation">(</span>RCC_AHBPeriph_DMA1<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">/*配置DMA参数*/</span>  
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_PeripheralBaseAddr<span class="token operator">=</span><span class="token punctuation">(</span>uint32_t<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>ADC_x<span class="token operator">-></span>DR<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*ADC的数据寄存器*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_MemoryBaseAddr<span class="token operator">=</span><span class="token punctuation">(</span>uint32_t<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ConvData<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*存储器地址*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_DIR<span class="token operator">=</span>DMA_DIR_PeripheralSRC<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*外设为源*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_BufferSize<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*数据的个数为1*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_PeripheralInc<span class="token operator">=</span>DMA_PeripheralInc_Disable<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*外设地址不增加*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_MemoryInc<span class="token operator">=</span>DMA_MemoryInc_Disable<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*存储器地址不增加*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_PeripheralDataSize<span class="token operator">=</span>DMA_PeripheralDataSize_HalfWord<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/*16位数据，所以是半字*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_MemoryDataSize<span class="token operator">=</span>DMA_MemoryDataSize_HalfWord<span class="token punctuation">;</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_Mode<span class="token operator">=</span>DMA_Mode_Circular<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*这里是指数据循环不停地发送*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_Priority<span class="token operator">=</span>DMA_Priority_High<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*DMA优先级设为高*/</span>
+  DMA_InitStruct<span class="token punctuation">.</span>DMA_M2M<span class="token operator">=</span>DMA_M2M_Disable<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*不使能存储器到存储器*/</span>
+    <span class="token comment" spellcheck="true">/*将参数写入寄存器*/</span>
+  <span class="token function">DMA_Init</span><span class="token punctuation">(</span>ADCx_DMA_CHx<span class="token punctuation">,</span> <span class="token operator">&amp;</span>DMA_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*使能DMA*/</span>
+  <span class="token function">DMA_Cmd</span><span class="token punctuation">(</span>ADCx_DMA_CHx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">ADCx_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token function">ADCx_GPIO_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ADCx_DMA_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ADCx_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span></code></pre>
+<h3 id="bsp-adc-h"><a href="#bsp-adc-h" class="headerlink" title="bsp_adc.h"></a>bsp_adc.h</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> _BSP_ADC_H_</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> _BSP_ADC_H_</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span></span>
+<span class="token comment" spellcheck="true">/*GPIO*/</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_PORT_CLK          RCC_APB2Periph_GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_PIN                  GPIO_Pin_7</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_PORT                    GPIOA</span>
+
+<span class="token comment" spellcheck="true">/*ADC*/</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADC_x                            ADC1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_CLK              RCC_APB2Periph_ADC1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_CHx                 ADC_Channel_7</span>
+
+<span class="token comment" spellcheck="true">/*DMA*/</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_DMA_CLK          RCC_AHBPeriph_DMA1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADCx_DMA_CHx           DMA1_Channel1</span>
+
+
+<span class="token keyword">void</span> <span class="token function">ADCx_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">//_BSP_ADC_H_</span></code></pre>
+<h3 id="bsp-advanced-timer-c"><a href="#bsp-advanced-timer-c" class="headerlink" title="bsp_advanced_timer.c"></a>bsp_advanced_timer.c</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_advanced_timer.h"</span></span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">AdvancedTim_GPIO_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    GPIO_InitTypeDef GPIO_InitStruct<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*开时钟*/</span>
+    <span class="token function">TIMx_CH1_GPIO_CLK_CMD</span><span class="token punctuation">(</span>TIMx_CH1_GPIO_CLK<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TIMx_CH1N_GPIO_CLK_CMD</span><span class="token punctuation">(</span>TIMx_CH1N_GPIO_CLK<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TIMx_BKIN_GPIO_CLK_CMD</span><span class="token punctuation">(</span>TIMx_BKIN_GPIO_CLK <span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*设置参数1*/</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode<span class="token operator">=</span>GPIO_Mode_AF_PP<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin<span class="token operator">=</span>TIMx_CH1_GPIO_PIN<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Speed<span class="token operator">=</span>GPIO_Speed_50MHz<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*写参数*/</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>TIMx_CH1_GPIO_PORT<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment" spellcheck="true">/*设置参数2*/</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin<span class="token operator">=</span>TIMx_CH1N_GPIO_PIN<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*写参数*/</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>TIMx_CH1N_GPIO_PORT<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment" spellcheck="true">/*设置参数3*/</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode<span class="token operator">=</span>GPIO_Mode_AF_PP<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin<span class="token operator">=</span>TIMx_BKIN_GPIO_PIN<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*写参数*/</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>TIMx_BKIN_GPIO_PORT<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">AdvancedTim_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct<span class="token punctuation">;</span>
+    TIM_OCInitTypeDef TIM_OCInitStruct<span class="token punctuation">;</span>
+    TIM_BDTRInitTypeDef TIM_BDTRInitStruct<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*开时钟*/</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>ADVANCED_TIM_CLK<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*配置时基参数*/</span>
+    TIM_TimeBaseInitStruct<span class="token punctuation">.</span>TIM_Prescaler<span class="token operator">=</span>ADVANCED_TIM_PSC<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*预分频因子*/</span>
+    TIM_TimeBaseInitStruct<span class="token punctuation">.</span>TIM_CounterMode<span class="token operator">=</span>TIM_CounterMode_Up<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*向上计数*/</span>
+    TIM_TimeBaseInitStruct<span class="token punctuation">.</span>TIM_Period<span class="token operator">=</span>ADVANCED_TIM_ARR<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*周期*/</span>
+    TIM_TimeBaseInitStruct<span class="token punctuation">.</span>TIM_ClockDivision<span class="token operator">=</span>TIM_CKD_DIV1<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*Tdts:这里会与死区时间有关*/</span>
+    TIM_TimeBaseInitStruct<span class="token punctuation">.</span>TIM_RepetitionCounter<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*不使用重复计数器*/</span>
+    <span class="token comment" spellcheck="true">/*写参数*/</span>
+    <span class="token function">TIM_TimeBaseInit</span><span class="token punctuation">(</span>ADVANCED_TIM<span class="token punctuation">,</span> <span class="token operator">&amp;</span>TIM_TimeBaseInitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/*配置输出比较的参数*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OCMode<span class="token operator">=</span>TIM_OCMode_PWM1<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*PWM模式一*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OutputState<span class="token operator">=</span>TIM_OutputState_Enable<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*主通道使能*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OutputNState<span class="token operator">=</span>TIM_OutputNState_Enable<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*互补通道使能*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_Pulse<span class="token operator">=</span>ADVANCED_TIM_CCR<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*占空比*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OCPolarity<span class="token operator">=</span>TIM_OCPolarity_High<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*主通道高电平为有效*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OCNPolarity<span class="token operator">=</span>TIM_OCNPolarity_High<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*互补通道高电平为有效*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OCIdleState<span class="token operator">=</span>TIM_OCIdleState_Reset<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*刹车后的输出状态*/</span>
+    TIM_OCInitStruct<span class="token punctuation">.</span>TIM_OCNIdleState<span class="token operator">=</span>TIM_OCNIdleState_Reset<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*写参数*/</span>
+    <span class="token function">TIM_OC1Init</span><span class="token punctuation">(</span>ADVANCED_TIM<span class="token punctuation">,</span> <span class="token operator">&amp;</span>TIM_OCInitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TIM_OC1PreloadConfig</span><span class="token punctuation">(</span>ADVANCED_TIM<span class="token punctuation">,</span> TIM_OCPreload_Enable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/*配置死区刹车寄存器*/</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_OSSRState<span class="token operator">=</span>TIM_OSSRState_Enable<span class="token punctuation">;</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_OSSIState<span class="token operator">=</span>TIM_OSSIState_Enable<span class="token punctuation">;</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_LOCKLevel<span class="token operator">=</span>TIM_LOCKLevel_OFF<span class="token punctuation">;</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_DeadTime<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/*死区时间97ns*/</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_Break<span class="token operator">=</span>TIM_Break_Enable<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*使能刹车功能*/</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_BreakPolarity<span class="token operator">=</span>TIM_BreakPolarity_High<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*当刹车通道为高电平时停止输出*/</span>
+    TIM_BDTRInitStruct<span class="token punctuation">.</span>TIM_AutomaticOutput<span class="token operator">=</span>TIM_AutomaticOutput_Enable<span class="token punctuation">;</span>
+    <span class="token function">TIM_BDTRConfig</span><span class="token punctuation">(</span>ADVANCED_TIM<span class="token punctuation">,</span> <span class="token operator">&amp;</span>TIM_BDTRInitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">TIM_Cmd</span><span class="token punctuation">(</span>ADVANCED_TIM<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TIM_CtrlPWMOutputs</span><span class="token punctuation">(</span>ADVANCED_TIM<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">AdvancedTim_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+        <span class="token function">AdvancedTim_GPIO_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">AdvancedTim_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="bsp-advanced-timer-h"><a href="#bsp-advanced-timer-h" class="headerlink" title="bsp_advanced_timer.h"></a>bsp_advanced_timer.h</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> _BSP_ADVANCED_TIMER_H_</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> _BSP_ADVANCED_TIMER_H_</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span></span>
+<span class="token comment" spellcheck="true">/*GPIO*/</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1_GPIO_PORT                 GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1_GPIO_PIN                 GPIO_Pin_8</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1_GPIO_CLK             RCC_APB2Periph_GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1_GPIO_CLK_CMD         RCC_APB2PeriphClockCmd</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1N_GPIO_PORT             GPIOB</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1N_GPIO_PIN                 GPIO_Pin_13</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1N_GPIO_CLK             RCC_APB2Periph_GPIOB</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_CH1N_GPIO_CLK_CMD         RCC_APB2PeriphClockCmd</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_BKIN_GPIO_PORT             GPIOB</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_BKIN_GPIO_PIN                 GPIO_Pin_12</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_BKIN_GPIO_CLK             RCC_APB2Periph_GPIOB</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIMx_BKIN_GPIO_CLK_CMD         RCC_APB2PeriphClockCmd</span>
+<span class="token comment" spellcheck="true">/*Advanced Timer*/</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM                             TIM1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_CLK                    RCC_APB2Periph_TIM1</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_PSC_SET             36</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_PSC                     (ADVANCED_TIM_PSC_SET-1)</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_ARR_SET             65536</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_ARR                     (ADVANCED_TIM_ARR_SET-1)</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_CCR_SET             12000</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADVANCED_TIM_CCR                    (ADVANCED_TIM_CCR_SET)</span>
+
+
+<span class="token keyword">void</span> <span class="token function">AdvancedTim_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span class="token comment" spellcheck="true">//_BSP_ADVANCED_TIMER_H_</span></code></pre>
+<h3 id="bsp-i2c-gpio-c"><a href="#bsp-i2c-gpio-c" class="headerlink" title="bsp_i2c_gpio.c"></a>bsp_i2c_gpio.c</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+  ******************************************************************************
+  * @file    bsp_i2c_gpio.c
+  * @version V1.0
+  * @date    2013-xx-xx
+  * @brief   用gpio模拟i2c总线, 适用于STM32系列CPU。该模块不包括应用层命令帧，仅包括I2C总线基本操作函数。
+  ******************************************************************************
+  * @attention
+  *
+  * 实验平台:野火 F103-MINI STM32 开发板 
+  * 论坛    :http://www.firebbs.cn
+  * 淘宝    :https://fire-stm32.taobao.com
+  *
+  ******************************************************************************
+  */</span> 
+
+<span class="token comment" spellcheck="true">/*
+    应用说明：
+    在访问I2C设备前，请先调用 i2c_CheckDevice() 检测I2C设备是否正常
+
+*/</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_i2c_gpio.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span></span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_Delay
+*    功能说明: I2C总线位延迟，最快400KHz
+*    形    参：无
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//uint8_t i;</span>
+
+    <span class="token comment" spellcheck="true">/*　
+         下面的时间是通过逻辑分析仪测试得到的。
+    工作条件：CPU主频72MHz ，MDK编译环境，1级优化
+
+        循环次数为10时，SCL频率 = 205KHz 
+        循环次数为7时，SCL频率 = 347KHz， SCL高电平时间1.5us，SCL低电平时间2.87us 
+         循环次数为5时，SCL频率 = 421KHz， SCL高电平时间1.25us，SCL低电平时间2.375us 
+    */</span>
+    <span class="token comment" spellcheck="true">//for (i = 0; i &lt; 10; i++);</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_Start
+*    功能说明: CPU发起I2C总线启动信号
+*    形    参：无
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">void</span> <span class="token function">i2c_Start</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* 当SCL高电平时，SDA出现一个下跳沿表示I2C总线启动信号 */</span>
+    <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SDA_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_Start
+*    功能说明: CPU发起I2C总线停止信号
+*    形    参：无
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">void</span> <span class="token function">i2c_Stop</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* 当SCL高电平时，SDA出现一个上跳沿表示I2C总线停止信号 */</span>
+    <span class="token function">OLED_I2C_SDA_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_SendByte
+*    功能说明: CPU向I2C总线设备发送8bit数据
+*    形    参：_ucByte ： 等待发送的字节
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">void</span> <span class="token function">i2c_SendByte</span><span class="token punctuation">(</span>uint8_t _ucByte<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint8_t i<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* 先发送字节的高位bit7 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>_ucByte <span class="token operator">&amp;</span> <span class="token number">0x80</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_I2C_SDA_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+        <span class="token function">OLED_I2C_SCL_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">7</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+             <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 释放总线</span>
+        <span class="token punctuation">}</span>
+        _ucByte <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* 左移一个bit */</span>
+        <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_ReadByte
+*    功能说明: CPU从I2C总线设备读取8bit数据
+*    形    参：无
+*    返 回 值: 读到的数据
+*********************************************************************************************************
+*/</span>
+uint8_t <span class="token function">i2c_ReadByte</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint8_t i<span class="token punctuation">;</span>
+    uint8_t value<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* 读到第1个bit为数据的bit7 */</span>
+    value <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        value <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">OLED_I2C_SDA_READ</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            value<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">OLED_I2C_SCL_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_WaitAck
+*    功能说明: CPU产生一个时钟，并读取器件的ACK应答信号
+*    形    参：无
+*    返 回 值: 返回0表示正确应答，1表示无器件响应
+*********************************************************************************************************
+*/</span>
+ uint8_t <span class="token function">i2c_WaitAck</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint8_t re<span class="token punctuation">;</span>
+
+    <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU释放SDA总线 */</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU驱动SCL = 1, 此时器件会返回ACK应答 */</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">OLED_I2C_SDA_READ</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">/* CPU读取SDA口线状态 */</span>
+    <span class="token punctuation">{</span>
+        re <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        re <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">OLED_I2C_SCL_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> re<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_Ack
+*    功能说明: CPU产生一个ACK信号
+*    形    参：无
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">void</span> <span class="token function">i2c_Ack</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">OLED_I2C_SDA_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU驱动SDA = 0 */</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU产生1个时钟 */</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU释放SDA总线 */</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_NAck
+*    功能说明: CPU产生1个NACK信号
+*    形    参：无
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">void</span> <span class="token function">i2c_NAck</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">OLED_I2C_SDA_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU驱动SDA = 1 */</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* CPU产生1个时钟 */</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">OLED_I2C_SCL_0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">i2c_Delay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_CfgGpio
+*    功能说明: 配置I2C总线的GPIO，采用模拟IO的方式实现
+*    形    参：无
+*    返 回 值: 无
+*********************************************************************************************************
+*/</span>
+<span class="token keyword">void</span> <span class="token function">i2c_CfgGpio</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    GPIO_InitTypeDef GPIO_InitStructure<span class="token punctuation">;</span>
+
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span>OLED_RCC_I2C_PORT<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* 打开GPIO时钟 */</span>
+
+    GPIO_InitStructure<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> OLED_I2C_SCL_PIN <span class="token operator">|</span> OLED_I2C_SDA_PIN<span class="token punctuation">;</span>
+    GPIO_InitStructure<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_50MHz<span class="token punctuation">;</span>
+    GPIO_InitStructure<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_Out_OD<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">/* 开漏输出 */</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>OLED_GPIO_PORT_I2C<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStructure<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* 给一个停止信号, 复位I2C总线上的所有设备到待机模式 */</span>
+    <span class="token function">i2c_Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="bsp-i2c-gpio-h"><a href="#bsp-i2c-gpio-h" class="headerlink" title="bsp_i2c_gpio.h"></a>bsp_i2c_gpio.h</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> _BSP_I2C_GPIO_H</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> _BSP_I2C_GPIO_H</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;inttypes.h></span></span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_WR    0        </span><span class="token comment" spellcheck="true">/* 写控制bit */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_RD    1        </span><span class="token comment" spellcheck="true">/* 读控制bit */</span>
+
+<span class="token comment" spellcheck="true">/* 定义I2C总线连接的GPIO端口, 用户只需要修改下面4行代码即可任意改变SCL和SDA的引脚 */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_GPIO_PORT_I2C    GPIOB            </span><span class="token comment" spellcheck="true">/* GPIO端口 */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_RCC_I2C_PORT     RCC_APB2Periph_GPIOB        </span><span class="token comment" spellcheck="true">/* GPIO端口时钟 */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SCL_PIN        GPIO_Pin_6            </span><span class="token comment" spellcheck="true">/* 连接到SCL时钟线的GPIO */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_PIN        GPIO_Pin_7            </span><span class="token comment" spellcheck="true">/* 连接到SDA数据线的GPIO */</span>
+
+
+<span class="token comment" spellcheck="true">/* 定义读写SCL和SDA的宏，已增加代码的可移植性和可阅读性 */</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> 0    </span><span class="token comment" spellcheck="true">/* 条件编译： 1 选择GPIO的库函数实现IO读写 */</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SCL_1()  GPIO_SetBits(OLED_GPIO_PORT_I2C, OLED_I2C_SCL_PIN)        </span><span class="token comment" spellcheck="true">/* SCL = 1 */</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SCL_0()  GPIO_ResetBits(OLED_GPIO_PORT_I2C, OLED_I2C_SCL_PIN)        </span><span class="token comment" spellcheck="true">/* SCL = 0 */</span>
+
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_1()  GPIO_SetBits(OLED_GPIO_PORT_I2C, OLED_I2C_SDA_PIN)        </span><span class="token comment" spellcheck="true">/* SDA = 1 */</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_0()  GPIO_ResetBits(OLED_GPIO_PORT_I2C, OLED_I2C_SDA_PIN)        </span><span class="token comment" spellcheck="true">/* SDA = 0 */</span>
+
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_READ()  GPIO_ReadInputDataBit(OLED_GPIO_PORT_I2C, OLED_I2C_SDA_PIN)    </span><span class="token comment" spellcheck="true">/* 读SDA口线状态 */</span>
+<span class="token macro property">#<span class="token directive keyword">else</span>    </span><span class="token comment" spellcheck="true">/* 这个分支选择直接寄存器操作实现IO读写 */</span>
+    <span class="token comment" spellcheck="true">/*　注意：如下写法，在IAR最高级别优化时，会被编译器错误优化 */</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SCL_1()  OLED_GPIO_PORT_I2C->BSRR = OLED_I2C_SCL_PIN                </span><span class="token comment" spellcheck="true">/* SCL = 1 */</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SCL_0()  OLED_GPIO_PORT_I2C->BRR = OLED_I2C_SCL_PIN                </span><span class="token comment" spellcheck="true">/* SCL = 0 */</span>
+
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_1()  OLED_GPIO_PORT_I2C->BSRR = OLED_I2C_SDA_PIN                </span><span class="token comment" spellcheck="true">/* SDA = 1 */</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_0()  OLED_GPIO_PORT_I2C->BRR = OLED_I2C_SDA_PIN                </span><span class="token comment" spellcheck="true">/* SDA = 0 */</span>
+
+    <span class="token macro property">#<span class="token directive keyword">define</span> OLED_I2C_SDA_READ()  ((OLED_GPIO_PORT_I2C->IDR &amp; OLED_I2C_SDA_PIN) != 0)    </span><span class="token comment" spellcheck="true">/* 读SDA口线状态 */</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+
+<span class="token keyword">void</span> <span class="token function">i2c_Start</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">i2c_Stop</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">i2c_SendByte</span><span class="token punctuation">(</span>uint8_t _ucByte<span class="token punctuation">)</span><span class="token punctuation">;</span>
+uint8_t <span class="token function">i2c_ReadByte</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+uint8_t <span class="token function">i2c_WaitAck</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">i2c_Ack</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">i2c_NAck</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">i2c_CfgGpio</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span></code></pre>
+<h3 id="OLED-I2C-c"><a href="#OLED-I2C-c" class="headerlink" title="OLED_I2C.c"></a>OLED_I2C.c</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"OLED_I2C.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_i2c_gpio.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_systick.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"codetab.h"</span></span>
+
+uint8_t DataBuffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+uint8_t Bef<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//保存前一个数据的几个参数1.要写在第几页2.0x01要移动几位3.写什么数据</span>
+uint8_t Cur<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当前前一个数据1.要写在第几页2.0x01要移动几位3.写什么数据</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: i2c_CheckDevice
+*    功能说明: 检测I2C总线设备，CPU向发送设备地址，然后读取设备应答来判断该设备是否存在
+*    形    参：_Address：设备的I2C总线地址
+*    返 回 值: 返回值 0 表示正确， 返回1表示未探测到
+*********************************************************************************************************
+*/</span>
+uint8_t <span class="token function">OLED_CheckDevice</span><span class="token punctuation">(</span>uint8_t _Address<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint8_t ucAck<span class="token punctuation">;</span>
+
+    <span class="token function">i2c_Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">/* 发送启动信号 */</span>
+
+    <span class="token function">i2c_SendByte</span><span class="token punctuation">(</span>_Address<span class="token operator">|</span>OLED_I2C_WR<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* 发送设备地址 */</span>
+    ucAck <span class="token operator">=</span> <span class="token function">i2c_WaitAck</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* 检测设备的ACK应答 */</span>
+
+    <span class="token function">i2c_Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">/* 发送停止信号 */</span>
+
+    <span class="token keyword">return</span> ucAck<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  I2C_WriteByte，向OLED寄存器地址写一个byte的数据
+  * @param  addr：寄存器地址
+    *                    data：要写入的数据
+  * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">I2C_WriteByte</span><span class="token punctuation">(</span>uint8_t addr<span class="token punctuation">,</span>uint8_t data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token function">i2c_Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//开启I2C总线</span>
+
+    <span class="token comment" spellcheck="true">/* 发送设备地址+读写控制bit（0 = w， 1 = r) bit7 先传 */</span>
+    <span class="token function">i2c_SendByte</span><span class="token punctuation">(</span>OLED_ADDRESS<span class="token operator">|</span>OLED_I2C_WR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/*等待ACK */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">i2c_WaitAck</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">goto</span> cmd_fail<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* OLED器件无应答 */</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">i2c_SendByte</span><span class="token punctuation">(</span>addr<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//发送寄存器地址</span>
+
+    <span class="token comment" spellcheck="true">/*等待ACK */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">i2c_WaitAck</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">goto</span> cmd_fail<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* OLED器件无应答 */</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">i2c_SendByte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//发送数据</span>
+
+    <span class="token comment" spellcheck="true">/*等待ACK */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">i2c_WaitAck</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">goto</span> cmd_fail<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* OLED器件无应答 */</span>
+    <span class="token punctuation">}</span>    
+
+ <span class="token comment" spellcheck="true">/* 发送I2C总线停止信号 */</span>
+    <span class="token function">i2c_Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+cmd_fail<span class="token punctuation">:</span> <span class="token comment" spellcheck="true">/* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */</span>
+    <span class="token comment" spellcheck="true">/* 发送I2C总线停止信号 */</span>
+    <span class="token function">i2c_Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  WriteCmd，向OLED写入命令
+  * @param  I2C_Command：命令代码
+  * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> I2C_Command<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//写命令</span>
+<span class="token punctuation">{</span>
+    <span class="token function">I2C_WriteByte</span><span class="token punctuation">(</span><span class="token number">0x00</span><span class="token punctuation">,</span> I2C_Command<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  WriteDat，向OLED写入数据
+  * @param  I2C_Data：数据
+  * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> I2C_Data<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//写数据</span>
+<span class="token punctuation">{</span>
+    <span class="token function">I2C_WriteByte</span><span class="token punctuation">(</span><span class="token number">0x40</span><span class="token punctuation">,</span> I2C_Data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  OLED_Init，初始化OLED
+  * @param  无
+  * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">OLED_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">i2c_CfgGpio</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment" spellcheck="true">/*I2C总线的GPIO初始化*/</span>
+    <span class="token function">Delay_ms</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// 1s,这里的延时很重要,上电后延时，没有错误的冗余设计</span>
+
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xAE</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//display off</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//Set Memory Addressing Mode    </span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//00,Horizontal Addressing Mode;01,Vertical Addressing Mode;10,Page Addressing Mode (RESET);11,Invalid</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xb0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//Set Page Start Address for Page Addressing Mode,0-7</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xc8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//Set COM Output Scan Direction</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x00</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//---set low column address</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//---set high column address</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x40</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set start line address</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x81</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set contrast control register</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xff</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//亮度调节 0x00~0xff</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xa1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set segment re-map 0 to 127</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xa6</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set normal display</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xa8</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set multiplex ratio(1 to 64)</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x3F</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xa4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//0xa4,Output follows RAM content;0xa5,Output ignores RAM content</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xd3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//-set display offset</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x00</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//-not offset</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xd5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set display clock divide ratio/oscillator frequency</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xf0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set divide ratio</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xd9</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set pre-charge period</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x22</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xda</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set com pins hardware configuration</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xdb</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set vcomh</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x20</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//0x20,0.77xVcc</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x8d</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--set DC-DC enable</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0x14</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xaf</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//--turn on oled panel</span>
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  OLED_SetPos，设置光标
+  * @param  x,第几页
+    *                    y,第几列
+  * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> y<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//设置起始点坐标</span>
+<span class="token punctuation">{</span> 
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0xb0</span><span class="token operator">+</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token punctuation">(</span>y<span class="token operator">&amp;</span><span class="token number">0x0f</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token number">0x00</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//LOW</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>y<span class="token operator">&amp;</span><span class="token number">0xf0</span><span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token number">0x10</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//HIGHT</span>
+<span class="token punctuation">}</span>
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  OLED_Fill，填充整个屏幕
+  * @param  fill_Data:要填充的数据
+    * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">OLED_Fill</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//全屏填充</span>
+<span class="token punctuation">{</span>
+    uint8_t i<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">128</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            DataBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0xff</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Write_DataBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  OLED_CLS，清屏
+  * @param  无
+    * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">OLED_CLS</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//清屏</span>
+<span class="token punctuation">{</span>
+    uint8_t i<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">128</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            DataBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0x00</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Write_DataBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  OLED_ON，将OLED从休眠中唤醒
+  * @param  无
+    * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">OLED_ON</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0X8D</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//设置电荷泵</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0X14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//开启电荷泵</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0XAF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//OLED唤醒</span>
+<span class="token punctuation">}</span>
+
+
+ <span class="token comment" spellcheck="true">/**
+  * @brief  OLED_OFF，让OLED休眠 -- 休眠模式下,OLED功耗不到10uA
+  * @param  无
+    * @retval 无
+  */</span>
+<span class="token keyword">void</span> <span class="token function">OLED_OFF</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0X8D</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//设置电荷泵</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0X10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//关闭电荷泵</span>
+    <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token number">0XAE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//OLED休眠</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">void</span> <span class="token function">OLED_ShowStr</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> y<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> ch<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> TextSize<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Parameters     : x,y -- 起始点坐标(x:0~127, y:0~7); ch[] -- 要显示的字符串; TextSize -- 字符大小(1:6*8 ; 2:8*16)</span>
+    <span class="token comment" spellcheck="true">// Description    : 显示codetab.h中的ASCII字符,有6*8和8*16可选择</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>TextSize<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>ch<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'\0'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                c <span class="token operator">=</span> ch<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">32</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">></span> <span class="token number">126</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                    y<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment" spellcheck="true">//OLED_SetPos(x,y);</span>
+                <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">6</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+                    <span class="token function">WriteDat</span><span class="token punctuation">(</span>F6x8<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+                j<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>ch<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'\0'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                c <span class="token operator">=</span> ch<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">32</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">></span> <span class="token number">120</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                    y<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment" spellcheck="true">//OLED_SetPos(x,y);</span>
+                <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+                    <span class="token function">WriteDat</span><span class="token punctuation">(</span>F8X16<span class="token punctuation">[</span>c<span class="token operator">*</span><span class="token number">16</span><span class="token operator">+</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//OLED_SetPos(x,y+1);</span>
+                <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+                    <span class="token function">WriteDat</span><span class="token punctuation">(</span>F8X16<span class="token punctuation">[</span>c<span class="token operator">*</span><span class="token number">16</span><span class="token operator">+</span>i<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+                j<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">void</span> <span class="token function">OLED_ShowCN</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> y<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> N<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Parameters     : x,y -- 起始点坐标(x:0~127, y:0~7); N:汉字在codetab.h中的索引</span>
+    <span class="token comment" spellcheck="true">// Description    : 显示codetab.h中的汉字,16*16点阵</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> wm<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span>  adder<span class="token operator">=</span><span class="token number">32</span><span class="token operator">*</span>N<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//OLED_SetPos(x , y);</span>
+    <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>wm <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>wm <span class="token operator">&lt;</span> <span class="token number">16</span><span class="token punctuation">;</span>wm<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">WriteDat</span><span class="token punctuation">(</span>F16x16<span class="token punctuation">[</span>adder<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        adder <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//OLED_SetPos(x,y + 1);</span>
+    <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>wm <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>wm <span class="token operator">&lt;</span> <span class="token number">16</span><span class="token punctuation">;</span>wm<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">WriteDat</span><span class="token punctuation">(</span>F16x16<span class="token punctuation">[</span>adder<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        adder <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">OLED_DrawBMP</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x0<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> y0<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x1<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> y1<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> BMP<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Parameters     : x0,y0 -- 起始点坐标(x0:0~127, y0:0~7); x1,y1 -- 起点对角线(结束点)的坐标(x1:1~128,y1:1~8)</span>
+    <span class="token comment" spellcheck="true">// Description    : 显示BMP位图</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span>y<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span>y1<span class="token operator">%</span><span class="token number">8</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+        y <span class="token operator">=</span> y1<span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+        y <span class="token operator">=</span> y1<span class="token operator">/</span><span class="token number">8</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>y<span class="token operator">=</span>y0<span class="token punctuation">;</span>y<span class="token operator">&lt;</span>y1<span class="token punctuation">;</span>y<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//OLED_SetPos(x0,y);</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span>x0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>x<span class="token operator">=</span>x0<span class="token punctuation">;</span>x<span class="token operator">&lt;</span>x1<span class="token punctuation">;</span>x<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span>BMP<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">void</span> <span class="token function">Before_State_Update</span><span class="token punctuation">(</span>uint8_t y<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//根据y的值，求出前一个数据的有关参数</span>
+<span class="token punctuation">{</span>
+    Bef<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">7</span><span class="token operator">-</span>y<span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">;</span>
+    Bef<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">7</span><span class="token operator">-</span>y<span class="token operator">%</span><span class="token number">8</span><span class="token punctuation">;</span>
+    Bef<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>Bef<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">Current_State_Update</span><span class="token punctuation">(</span>uint8_t y<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//根据Y值，求出当前数据的有关参数</span>
+<span class="token punctuation">{</span>
+    Cur<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">7</span><span class="token operator">-</span>y<span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据写在第几页</span>
+    Cur<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">7</span><span class="token operator">-</span>y<span class="token operator">%</span><span class="token number">8</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//0x01要移动的位数</span>
+    Cur<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>Cur<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//要写什么数据</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment" spellcheck="true">/*0&lt;=x&lt;=127,0&lt;=y&lt;=63屏幕看作一个坐标轴，左下角是原点*/</span>
+<span class="token keyword">void</span> <span class="token function">OLED_DrawPoint</span><span class="token punctuation">(</span>uint8_t x<span class="token punctuation">,</span>uint8_t y<span class="token punctuation">)</span><span class="token comment" spellcheck="true">/*这里x是横坐标，y是纵坐标，在（x,y）处画一个点*/</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">></span><span class="token number">127</span><span class="token operator">||</span>y<span class="token operator">></span><span class="token number">63</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    uint8_t page<span class="token punctuation">,</span>move<span class="token punctuation">,</span>data<span class="token punctuation">;</span>
+
+    page<span class="token operator">=</span><span class="token number">7</span><span class="token operator">-</span>y<span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据写在第几页</span>
+    move<span class="token operator">=</span><span class="token number">7</span><span class="token operator">-</span>y<span class="token operator">%</span><span class="token number">8</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//0x01要移动的位数</span>
+    data<span class="token operator">=</span><span class="token number">0x01</span><span class="token operator">&lt;&lt;</span>move<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//要写什么数据</span>
+
+    <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">WriteDat</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">OLED_DrawWave</span><span class="token punctuation">(</span>uint8_t x<span class="token punctuation">,</span>uint8_t y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    int8_t page_sub<span class="token punctuation">;</span>
+    uint8_t page_buff<span class="token punctuation">,</span>i<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token function">Current_State_Update</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//根据Y值，求出当前数据的有关参数</span>
+    page_sub<span class="token operator">=</span>Bef<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">-</span>Cur<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当前值与前一个值的页数相比较</span>
+    <span class="token comment" spellcheck="true">//确定当前列，每一页应该写什么数据</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>page_sub<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        page_buff<span class="token operator">=</span>Bef<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page_buff<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">WriteDat</span><span class="token punctuation">(</span>Bef<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">0x01</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        page_buff<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>page_sub<span class="token number">-1</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page_buff<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token number">0xff</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            page_buff<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page_buff<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token number">0xff</span><span class="token operator">&lt;&lt;</span>Cur<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>page_sub<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">==</span>Bef<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">></span>Bef<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">-</span>Bef<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">|</span>Cur<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>Bef<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span>Bef<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">-</span>Cur<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>page_sub<span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        page_buff<span class="token operator">=</span>Cur<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page_buff<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token punctuation">(</span>Cur<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">0x01</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        page_buff<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">-</span>page_sub<span class="token number">-1</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page_buff<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token number">0xff</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            page_buff<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>page_buff<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token number">0xff</span><span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span>Bef<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Before_State_Update</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//把下一列，每一页的数据清除掉</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">1</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token number">0x00</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+*********************************************************************************************************
+*    函 数 名: OLED检测测试
+*    功能说明: 检测I2C总线设备，实际是对OLED_CheckDevice()的封装
+*    形    参：
+*    返 回 值: 返回值 0 表示没有检测到OLED，返回1表示检测到OLED
+*********************************************************************************************************
+*/</span>
+
+ uint8_t <span class="token function">OLED_Test</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">OLED_CheckDevice</span><span class="token punctuation">(</span>OLED_ADDRESS<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>    
+
+<span class="token comment" spellcheck="true">/*写 缓存数据*/</span>
+<span class="token keyword">void</span> <span class="token function">Write_DataBuffer</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//这个是将DataBuffer数组里面的值，全部写进屏里去</span>
+<span class="token punctuation">{</span>    
+    uint8_t i<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置起始点坐标</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">128</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">WriteDat</span><span class="token punctuation">(</span>DataBuffer<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//写数据</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="OLED-I2C-h"><a href="#OLED-I2C-h" class="headerlink" title="OLED_I2C.h"></a>OLED_I2C.h</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> __OLED_I2C_H</span>
+<span class="token macro property">#<span class="token directive keyword">define</span>    __OLED_I2C_H</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> BUFF_SIZE 10</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> OLED_ADDRESS    0x78 </span><span class="token comment" spellcheck="true">//通过调整0R电阻,屏可以0x78和0x7A两个地址 -- 默认0x78</span>
+
+uint8_t <span class="token function">OLED_CheckDevice</span><span class="token punctuation">(</span>uint8_t _Address<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//检测I2C总线设备OLED</span>
+<span class="token keyword">void</span> <span class="token function">I2C_WriteByte</span><span class="token punctuation">(</span>uint8_t addr<span class="token punctuation">,</span>uint8_t data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">WriteCmd</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> I2C_Command<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">WriteDat</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> I2C_Data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_SetPos</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_Fill</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_CLS</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_ON</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_OFF</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_ShowStr</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> y<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> ch<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> TextSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_ShowCN</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> y<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_DrawBMP</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x0<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> y0<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> x1<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> y1<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> BMP<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+uint8_t <span class="token function">OLED_Test</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">;</span><span class="token comment" spellcheck="true">//OLED检测测试</span>
+<span class="token keyword">void</span> <span class="token function">Write_DataBuffer</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_DrawWave</span><span class="token punctuation">(</span>uint8_t x<span class="token punctuation">,</span>uint8_t y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">OLED_DrawPoint</span><span class="token punctuation">(</span>uint8_t x<span class="token punctuation">,</span>uint8_t y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">Before_State_Update</span><span class="token punctuation">(</span>uint8_t y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span></span></code></pre>
+<h3 id="bsp-systick-c"><a href="#bsp-systick-c" class="headerlink" title="bsp_systick.c"></a>bsp_systick.c</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_systick.h"</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+<span class="token keyword">static</span> __INLINE uint32_t <span class="token function">SysTick_Config</span><span class="token punctuation">(</span>uint32_t ticks<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> 
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>ticks <span class="token operator">></span> SysTick_LOAD_RELOAD_Msk<span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">/* Reload value impossible */</span>
+
+  SysTick<span class="token operator">-></span>LOAD  <span class="token operator">=</span> <span class="token punctuation">(</span>ticks <span class="token operator">&amp;</span> SysTick_LOAD_RELOAD_Msk<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">/* set reload register */</span>
+  <span class="token function">NVIC_SetPriority</span> <span class="token punctuation">(</span>SysTick_IRQn<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>__NVIC_PRIO_BITS<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">/* set Priority for Cortex-M0 System Interrupts */</span>
+  SysTick<span class="token operator">-></span>VAL   <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>                                          <span class="token comment" spellcheck="true">/* Load the SysTick Counter Value */</span>
+  SysTick<span class="token operator">-></span>CTRL  <span class="token operator">=</span> SysTick_CTRL_CLKSOURCE_Msk <span class="token operator">|</span> 
+                   SysTick_CTRL_TICKINT_Msk   <span class="token operator">|</span> 
+                   SysTick_CTRL_ENABLE_Msk<span class="token punctuation">;</span>                    <span class="token comment" spellcheck="true">/* Enable SysTick IRQ and SysTick Timer */</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                  <span class="token comment" spellcheck="true">/* Function successful */</span>
+<span class="token punctuation">}</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token keyword">void</span> <span class="token function">Delay_ms</span><span class="token punctuation">(</span>uint32_t ms<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint32_t i<span class="token punctuation">;</span>
+    <span class="token function">SysTick_Config</span><span class="token punctuation">(</span><span class="token number">72000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                    <span class="token comment" spellcheck="true">/*配置为1ms中断一次*/</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>ms<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>SysTick<span class="token operator">-></span>CTRL <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">/*检测标志位（最高位）*/</span>
+    <span class="token punctuation">}</span>
+    SysTick<span class="token operator">-></span>CTRL<span class="token operator">&amp;</span><span class="token operator">=</span><span class="token operator">~</span>SysTick_CTRL_ENABLE_Msk<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*关闭SysTick*/</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">Delay_us</span><span class="token punctuation">(</span>uint32_t us<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint32_t i<span class="token punctuation">;</span>
+    <span class="token function">SysTick_Config</span><span class="token punctuation">(</span><span class="token number">72</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>us<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>SysTick<span class="token operator">-></span>CTRL <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    SysTick<span class="token operator">-></span>CTRL<span class="token operator">&amp;</span><span class="token operator">=</span><span class="token operator">~</span>SysTick_CTRL_ENABLE_Msk<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="bsp-systick-h"><a href="#bsp-systick-h" class="headerlink" title="bsp_systick.h"></a>bsp_systick.h</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> _BSP_SYSTICK_H</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> _BSP_SYSTICK_H</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"core_cm3.h"</span></span>
+
+<span class="token keyword">void</span> <span class="token function">Delay_ms</span><span class="token punctuation">(</span>uint32_t ms<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">Delay_us</span><span class="token punctuation">(</span>uint32_t us<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">//_BSP_SYSTICK_H</span></code></pre>
+<h3 id="bsp-usart-c"><a href="#bsp-usart-c" class="headerlink" title="bsp_usart.c"></a>bsp_usart.c</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"bsp_usart.h"</span></span>
+
+<span class="token keyword">void</span> <span class="token function">USARTx_GPIO_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    GPIO_InitTypeDef GPIO_InitStruct<span class="token punctuation">;</span>
+    <span class="token function">USART_Rx_GPIO_CLK_CMD</span><span class="token punctuation">(</span>USART_Rx_GPIO_CLK<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">USART_Tx_GPIO_CLK_CMD</span><span class="token punctuation">(</span>USART_Tx_GPIO_CLK<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin<span class="token operator">=</span>USART_Rx_GPIO_PIN<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode<span class="token operator">=</span>GPIO_Mode_IN_FLOATING<span class="token punctuation">;</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>USART_Rx_GPIO_PORT<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Pin<span class="token operator">=</span>USART_Tx_GPIO_PIN<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Mode<span class="token operator">=</span>GPIO_Mode_AF_PP<span class="token punctuation">;</span>
+    GPIO_InitStruct<span class="token punctuation">.</span>GPIO_Speed<span class="token operator">=</span>GPIO_Speed_50MHz<span class="token punctuation">;</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>USART_Tx_GPIO_PORT<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">USARTx_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    USART_InitTypeDef USART_InitStruct<span class="token punctuation">;</span>
+    <span class="token function">USARTx_CLK_CMD</span><span class="token punctuation">(</span>USARTx_CLK<span class="token punctuation">,</span>ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//初始化串口相关数据</span>
+    USART_InitStruct<span class="token punctuation">.</span>USART_BaudRate<span class="token operator">=</span>USARTx_BAUD_RATE<span class="token punctuation">;</span>
+    USART_InitStruct<span class="token punctuation">.</span>USART_WordLength<span class="token operator">=</span>USART_WordLength_8b<span class="token punctuation">;</span>
+    USART_InitStruct<span class="token punctuation">.</span>USART_StopBits<span class="token operator">=</span>USART_StopBits_1<span class="token punctuation">;</span>
+    USART_InitStruct<span class="token punctuation">.</span>USART_Parity<span class="token operator">=</span>USART_Parity_No<span class="token punctuation">;</span>
+    USART_InitStruct<span class="token punctuation">.</span>USART_Mode<span class="token operator">=</span>USART_Mode_Rx<span class="token operator">|</span>USART_Mode_Tx<span class="token punctuation">;</span>
+    USART_InitStruct<span class="token punctuation">.</span>USART_HardwareFlowControl<span class="token operator">=</span>USART_HardwareFlowControl_None<span class="token punctuation">;</span>
+    <span class="token function">USART_Init</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> <span class="token operator">&amp;</span>USART_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//使能串口</span>
+    <span class="token function">USART_Cmd</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//使能串口中断</span>
+    <span class="token comment" spellcheck="true">//USART_ITConfig(USARTx, USART_IT_RXNE, ENABLE);</span>
+
+
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">USARTx_NVIC_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+      NVIC_InitTypeDef NVIC_InitStruct<span class="token punctuation">;</span>
+      <span class="token function">NVIC_PriorityGroupConfig</span><span class="token punctuation">(</span>NVIC_PriorityGroup_2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      NVIC_InitStruct<span class="token punctuation">.</span>NVIC_IRQChannel<span class="token operator">=</span>USARTx_IRQCHANNEL<span class="token punctuation">;</span>
+      NVIC_InitStruct<span class="token punctuation">.</span>NVIC_IRQChannelPreemptionPriority<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+      NVIC_InitStruct<span class="token punctuation">.</span>NVIC_IRQChannelSubPriority<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+      NVIC_InitStruct<span class="token punctuation">.</span>NVIC_IRQChannelCmd<span class="token operator">=</span>ENABLE<span class="token punctuation">;</span>
+
+      <span class="token function">NVIC_Init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>NVIC_InitStruct<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">USARTx_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//USARTx_NVIC_Config();</span>
+    <span class="token function">USARTx_GPIO_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">USARTx_Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">int</span> <span class="token function">fputc</span><span class="token punctuation">(</span><span class="token keyword">int</span> ch<span class="token punctuation">,</span>FILE<span class="token operator">*</span> f<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">USART_SendData</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint8_t<span class="token punctuation">)</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">USART_GetFlagStatus</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> USART_FLAG_TXE<span class="token punctuation">)</span><span class="token operator">==</span>RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">fgetc</span><span class="token punctuation">(</span>FILE<span class="token operator">*</span> f<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">USART_GetFlagStatus</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">,</span> USART_FLAG_RXNE<span class="token punctuation">)</span><span class="token operator">==</span>RESET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">USART_ReceiveData</span><span class="token punctuation">(</span>USARTx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="bsp-usart-h"><a href="#bsp-usart-h" class="headerlink" title="bsp_usart.h"></a>bsp_usart.h</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> _BSP_USART_H_</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> _BSP_USART_H_</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+
+<span class="token macro property">#<span class="token directive keyword">define</span> USARTx USART1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USARTx_BAUD_RATE 115200</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USARTx_CLK  RCC_APB2Periph_USART1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USARTx_CLK_CMD  RCC_APB2PeriphClockCmd</span>
+
+
+<span class="token macro property">#<span class="token directive keyword">define</span> USARTx_IRQCHANNEL USART1_IRQn</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USARTx_IRQHANDLER USART1_IRQHandler</span>
+
+
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Rx_GPIO_PORT  GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Rx_GPIO_PIN   GPIO_Pin_10</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Rx_GPIO_CLK   RCC_APB2Periph_GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Rx_GPIO_CLK_CMD  RCC_APB2PeriphClockCmd</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Tx_GPIO_PORT GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Tx_GPIO_PIN  GPIO_Pin_9</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Tx_GPIO_CLK  RCC_APB2Periph_GPIOA</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> USART_Tx_GPIO_CLK_CMD  RCC_APB2PeriphClockCmd</span>
+
+
+<span class="token keyword">void</span> <span class="token function">USARTx_GPIO_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">USARTx_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">USARTx_NVIC_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">USARTx_Init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">//_BSP_USART_H_</span></code></pre>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="https://img-blog.csdnimg.cn/20200728102357299.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200728102357286.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200728102357282.png" alt="在这里插入图片描述"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/07/28/ye-huo-stm32f1-kai-fa-ban-iic-0.96oled-bo-xing-xian-shi/">https://delehub.vercel.app/2020/07/28/ye-huo-stm32f1-kai-fa-ban-iic-0.96oled-bo-xing-xian-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                    <span class="chip bg-color">嵌入式</span>
+                                </a>
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
+                                <a href="/tags/OLED/">
+                                    <span class="chip bg-color">OLED</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">软件开发</span>
+                                </a>
+                            
+                                <a href="/tags/IIC/">
+                                    <span class="chip bg-color">IIC</span>
+                                </a>
+                            
+                                <a href="/tags/STM32-ARM/">
+                                    <span class="chip bg-color">STM32 ARM</span>
+                                </a>
+                            
+                                <a href="/tags/ADC/">
+                                    <span class="chip bg-color">ADC</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%87%8E%E7%81%AB%E3%80%81/">
+                                    <span class="chip bg-color">野火、</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/08/07/opencv-example/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="OpenCV example">
+                        
+                        <span class="card-title">OpenCV example</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            OpenCV Example
+环境配置Vscode + Anconda + Python3.6
+pip install opencv-python
+pip install numpy
+步骤
+将须处理图片或视频放入该文件夹
+重命名为 tey.
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/OpenCV/">
+                        <span class="chip bg-color">OpenCV</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/07/05/ji-yu-vue-kuang-jia-wei-xin-xiao-cheng-xu-wu-lian-wang-xiang-mu-zhi-she-ji-bi-ji-chuang-jian-gong-cheng-mo-ban/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="基于Vue框架微信小程序物联网项目之设计笔记--创建工程模板">
+                        
+                        <span class="card-title">基于Vue框架微信小程序物联网项目之设计笔记--创建工程模板</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于Vue框架微信小程序物联网项目之设计笔记–创建工程模板
+Vue简介Vue  是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/STM32/" class="post-category">
+                                    STM32
+                                </a>
+                            
+                            <a href="/categories/STM32/ESP8266/" class="post-category">
+                                    ESP8266
+                                </a>
+                            
+                            <a href="/categories/STM32/ESP8266/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" class="post-category">
+                                    微信小程序
+                                </a>
+                            
+                            <a href="/categories/STM32/ESP8266/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/Vue-js/" class="post-category">
+                                    Vue js
+                                </a>
+                            
+                            <a href="/categories/STM32/ESP8266/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/Vue-js/%E7%89%A9%E8%81%94%E7%BD%91/" class="post-category">
+                                    物联网
+                                </a>
+                            
+                            <a href="/categories/STM32/ESP8266/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/Vue-js/%E7%89%A9%E8%81%94%E7%BD%91/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    嵌入式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PCB/">
+                        <span class="chip bg-color">PCB</span>
+                    </a>
+                    
+                    <a href="/tags/OLED/">
+                        <span class="chip bg-color">OLED</span>
+                    </a>
+                    
+                    <a href="/tags/DHT11/">
+                        <span class="chip bg-color">DHT11</span>
+                    </a>
+                    
+                    <a href="/tags/ESP8266/">
+                        <span class="chip bg-color">ESP8266</span>
+                    </a>
+                    
+                    <a href="/tags/STM32/">
+                        <span class="chip bg-color">STM32</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+                        <span class="chip bg-color">微信小程序</span>
+                    </a>
+                    
+                    <a href="/tags/Vue-js/">
+                        <span class="chip bg-color">Vue js</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/">
+                        <span class="chip bg-color">智能家居</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1986 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Timer &amp; interrupt, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Timer &amp; interrupt | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Timer &amp; interrupt</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                <span class="chip bg-color">嵌入式</span>
+                            </a>
+                        
+                            <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                <span class="chip bg-color">51单片机</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">
+                                <span class="chip bg-color">定时器 串口通信</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                单片机
+                            </a>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="post-category">
+                                定时器 串口通信
+                            </a>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                嵌入式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-08
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="51单片机学习–定时器–中断–串口通信"><a href="#51单片机学习–定时器–中断–串口通信" class="headerlink" title="51单片机学习–定时器–中断–串口通信"></a>51单片机学习–定时器–中断–串口通信</h1><a id="more"></a>
+<h2 id="定时器–中断–串口通信"><a href="#定时器–中断–串口通信" class="headerlink" title="定时器–中断–串口通信"></a>定时器–中断–串口通信</h2><h3 id="中断分类"><a href="#中断分类" class="headerlink" title="中断分类"></a>中断分类</h3><p>  定时器中断 外部中断  串口中断</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><ol>
+<li>基本概念<br>对于单片机来讲， 中断是指 CPU 在处理某一事件 A 时， 发生了另一事件 B，<br>请求 CPU 迅速去处理(中断发生)； CPU 暂时停止当前的工作(中断响应)， 转去<br>处理事件 B(中断服务)； 待 CPU 将事件 I 处理完毕后， 再回到原来事件 A 被<br>中断的地方继续处理事件 A(中断返回)， 这一过程称为中断。</li>
+<li>学习目的<br>中断是为使单片机具有对外部或内部随机发生的事件实时处理而设置的，<br>中断功能的存在， 很大程度上提高了单片机处理外部或内部事件的能力。 它也是<br>单片机最重要的功能之一， 是我们学习单片机必须要掌握的。<br><img src="/medias/images/interrput1.jpg" alt="avatar"></li>
+<li>流程图<br><img src="/medias/images/interrput2.jpg" alt="avatar"></li>
+<li>中断系统-中断源<br>引起 CPU 中断的根源称为中断源。 中断源向 CPU 提出中断请求， CPU 暂时<br>中断原来的事务 A， 转去处理事件 B， 对事件 B 处理完毕后， 再回到原来被中断<br>的地方(即断点)， 称为中断返回。 实现上述中断功能的部件称为中断系统(中断<br>机构)。</li>
+<li>优点<br> ①分时操作。 CPU 可以分时为多个 I/O 设备服务， 提高了计算机的利用率；<br> ②实时响应。 CPU 能够及时处理应用系统的随机事件， 系统的实时性大大增<br>强；<br> ③可靠性高。 CPU 具有处理设备故障及掉电等突发性事件能力， 从而使系统<br>可靠性提高。</li>
+<li>STC89C5X系列单片机一般配置<br>51 系列单片机一定有基本的 5 个中断， 但不全有 8 个中断， 需要查看芯片手册，基本的 5 个中断： INT0、 INT1、 定时器 0/1， 串口中断。<br>基本类型单片机的中断有2个中断优先级。<br>用户可以用关总中断允许位(EA/IE.7)或相应中断的允许位来屏蔽所有的中断请求， 也可以用打开相应的中断允许位来使 CPU 响应相应的中断申请。 其中有些中断源可以用软件独立地控制为开中断或关中断状态。 每一个中断的优先级别均可用软件设置。<br>高优先级的中断请求可以打断低优先级的中断， 反之， 低优先级的中断请求不可以打断高优先级及同优先级的中断。 当两个相同优先级的中断同时产生时， 将由查询次序来决定系统先响应哪个中断。 STC89C5X 系列单片机的各个中断查询次序表如下图所示：<br><img src="/medias/images/interrput3.jpg" alt="avatar"></li>
+<li>传统51单片机的5个基本中断源的理解<br><img src="/medias/images/interrput4.jpg" alt="avatar"><br>①INT0 对应的是 P3.2 口的附加功能， 可由 IT0(TCON.0)选择其为低电平有<br>效还是下降沿有效。 当 CPU 检测到 P3.2 引脚上出现有效的中断信号时， 中断标<br>志 IE0(TCON.1)置 1， 向 CPU 申请中断。<br>②INT1 对应的是 P3.3 口的附加功能， 可由 IT1(TCON.2)选择其为低电平有<br>效还是下降沿有效。 当 CPU 检测到 P3.3 引脚上出现有效的中断信号时， 中断标<br>志 IE1(TCON.3)置 1,向 CPU 申请中断。<br>③T0 对应的是 P3.4 口的附加功能， TF0（TCON.5） ,片内定时/计数器 T0 溢<br>出中断请求标志。 当定时/计数器 T0 发生溢出时， 置位 TF0， 并向 CPU 申请中断。<br>④T1 对应的是 P3.5 口的附加功能， TF1（ TCON.7） ， 片内定时/计数器 T1<br>溢出中断请求标志。 当定时/计数器 T1 发生溢出时， 置位 TF1， 并向 CPU 申请中<br>断。<br>⑤RXD 和 TXD 对应对应的是 P3.0 和 P3.1 口的附加功能， RI（SCON.0） 或 TI<br>（SCON.1） ， 串行口中断请求标志。 当串行口接收完一帧串行数据时置位 RI 或<br>当串行口发送完一帧串行数据时置位 TI， 向 CPU 申请中断。</li>
+<li>中断允许控制<br>CPU 对中断系统所有中断以及某个中断源的开放和屏蔽是由中断允许寄存器IE控制。<br><img src="/medias/images/interrput5.jpg" alt="avatar"><br>EX0(IE.0)， 外部中断 0 允许位；<br>ET0(IE.1)， 定时/计数器 T0 中断允许位；<br>EX1(IE.2)， 外部中断 0 允许位；<br>ET1(IE.3)， 定时/计数器 T1 中断允许位；<br>ES（IE.4)， 串行口中断允许位；<br>EA (IE.7)， CPU 中断允许（总允许）位。</li>
+<li>中断请求标志 TCON<br><img src="/medias/images/interrput6.jpg" alt="avatar"><br>IT0（TCON.0） ， 外部中断 0 触发方式控制位。<br>当 IT0=0 时， 为电平触发方式。<br>当 IT0=1 时， 为边沿触发方式（下降沿有效） 。<br>IE0（TCON.1） ， 外部中断 0 中断请求标志位。<br>IT1（TCON.2） ， 外部中断 1 触发方式控制位。<br>IE1（TCON.3） ， 外部中断 1 中断请求标志位。<br>TF0（TCON.5） ， 定时/计数器 T0 溢出中断请求标志位。<br>TF1（TCON.7） ， 定时/计数器 T1 溢出中断请求标志位。</li>
+<li>中断优先级<br><img src="/medias/images/interrput7.jpg" alt="avatar"></li>
+<li>中断号<br><img src="/medias/images/interrput8.jpg" alt="avatar"></li>
+<li>中断响应条件<br>①中断源有中断请求；<br>②此中断源的中断允许位为1；<br>③CPU 开中断（即 EA=1）。</li>
+<li>中断源入口地址<br>中断源              入口地址<br>外部中断0            0003H<br>定时器T0中断         000BH<br>外部中断1            0013H<br>定时器T1中断         001BH<br>串行口中断           0023H<h3 id="软件代码分析"><a href="#软件代码分析" class="headerlink" title="软件代码分析"></a>软件代码分析</h3>一般具有的框架<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//主程序中需要有以下代码：</span>
+EA<span class="token operator">=</span><span class="token number">1</span>； <span class="token comment" spellcheck="true">//打开总中断开关</span>
+EX0<span class="token operator">=</span><span class="token number">1</span>； <span class="token comment" spellcheck="true">//开外部中断 0</span>
+IT0<span class="token operator">=</span><span class="token number">0</span><span class="token operator">/</span><span class="token number">1</span>； <span class="token comment" spellcheck="true">//设置外部中断的触发方式普中 51 单片机开发攻略</span>
+<span class="token comment" spellcheck="true">//中断服务函数</span>
+<span class="token keyword">void</span> <span class="token function">int0</span><span class="token punctuation">(</span><span class="token punctuation">)</span> interrupt <span class="token number">0</span> using <span class="token number">1</span>
+<span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">// 编写用户所需的功能代码</span>
+<span class="token punctuation">}</span></code></pre>
+注意：在中断函数中 int0 是函数名，可自定义，但必须符合 C 语言标识符定义规则， interrupt 是一个关键字， 表示 51 单片机中断。 后面的“0” 是中断号， 外部中断 0 中断号为 0， 这个可参考前面的内容。后面的 using 1 可省略不写。<h3 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">Int0Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ol>
+<p>{<br>    //设置 INT0<br>    IT0=1;//跳变沿出发方式（下降沿）<br>    EX0=1;//打开 INT0 的中断允许。<br>    EA=1;//打开总中断<br>} </p>
+<p>//触发中断后即会进入中断服务函数， 外部中断 0 中断服务函数如下：<br>void Int0() interrupt 0 //外部中断 0 的中断函数<br>{<br>    //执行所需的功能<br>}</p>
+<pre><code>
+## 定时器
+1. 基本概念
+①振荡周期： 为单片机提供定时信号的振荡源的周期（晶振周期或外加振荡
+周期） 。
+②状态周期： 2 个振荡周期为 1 个状态周期， 用 S 表示。 振荡周期又称 S 周
+期或时钟周期。
+③机器周期： 1 个机器周期含 6 个状态周期， 12 个振荡周期。
+④指令周期： 完成 1 条指令所占用的全部时间， 它以机器周期为单位。
+例如： 外接晶振为 12MHz 时， 51 单片机相关周期的具体值为：
+振荡周期=1/12us;
+状态周期=1/6us;
+机器周期=1us;
+指令周期=1~4us;
+2. 注意
+①51 单片机有两组定时器/计数器， 因为既可以定时， 又可以计数， 故称之
+为定时器/计数器。
+②定时器/计数器和单片机的 CPU 是相互独立的。 定时器/计数器工作的过程
+是自动完成的， 不需要 CPU 的参与。
+③51 单片机中的定时器/计数器是根据机器内部的时钟或者是外部的脉冲信
+号对寄存器中的数据加 1。
+3. 原理
+STC89C5X 单片机内有两个可编程的定时/计数器T0、T1和一个特殊功能定时器 T2。定时/计数器的实质是加 1 计数器（16 位），由高 8 位和低 8 位两个寄存器 THx 和 TLx 组成。 它随着计数器的输入脉冲进行自加 1， 也就是每来一个脉冲， 计数器就自动加 1， 当加到计数器为全 1 时， 再输入一个脉冲就使计数器回零， 且计数器的溢出使相应的中断标志位置 1， 向 CPU 发出中断请求（定时/计数器中断允许时） 。 如果定时/计数器工作于定时模式， 则表示定时时间已到；如果工作于计数模式， 则表示计数值已满。 可见， 由溢出时计数器的值减去计数初值才是加 1 计数器的计数值。
+4. 定时器/计数器内部结构
+![avatar](/medias/images/interrput9.jpg)
+ T0 和 T1 引脚对应的是单片机 P3.4 和 P3.5 管脚.
+ 51单片机定时器/计数器：两个特殊功能寄存器控制。
+  TMOD 是定时/计数器的工作方式寄存器， 确定工作方式和功能； 
+  TCON 是控制寄存器， 控制 T0、 T1 的启动和停止及设置溢出标志；
+5. TMOD寄存器 工作方式寄存器
+工作方式寄存器 TMOD 用于设置定时/计数器的工作方式， 低四位用于 T0， 高
+四位用于 T1。
+GATE=0;(不需要外部中断INT0/1引脚为高电平) 
+用于控制定时器的启动是否受外部中断源信号的影响。只要用软件使 TCON 中的 TR0或TR1为1,就可以启动定时/计数器工作；
+GATE=1;
+要用软件使TR0或TR1为1.同时外部中断引脚 INT0/1 也为高电平时，才能启动定时/计数器工作.即此时定时器的启动条件,加上了INT0/1引脚为高电平这一条件;
+
+C/T :定时/计数模式选择位。
+C/T ＝0 为定时模式;
+C/T =1 为计数模式;
+
+![avatar](/medias/images/interrput10.jpg)
+![avatar](/medias/images/interrput11.jpg)
+
+M1M0:工作方式设置位：定时器/计数器共有4种方式。
+M1M0 工作方式计数器模式 TMOD(设置定时器模式) 
+0 0 方式0 13位计数器 TMOD=0x00 
+0 1 方式1 16位计数器 TMOD=0x01 
+1 0 方式2 自动重装8位计数器 TMOD=0x02 
+1 1 方式3 T0分为2个8位独立计数器，T1为无中断重装8位计数器 TMOD=0x03 
+
+6. 控制寄存器 TCON
+TCON 的低 4 位用于控制外部中断,已在前面介绍。 TCON 的高 4 位用于控制定
+时/计数器的启动和中断申请。 
+![avatar](/medias/images/interrput12.jpg)
+TCON寄存器高四位
+TF1（TCON.7）：T1溢出中断请求标志位。T1计数溢出时由硬件自动置TF1
+为 1。 CPU 响应中断后TF1由硬件自动清0。T1工作时，CPU可随时查询 TF1 的状态。 所以， TF1 可用作查询测试的标志。 TF1 也可以用软件置 1 或清 0， 同硬件置 1 或清 0 的效果一样。
+TR1（TCON.6）：T1 运行控制位。 TR1 置 1 时， T1 开始工作； TR1 置 0 时，T1 停止工作。 TR1 由软件置 1 或清 0。 所以， 用软件可控制定时/计数器的启动与停止。
+TF0（TCON.5） ： T0 溢出中断请求标志位， 其功能与 TF1 类同。
+TR0（TCON.4） ： T0 运行控制位， 其功能与 TR1 类同。
+
+TR1,TR0=0;关闭定时器1，0
+TR1,TR0=1;打开定时器1，0
+
+7. 定时器/计数器工作方式
+##### 方式0
+方式 0 为 13 位计数， 由 TL0 的低 5 位（高 3 位未用） 和 TH0 的 8 位组成。TL0 的低 5 位溢出时向 TH0 进位， TH0 溢出时， 置位 TCON 中的 TF0 标志， 向 CPU发出中断请求。
+![avatar](/medias/images/interrput13.jpg)
+##### 方式1
+方式 1 的计数位数是 16 位， 由 TL0 作为低 8 位， TH0 作为高 8 位， 组成了16 位加 1 计数器。
+![avatar](/medias/images/interrput14.jpg)
+##### 方式2
+方式 2 为自动重装初值的 8 位计数方式。 工作方式 2 特别适合于用作较精确的脉冲信号发生器。
+![avatar](/medias/images/interrput16.jpg)
+##### 方式3
+方式 3 只适用于定时/计数器 T0， 定时器 T1 处于方式 3 时相当于 TR1=0，
+停止计数。 工作方式 3 将 T0 分成为两个独立的 8 位计数器 TL0 和 TH0。
+![avatar](/medias/images/interrput17.jpg)
+
+8. 单片机编写定时器程序时一些步骤
+对TMOD赋值，以确定T0和T1的工作方式； 
+计算初值，并将初值写入TH0，TL0或者TH1，TL1； 
+中断方式时，则对IE赋值，开放中断 
+使TR0或TR1置位，启动定时器/计数器定时或者计数。
+9. 应用
+应用较多的是方式 1 和方式 2。 定时器中通常使用定时器方式 1， 串口通信中通常使用方式 2。
+
+### 定时器配置
+#### 步骤
+①对 TMOD 赋值，以确定 T0 和 T1 的工作方式，如果使用定时器0即对T0配置， 如果使用定时器 1 即对 T1 配置。
+②根据所要定时的时间计算初值,并将其写入 TH0、 TL0 或 TH1、 TL1。
+③如果使用中断， 则对 EA 赋值， 开放定时器中断。
+④使 TR0 或 TR1 置位， 启动定时/计数器定时或计数。
+
+初值的计算:
+```c
+TH0=(65536-50000)/256; //装定时器初值高8位
+TL0=(65536-50000)%256; //装定时器初值低8位    
+TH0=(65536-T0)/256 ;//装定时器初值高8位
+TL0=(65536-T0)%256 ;//装定时器初值低8位
+//其中T0是需要计算的时间
+//一般编程过程并直接计算T0的值，直接写让单片机自己去计算</code></pre><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//定时器0中断函数 </span>
+<span class="token keyword">void</span> T0<span class="token operator">/</span><span class="token function">T1_time</span><span class="token punctuation">(</span><span class="token punctuation">)</span> interrupt <span class="token number">1</span><span class="token comment" spellcheck="true">//使用定时器中断1</span>
+<span class="token punctuation">{</span>
+
+    TMOD<span class="token operator">=</span><span class="token number">0X01</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//选择了定时器0 方式1</span>
+    <span class="token comment" spellcheck="true">//可以设置TMOD=0x00;0x01;0x10;0x11;共四组方式</span>
+
+    TH0<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">65536</span><span class="token operator">-</span>T0<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">256</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//装定时器初值高8位</span>
+    TL0<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">65536</span><span class="token operator">-</span>T0<span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">256</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//装定时器初值低8位</span>
+    <span class="token comment" spellcheck="true">//T0是需要计算的时间</span>
+    uchar count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>count<span class="token operator">==</span>X<span class="token punctuation">)</span>
+
+    <span class="token punctuation">{</span>
+        count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//清0重新计数</span>
+        执行程序代码
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//其中X是需要计算次数，比如让定时器定时个1s；</span>
+    <span class="token comment" spellcheck="true">//则需要定时器一个50ms的时间；</span>
+    <span class="token comment" spellcheck="true">//如果要达成1s则需要执行20次；</span>
+    <span class="token comment" spellcheck="true">//让定时器定时个50ms时间，需要这样去写</span>
+    <span class="token comment" spellcheck="true">//TH0=(65536-50000)/256;</span>
+    <span class="token comment" spellcheck="true">//TL0=(65536-50000)%256;</span>
+    <span class="token comment" spellcheck="true">//让定时器定时个T0时间，需要这样去写</span>
+    <span class="token comment" spellcheck="true">//</span>
+     <span class="token comment" spellcheck="true">//TH0=(65536-T0乘10的3次方)/256;</span>
+    <span class="token comment" spellcheck="true">//TL0=(65536-T0乘10的3次方)%256;</span></code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// 使用定时器0</span>
+<span class="token comment" spellcheck="true">//配置定时器0工作方式1，设置1ms的初值，打开定时器计数器功能</span>
+<span class="token keyword">void</span> <span class="token function">Timer0Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    TMOD<span class="token operator">|</span><span class="token operator">=</span><span class="token number">0X01</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//选择为定时器 0 模式， 工作方式 1， 仅用 TR0 打开启动。</span>
+    TH0<span class="token operator">=</span><span class="token number">0XFC</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//给定时器赋初值， 定时 1ms</span>
+    TL0<span class="token operator">=</span><span class="token number">0X18</span><span class="token punctuation">;</span>
+    ET0<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开定时器 0 中断允许</span>
+    EA<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开总中断普中 51 单片机开发攻略</span>
+    TR0<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开定时器</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h4><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/****************************************************************
+**********************
+实验现象： 下载程序后， D1 小灯循环点亮 1 秒， 熄灭 1 秒。 使用单片机内部
+定时器可以实现准确延时
+接线说明： (具体接线图可见开发攻略对应实验的“实验现象” 章节)
+1， 单片机-->LED&amp;交通灯模块
+P20-->D1
+注意事项：
+*****************************************************************
+**********************/</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"reg52.h"</span> </span><span class="token comment" spellcheck="true">//此文件中定义了单片机的一些特殊功能寄存器</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> u16<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//对数据类型进行声明定义</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> u8<span class="token punctuation">;</span>
+sbit led<span class="token operator">=</span>P2<span class="token operator">^</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//定义 P20 口是 led</span>
+<span class="token comment" spellcheck="true">/****************************************************************
+***************
+* 函 数 名 : Timer0Init
+* 函数功能 : 定时器 0 初始化
+* 输 入 : 无
+* 输 出 : 无
+*****************************************************************
+**************/</span>
+<span class="token keyword">void</span> <span class="token function">Timer0Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    TMOD<span class="token operator">|</span><span class="token operator">=</span><span class="token number">0X01</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//选择为定时器 0 模式， 工作方式 1， 仅用 TR0 打开启动。</span>
+    TH0<span class="token operator">=</span><span class="token number">0XFC</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//给定时器赋初值， 定时 1ms</span>
+    TL0<span class="token operator">=</span><span class="token number">0X18</span><span class="token punctuation">;</span>
+    ET0<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开定时器 0 中断允许</span>
+    EA<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开总中断</span>
+    TR0<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开定时器</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/****************************************************************
+***************
+* 函 数 名 : main
+* 函数功能 : 主函数
+* 输 入 : 无
+* 输 出 : 无
+*****************************************************************
+**************/</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">Timer0Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//定时器 0 初始化</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/****************************************************************
+***************
+* 函 数 名 : void Timer0() interrupt 1
+* 函数功能 : 定时器 0 中断函数
+* 输 入 : 无
+* 输 出 : 无
+*****************************************************************
+**************/</span>
+<span class="token keyword">void</span> <span class="token function">Timer0</span><span class="token punctuation">(</span><span class="token punctuation">)</span> interrupt <span class="token number">1</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> u16 i<span class="token punctuation">;</span>
+    TH0<span class="token operator">=</span><span class="token number">0XFC</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//给定时器赋初值， 定时 1ms</span>
+    TL0<span class="token operator">=</span><span class="token number">0X18</span><span class="token punctuation">;</span>
+    i<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span><span class="token number">1000</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        led<span class="token operator">=</span><span class="token operator">~</span>led<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="串口中断"><a href="#串口中断" class="headerlink" title="串口中断"></a>串口中断</h3><p>串口相关寄存器</p>
+<ol>
+<li><p>串口控制寄存器SCON</p>
+</li>
+<li><p>电源控制寄存器PCON</p>
+<h3 id="串口工作方式"><a href="#串口工作方式" class="headerlink" title="串口工作方式"></a>串口工作方式</h3></li>
+<li><p>方式0</p>
+</li>
+<li><p>方式1</p>
+</li>
+<li><p>方式2</p>
+</li>
+<li><p>方式4</p>
+<h3 id="串口初始化"><a href="#串口初始化" class="headerlink" title="串口初始化"></a>串口初始化</h3><p>步骤<br>①确定 T1 的工作方式（TMOD 寄存器） ；<br>②确定串口工作方式（SCON 寄存器） ；<br>③计算 T1 的初值（设定波特率） ， 装载 TH1、 TL1；<br>④启动 T1（TCON 中的 TR1 位） ；<br>⑤如果使用中断， 需开启串口中断控制位（IE 寄存器）。</p>
+<h4 id="串口初始化案例"><a href="#串口初始化案例" class="headerlink" title="串口初始化案例"></a>串口初始化案例</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">UsartInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  SCON<span class="token operator">=</span><span class="token number">0X50</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置为工作方式 1</span>
+  TMOD<span class="token operator">=</span><span class="token number">0X20</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置计数器工作方式 2</span>
+  PCON<span class="token operator">=</span><span class="token number">0X80</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//波特率加倍</span>
+  TH1<span class="token operator">=</span><span class="token number">0XF3</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//计数器初始值设置， 注意波特率是 4800 的</span>
+  TL1<span class="token operator">=</span><span class="token number">0XF3</span><span class="token punctuation">;</span>
+  ES<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//打开接收中断</span>
+  EA<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//打开总中断</span>
+  TR1<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//打开计数器</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ol>
+<h4 id="串口中断方式案例"><a href="#串口中断方式案例" class="headerlink" title="串口中断方式案例"></a>串口中断方式案例</h4><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;reg52.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">define</span> FOSC             12000000UL             </span>
+<span class="token macro property">#<span class="token directive keyword">define</span> BAUD             2400UL    </span>
+<span class="token keyword">void</span>  <span class="token function">UsartConfiguration</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>                <span class="token comment" spellcheck="true">//串口初始化</span>
+<span class="token punctuation">{</span>
+         TMOD<span class="token operator">&amp;</span><span class="token operator">=</span><span class="token number">0x0F</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//定时器1模式控制在高4位</span>
+         TMOD<span class="token operator">|</span><span class="token operator">=</span><span class="token number">0x20</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//定时器1工作在模式2，自动重装模式</span>
+         SCON<span class="token operator">=</span><span class="token number">0x50</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//串口工作在模式1</span>
+         TH1<span class="token operator">=</span><span class="token number">256</span><span class="token operator">-</span>FOSC<span class="token operator">/</span><span class="token punctuation">(</span>BAUD<span class="token operator">*</span><span class="token number">12</span><span class="token operator">*</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//计算定时器重装值</span>
+         TL1<span class="token operator">=</span><span class="token number">256</span><span class="token operator">-</span>FOSC<span class="token operator">/</span><span class="token punctuation">(</span>BAUD<span class="token operator">*</span><span class="token number">12</span><span class="token operator">*</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         PCON<span class="token operator">|</span><span class="token operator">=</span><span class="token number">0x80</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//串口波特率加倍</span>
+         ES<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//串行中断允许</span>
+         TR1<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//启动定时器1</span>
+         REN<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//允许接收 </span>
+         EA<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//允许中断</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">InterruptUART</span><span class="token punctuation">(</span><span class="token punctuation">)</span> interrupt <span class="token number">4</span> <span class="token comment" spellcheck="true">//中断源是4</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//unsigned char receive_data;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>RI<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+         RI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        SBUF <span class="token operator">=</span> SBUF<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//receive_data = SBUF;//接收到的数据</span>
+        <span class="token comment" spellcheck="true">//if(receive_data == '1')    </span>
+        <span class="token comment" spellcheck="true">//{</span>
+    <span class="token comment" spellcheck="true">//   LED1 = 0;</span>
+    <span class="token comment" spellcheck="true">//     DELAY_nMS(500);</span>
+    <span class="token comment" spellcheck="true">//     LED1=1;</span>
+    <span class="token comment" spellcheck="true">//}</span>
+<span class="token comment" spellcheck="true">//   if(receive_data == ' ')    //接受一个字符 </span>
+<span class="token comment" spellcheck="true">//        {</span>
+<span class="token comment" spellcheck="true">//          //执行代码，你想要的控制的东西，例如led,蜂鸣器，等传感器        </span>
+<span class="token comment" spellcheck="true">//        }    </span>
+     <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//EA=1;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>TI<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        TI<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>    
+    <span class="token punctuation">}</span>        
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">UsartConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre>
+<h2 id="软件代码"><a href="#软件代码" class="headerlink" title="软件代码"></a>软件代码</h2><h4 id="简单实现定时器led"><a href="#简单实现定时器led" class="headerlink" title="简单实现定时器led"></a>简单实现定时器led</h4><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">"reg51.h"</span></span>
+
+sbit led<span class="token operator">=</span>P1<span class="token operator">^</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//定义一个LED灯为1.1引脚</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> uchar unsigned char</span>
+<span class="token comment" spellcheck="true">//#define uint unsigned int</span>
+uchar num<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//定义全局变量</span>
+
+<span class="token keyword">void</span> <span class="token function">timer0Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//定时器0的初始化函数</span>
+<span class="token punctuation">{</span>   
+    TMOD<span class="token operator">=</span><span class="token number">0x01</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//设置定时器0为工作方式1（M1 M0为01）</span>
+    TH0<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">65536</span><span class="token operator">-</span><span class="token number">50000</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">256</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//装初值11.0582晶振定时50ms数为45872</span>
+    TL0<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">65536</span><span class="token operator">-</span><span class="token number">50000</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">256</span><span class="token punctuation">;</span>
+    EA<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//开总中断</span>
+    ET0<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//开定时器0中断</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">T0_time</span><span class="token punctuation">(</span><span class="token punctuation">)</span> interrupt <span class="token number">1</span>
+<span class="token punctuation">{</span>
+       num<span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//num每加一次判断一次是否到20次</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>num<span class="token operator">==</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//如果到了20次，说明1秒时间到</span>
+        <span class="token punctuation">{</span>
+            num<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//num清0重新计数</span>
+            led<span class="token operator">=</span><span class="token operator">~</span>led<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token function">timer0Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     TR0<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//启动定时器0//该步骤也可在初始化写</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span><span class="token comment" spellcheck="true">//程序停止在这里等待中断发生</span>
+ <span class="token punctuation">}</span> </code></pre>
+<h3 id="一些案例"><a href="#一些案例" class="headerlink" title="一些案例"></a>一些案例</h3><ol>
+<li>普中单片机串口接收数据控制灯亮灭<br>```c<br>/*—————————————————————————–</li>
+</ol>
+<ul>
+<li>实 验 名         : 串口试验</li>
+<li>实验说明     : 普中单片机串口接收数据控制灯亮灭</li>
+<li>连接方式     : </li>
+<li>注    意         : 该试验使用的晶振是12MHZ</li>
+<li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</li>
+</ul>
+<p>#include&lt;reg52.h&gt;<br>#include&lt;intrins.h&gt;</p>
+<p>#define uchar unsigned char<br>#define uint  unsigned int</p>
+<p>#define jingzhen     12000000UL             /<em>使用12.0M晶体</em>/<br>#define botelv   4800UL                   /<em>波特率定义为4800</em>/</p>
+<p>uchar PuZh[] = “<a href="http://www.lemonhubs.github.io&quot;" target="_blank" rel="noopener">www.lemonhubs.github.io&quot;</a>;</p>
+<p>//–定义使用的IO–//</p>
+<p>sbit LED1=P2^0;<br>sbit LED2=P2^1;<br>sbit LED3=P2^2;</p>
+<p>//–声明全局函数–//<br>void UsartConfiguration();<br>void Delay_1ms(uint i);</p>
+<p>void DELAY_nMS(unsigned int time);</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li><p>名称 : Com_Int()</p>
+</li>
+<li><p>功能 : 串口中断子函数</p>
+</li>
+<li><p>输入 : 无 * 输出 : 无</p>
+</li>
+<li><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>void Com_Int(void) interrupt 4<br>{<br>   uchar i;<br> uchar receive_data;</p>
+<p> EA = 0;</p>
+<p> if(RI == 1) //当硬件接收到一个数据时，RI会置位<br>   {         </p>
+<pre><code>       RI = 0;
+       receive_data = SBUF;//接收到的数据
+
+   if(receive_data == &#39;1&#39;)     
+   {
+           LED1= 0;
+         DELAY_nMS(500);
+           LED2= 0;
+        DELAY_nMS(500);
+           LED3= 1;
+        DELAY_nMS(500);
+   }
+   else
+   {
+           LED1 = 1; 
+        DELAY_nMS(500);
+         LED2 = 1; 
+        DELAY_nMS(500);
+         LED3 = 0; 
+        DELAY_nMS(500);
+   }</code></pre><p>   }</p>
+<pre><code>   for(i=0; i&lt;36; i++)
+   {
+       SBUF = PuZh[i];   //将要发送的数据放入到发送寄存器
+       while(!TI);            //等待发送数据完成
+       TI=0;                    //清除发送完成标志位
+       Delay_1ms(1);
+   }
+   EA = 1;</code></pre><p>}</p>
+</li>
+</ul>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li>函 数 名       : main</li>
+<li>函数功能           : 主函数</li>
+<li>输    入       : 无</li>
+<li>输    出       : 无</li>
+<li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</li>
+</ul>
+<p>void main()<br>{</p>
+<pre><code>UsartConfiguration();//初始化串口
+
+while(1);    </code></pre><p>}</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li>函 数 名       : UsartConfiguration()</li>
+<li>函数功能           : 设置串口</li>
+<li>输    入       : 无</li>
+<li>输    出       : 无</li>
+<li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</li>
+</ul>
+<p>void  UsartConfiguration(void)                //串口初始化<br>{<br>         EA=0;            //暂时关闭中断<br>         TMOD&amp;=0x0F;      //定时器1模式控制在高4位<br>         TMOD|=0x20;      //定时器1工作在模式2，自动重装模式<br>         SCON=0x50;       //串口工作在模式1<br>         TH1=256-jingzhen/(botelv<em>12</em>16);  //计算定时器重装值<br>         TL1=256-jingzhen/(botelv<em>12</em>16);<br>         PCON|=0x80;    //串口波特率加倍<br>         ES=1;         //串行中断允许<br>         TR1=1;        //启动定时器1<br>         REN=1;        //允许接收<br>         EA=1;         //允许中断<br>}</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li><p>名称 : Delay_1ms()</p>
+</li>
+<li><p>功能 : 延时子程序，延时时间为 1ms</p>
+</li>
+<li><p>x * 输入 : x (延时一毫秒的个数)</p>
+</li>
+<li><p>输出 : 无</p>
+</li>
+<li><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>void Delay_1ms(uint i)//1ms延时<br>{<br> uchar x,j;</p>
+<p> for(j=0;j&lt;i;j++)<br>   for(x=0;x&lt;=148;x++);<br>}</p>
+</li>
+</ul>
+<p>void DELAY_nMS(unsigned int time)<br>{<br>  unsigned int  i,j;<br>  for(i=0;i&lt;time;i++)<br>     for(j=0;j&lt;939;j++);<br>}</p>
+<pre><code>2. 普中单片机---串口通信（1）--通过按键控制发送
+```c
+#include &lt;reg52.h&gt;
+
+#define jingzhen     12000000UL             /*使用12.0M晶体*/    
+#define botelv   4800UL                   /*波特率定义为4800*/
+
+unsigned char zifu=&#39;a&#39;;            //待显示字符
+
+volatile unsigned char sending;
+
+sbit S4=P3^2;//setting a key
+
+void delay(unsigned char i)//延迟函数
+{
+    unsigned char j,k;
+    for(j=i;j&gt;0;j--)
+        for(k=90;k&gt;0;k--);
+}
+/*************************************************************************
+函数名称：UART_init
+函数功能：串口初始化
+
+**************************************************************************/
+
+void UART_init(void)                //串口初始化
+{
+         EA=0;            //暂时关闭中断
+         TMOD&amp;=0x0F;      //定时器1模式控制在高4位
+         TMOD|=0x20;      //定时器1工作在模式2，自动重装模式
+         SCON=0x50;       //串口工作在模式1
+         TH1=256-jingzhen/(botelv*12*16);  //计算定时器重装值
+         TL1=256-jingzhen/(botelv*12*16);
+         PCON|=0x80;    //串口波特率加倍
+         ES=1;         //串行中断允许
+         TR1=1;        //启动定时器1
+         REN=1;        //允许接收 
+         EA=1;         //允许中断
+}
+/*************************************************************************
+函数名称：UART_Send_char
+函数功能：发送一个字符
+
+**************************************************************************/
+void UART_Sendchar(unsigned char d)          //发送一个字节的数据，形参d即为待发送数据。
+{
+     SBUF=d; //将数据写入到串口缓冲
+     sending=1;     //设置发送标志
+     while(sending); //等待发送完毕
+}
+/*************************************************************************
+函数名称：UART_SendString
+函数功能：发送一个字符串
+
+**************************************************************************/
+void UART_SendString(unsigned char *String)
+{
+    while(*String)
+    {
+        UART_Sendchar(*String);
+        String++;
+    }
+}
+
+/*************************************************************************
+函数名称：UART_SendLine
+函数功能：串口发送换行
+
+**************************************************************************/
+void UART_SendLine(void)
+{
+    UART_Sendchar(0x0D);
+    UART_Sendchar(0x0A);
+}
+
+//*********************************************************************************** 
+函数名称：UART_SendIntNumber
+函数功能：串口发送整型数字
+//*********************************************************************************** 
+void UART_SendIntNumber(int Number)
+{
+    unsigned char NumbArray[6]={0};    // 定义局部数组，用于数据存储
+    if(Number&lt;0)
+    {
+        Number=0-Number;
+        UART_Sendchar(&#39;-&#39;);
+    }
+    else
+    {
+       UART_Sendchar(&#39;+&#39;);
+    }
+
+    NumbArray[0]=(Number/10000)%10+0x30; 
+    NumbArray[1]=(Number/1000) %10+0x30;
+    NumbArray[2]=(Number/100)  %10+0x30;
+    NumbArray[3]=(Number/10)   %10+0x30;
+    NumbArray[4]=(Number/1)    %10+0x30; 
+    NumbArray[5]= 0;     
+    UART_SendString(NumbArray);
+}
+
+//*********************************************************************************** 
+
+
+函数名称：UART_SendFloatNumber
+函数功能：串口发送浮点型数字
+//*********************************************************************************** 
+void UART_SendFloatNumber(float Number)
+{
+    unsigned char NumberArray[11]={0};              // 定义局部数组，用于数据存储
+    unsigned char i=1;                              // 定义局部变量，记录整数位数
+    long j=1;
+    unsigned int Real_Int=0;                        // 定义局部变量，记录整数部分
+    unsigned int Real_Dec=0;                        // 定义局部变量，记录小数部分
+
+    double Deci=0;                                  // 定义局部数组，暂存小数数值
+
+    //----------------------------------------------------------------------------------------------
+    // 判断 浮点数字正负
+    //----------------------------------------------------------------------------------------------
+    if(Number&lt;0)
+    {
+        Number=0-Number;
+        UART_Sendchar(&#39;-&#39;);
+    }
+    else
+    {
+        UART_Sendchar(&#39;+&#39;);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // 分离 整数位与小数位
+    //----------------------------------------------------------------------------------------------
+    Real_Int=(int)Number;                           // 取整数部分
+    Deci    =Number-Real_Int;                       // 取小数部分
+    Real_Dec=(unsigned int)(Deci*1e4);              // 小数变整型数字，1e4科学计数法
+
+
+    //----------------------------------------------------------------------------------------------
+    // 串口输出
+    //----------------------------------------------------------------------------------------------
+    NumberArray[0] = (Real_Int/10000)%10+0x30;
+    NumberArray[1] = (Real_Int/1000) %10+0x30;
+    NumberArray[2] = (Real_Int/100)  %10+0x30;
+    NumberArray[3] = (Real_Int/10)   %10+0x30;
+    NumberArray[4] = (Real_Int/1)    %10+0x30;
+    NumberArray[5] = &#39;.&#39;;
+    NumberArray[6] = (Real_Dec/1000)%10+0x30;
+    NumberArray[7] = (Real_Dec/100) %10+0x30;
+    NumberArray[8] = (Real_Dec/10)  %10+0x30;
+    NumberArray[9] = (Real_Dec/1)   %10+0x30;
+    NumberArray[10]= 0;
+
+    UART_SendString(NumberArray);
+}
+
+
+/*************************************************************************
+函数名称：MAIN
+函数功能：主函数
+
+**************************************************************************/
+void main()
+{
+    UART_init();
+    while(1)
+    {
+        if(S4==0)
+        {
+            delay(20);
+            if(!S4)
+            {
+                while(!S4);           
+                //UART_Sendchar(zifu);
+                //UART_SendString(&quot;dpj&quot;);
+                UART_SendString(&quot;wlb&quot;);
+                UART_SendLine();
+                UART_SendIntNumber(100);
+            }
+        }
+    }
+}
+
+void uart(void) interrupt 4         //串口发送中断
+{
+     if(RI)    //收到数据
+     {
+        RI=0;   //清中断请求
+     }
+     else      //发送完一字节数据
+     {
+            TI=0;
+            sending=0;  //清正在发送标志
+     }
+}</code></pre><p><img src="/medias/images/interrput18.jpg" alt="avatar"><br>3. 普中单片机–串口通信（2）—通过串口助手发送数据点LED</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;reg52.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">define</span> jingzhen     12000000UL             </span><span class="token comment" spellcheck="true">/*使用12.0M晶体*/</span>     <span class="token comment" spellcheck="true">//</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> botelv   4800UL             </span><span class="token comment" spellcheck="true">/*波特率定义为4800*/</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> uchar<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> uint<span class="token punctuation">;</span>
+
+uchar buf<span class="token punctuation">;</span>
+
+sbit beep<span class="token operator">=</span>P1<span class="token operator">^</span><span class="token number">5</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+         EA<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//暂时关闭中断</span>
+         TMOD<span class="token operator">&amp;</span><span class="token operator">=</span><span class="token number">0x0F</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//定时器1模式控制在高4位</span>
+         TMOD<span class="token operator">|</span><span class="token operator">=</span><span class="token number">0x20</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//定时器1工作在模式2，自动重装模式</span>
+         SCON<span class="token operator">=</span><span class="token number">0x50</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//串口工作在模式1</span>
+         TH1<span class="token operator">=</span><span class="token number">256</span><span class="token operator">-</span>jingzhen<span class="token operator">/</span><span class="token punctuation">(</span>botelv<span class="token operator">*</span><span class="token number">12</span><span class="token operator">*</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//计算定时器重装值</span>
+         TL1<span class="token operator">=</span><span class="token number">256</span><span class="token operator">-</span>jingzhen<span class="token operator">/</span><span class="token punctuation">(</span>botelv<span class="token operator">*</span><span class="token number">12</span><span class="token operator">*</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         PCON<span class="token operator">|</span><span class="token operator">=</span><span class="token number">0x80</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//串口波特率加倍</span>
+         ES<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//串行中断允许</span>
+         TR1<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//启动定时器1</span>
+         REN<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//允许接收 </span>
+         EA<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//允许中断</span>
+
+      <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/*********************************************************
+
+  串行中断服务函数
+
+*********************************************************/</span>
+<span class="token keyword">void</span>  <span class="token function">serial</span><span class="token punctuation">(</span><span class="token punctuation">)</span> interrupt <span class="token number">4</span> 
+<span class="token punctuation">{</span>
+   ES <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//关闭串行中断</span>
+   RI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//清除串行接受标志位</span>
+   buf <span class="token operator">=</span> SBUF<span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//从串口缓冲区取得数据</span>
+  <span class="token keyword">switch</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
+   <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token number">0x31</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xfe</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到1，第一个LED亮         </span>
+      <span class="token keyword">case</span> <span class="token number">0x32</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xfd</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到2，第二个LED亮        </span>
+      <span class="token keyword">case</span> <span class="token number">0x33</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xfb</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到3，第三个LED亮        </span>
+      <span class="token keyword">case</span> <span class="token number">0x34</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xf7</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到4，第四个LED亮       </span>
+      <span class="token keyword">case</span> <span class="token number">0x35</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xef</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到5，第五个LED亮            </span>
+      <span class="token keyword">case</span> <span class="token number">0x36</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xdf</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到5，第六个LED亮                   </span>
+      <span class="token keyword">case</span> <span class="token number">0x37</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0xbf</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到5，第七个LED亮</span>
+        <span class="token keyword">case</span> <span class="token number">0x38</span><span class="token punctuation">:</span>  P2<span class="token operator">=</span><span class="token number">0x7f</span><span class="token punctuation">;</span>beep<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到5，第八个LED亮</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>    beep<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>P2<span class="token operator">=</span><span class="token number">0xff</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//接受到其它数据，蜂鸣器响         </span>
+   <span class="token punctuation">}</span>
+   ES <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//允许串口中断</span>
+<span class="token punctuation">}</span></code></pre>
+<ol start="4">
+<li>HC05蓝牙模块LCD12864显示<br>```c<br>/*—————————————————————————–</li>
+</ol>
+<ul>
+<li>实 验 名         : HC05蓝牙模块LCD12864显示</li>
+<li>实验说明     : 普中单片机蓝牙串口接收数据控制灯亮灭和LCD12864显示</li>
+<li>连接方式     : </li>
+<li>注    意         : 该试验使用的晶振是12MHZ</li>
+<li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</li>
+</ul>
+<p>#include&lt;reg52.h&gt;<br>#include&lt;intrins.h&gt;<br>#define uchar unsigned char<br>#define uint  unsigned int</p>
+<p>#define jingzhen     12000000UL             /<em>使用12.0M晶体</em>/<br>#define botelv   4800UL                   /<em>波特率定义为4800</em>/</p>
+<p>uchar PuZh[] = “<a href="http://www.1234567890.com&quot;" target="_blank" rel="noopener">www.1234567890.com&quot;</a>;</p>
+<p>//–定义使用的IO–//<br> /<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>                    端口定义<br><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</p>
+<p>sbit RS=P2^6; //命令/数据选择<br>sbit RW=P2^5;  //读写口<br>sbit  E=P2^7;      //锁存控制<br>sbit RES = P2^0;<br>sbit PSB = P2^2;</p>
+<p>sbit LED1=P2^3;<br>sbit LED2=P2^4;</p>
+<p>//–声明全局函数–//<br>void UsartConfiguration();<br>void Delay_1ms(uint i);<br>void delay(unsigned int time);<br>void DELAY_nUS(unsigned int Time);<br>void DELAY_nMS(unsigned int time);<br>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li><p>名称 : Delay_1ms()</p>
+</li>
+<li><p>功能 : 延时子程序，延时时间为 1ms</p>
+</li>
+<li><p>x * 输入 : x (延时一毫秒的个数)</p>
+</li>
+<li><p>输出 : 无</p>
+</li>
+<li><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>void Delay_1ms(uint i)//1ms延时<br>{<br> uchar x,j;</p>
+<p> for(j=0;j&lt;i;j++)<br>   for(x=0;x&lt;=148;x++);<br>}</p>
+</li>
+</ul>
+<p>void DELAY_nMS(unsigned int time)<br>{<br>  unsigned int  i,j;<br>  for(i=0;i&lt;time;i++)<br>     for(j=0;j&lt;939;j++);<br>}</p>
+<p>void DELAY_nUS(unsigned int Time)<br>{<br>    while(–Time);<br>}</p>
+<p>void delay(unsigned int time)              //int型数据为16位,所以最大值为65535<br> {                                           //0.1ms<br>   unsigned int  i,j;                  //定义变量i,j,用于循环语句<br>   for(i=0;i&lt;time;i++)         //for循环,循环50*time次<br>     for(j=0;j&lt;50;j++);       //for循环,循环50次<br> }</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>LCD12864部分<br><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br> void checkbusy(void)<br>{<br>   RS=0;<br>   RW=1;<br>   E=1;<br>   while((P0&amp;0x80)==0x80);<br>   E=0;<br>}</p>
+<p>void wcode(unsigned char cmdcode)<br>{<br>   checkbusy();<br>   RS=0;<br>   RW=0;<br>   E=1;<br>   P0=cmdcode;<br>   delay(10);<br>   E=0;<br>}<br>void wdata(unsigned char dispdata)<br>{<br>   checkbusy();<br>   RS=1;<br>   RW=0;<br>   E=1;<br>   P0=dispdata;<br>   delay(10);<br>   E=0;<br>}</p>
+<p>void LCD12864_InitLCD(void)<br>   {<br>         PSB=1;<br>         RES=0;<br>         delay(10);<br>         RES=1;<br>         wcode(0x30);<br>         wcode(0x0c);<br>         wcode(0x01);<br>         wcode(0x06);<br>}  </p>
+<p>void LCD12864_Display_Char(unsigned char x,unsigned char y,unsigned char  Char)<br>{<br>  switch(y)<br>     {<br>            case 0: wcode(0x80+x);break;    //第1行<br>        case 1: wcode(0x90+x);break;    //第2行<br>        case 2: wcode(0x88+x);break;    //第3行<br>        case 3: wcode(0x98+x);break;    //第4行<br>      default:break;<br>       }<br>     wdata(Char);</p>
+<p>}</p>
+<p>void LCD12864_Display_String(unsigned char x,unsigned char y,unsigned char  <em>s)<br>{<br> switch(y)<br>     {<br>            case 0: wcode(0x80+x);break;<br>            case 1: wcode(0x90+x);break;<br>            case 2: wcode(0x88+x);break;<br>            case 3: wcode(0x98+x);break;<br>                default:break;<br>     }<br>   while(</em>s&gt;0)<br>     {<br>                wdata(*s);<br>                delay(10);<br>                s++;<br>     }<br>}</p>
+<p>void LCD12864_Display_UnsignedInt(unsigned char x,unsigned char y,unsigned int Number,unsigned char Count)<br>{<br>    unsigned char NumbArray[6]={0};    </p>
+<pre><code>NumbArray[0]=(Number/10000)%10+0x30; 
+NumbArray[1]=(Number/1000) %10+0x30;
+NumbArray[2]=(Number/100)  %10+0x30;
+NumbArray[3]=(Number/10)   %10+0x30;
+NumbArray[4]=(Number/1)    %10+0x30; 
+NumbArray[5]= 0;
+
+LCD12864_Display_String(x,y,&amp;NumbArray[5-Count]);</code></pre><p>}</p>
+<p>void Display_SignedInt(unsigned char x,<br>                       unsigned char y,<br>                       signed int Number,<br>                       unsigned char Count)<br>{<br>    unsigned char NumberArray[7]={0};<br>    signed int Number_Temp;</p>
+<pre><code>Number_Temp = Number;
+if(Number_Temp&lt;0)
+{
+    Number_Temp = 0 - Number_Temp;
+}
+
+NumberArray[0]=&#39;+&#39;; 
+NumberArray[1]=(Number_Temp/10000)%10+0x30; 
+NumberArray[2]=(Number_Temp/1000) %10+0x30;
+NumberArray[3]=(Number_Temp/100)  %10+0x30;
+NumberArray[4]=(Number_Temp/10)   %10+0x30;
+NumberArray[5]=(Number_Temp/1)    %10+0x30;
+NumberArray[6]=0;
+
+if(Number&gt;0)
+{
+    NumberArray[5-Count] = &#39;+&#39;;
+}
+else
+{
+    NumberArray[5-Count] = &#39;-&#39;;
+}
+
+LCD12864_Display_String(x, y, &amp;NumberArray[5-Count]);</code></pre><p>}</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li><p>名称 : Com_Int()</p>
+</li>
+<li><p>功能 : 串口中断子函数</p>
+</li>
+<li><p>输入 : 无 * 输出 : 无</p>
+</li>
+<li><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>void Com_Int(void) interrupt 4<br>{<br>   uchar i;<br> uchar receive_data;</p>
+<p> EA = 0;</p>
+<p> if(RI == 1) //当硬件接收到一个数据时，RI会置位<br>   {         </p>
+<pre><code>       RI = 0;
+       receive_data = SBUF;//接收到的数据
+
+   if(receive_data == &#39;1&#39;)     
+   {
+           LED1=0;
+         DELAY_nMS(200);
+         LED1=1;
+         DELAY_nMS(200);
+         LCD12864_Display_String(0,1,&quot;led1&quot;);
+         DELAY_nMS(500);
+         wcode(0x01);
+           LED2=1;
+         DELAY_nMS(200);
+         LED2=0;
+         DELAY_nMS(200);
+         LCD12864_Display_String(0,2,&quot;led2&quot;);
+         DELAY_nMS(500);
+         wcode(0x01);
+   }
+   else if(receive_data == &#39;2&#39;)     
+   {
+         LED2=1;
+         DELAY_nMS(200);
+         LED2=0;
+         DELAY_nMS(200);
+         LCD12864_Display_String(8,2,&quot;led2&quot;);
+         DELAY_nMS(500);
+         wcode(0x01);
+           LED1=0;
+         DELAY_nMS(200);
+         LED1=1;
+         DELAY_nMS(200);
+         LCD12864_Display_String(8,1,&quot;led1&quot;);
+         DELAY_nMS(500);
+         wcode(0x01);</code></pre></li>
+</ul>
+<pre><code>    }
+    else 
+    {
+         LCD12864_Display_String(0,3,&quot;error&quot;);
+         DELAY_nMS(500);
+         wcode(0x01);
+    }
+
+}
+
+    for(i=0; i&lt;36; i++)
+    {
+        SBUF = PuZh[i];   //将要发送的数据放入到发送寄存器
+        while(!TI);            //等待发送数据完成
+        TI=0;                    //清除发送完成标志位
+        Delay_1ms(1);
+    }
+    EA = 1;</code></pre><p>}</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li>函 数 名       : UsartConfiguration()</li>
+<li>函数功能           : 设置串口</li>
+<li>输    入       : 无</li>
+<li>输    出       : 无</li>
+<li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</li>
+</ul>
+<p>void  UsartConfiguration(void)                //串口初始化<br>{<br>         EA=0;            //暂时关闭中断<br>         TMOD&amp;=0x0F;      //定时器1模式控制在高4位<br>         TMOD|=0x20;      //定时器1工作在模式2，自动重装模式<br>         SCON=0x50;       //串口工作在模式1<br>         TH1=256-jingzhen/(botelv<em>12</em>16);  //计算定时器重装值<br>         TL1=256-jingzhen/(botelv<em>12</em>16);<br>         PCON|=0x80;    //串口波特率加倍<br>         ES=1;         //串行中断允许<br>         TR1=1;        //启动定时器1<br>         REN=1;        //允许接收<br>         EA=1;         //允许中断<br>}</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li><p>函 数 名       : main</p>
+</li>
+<li><p>函数功能           : 主函数</p>
+</li>
+<li><p>输    入       : 无</p>
+</li>
+<li><p>输    出       : 无</p>
+</li>
+<li><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>void main()<br>{</p>
+<p>   UsartConfiguration();//初始化串口<br>   LCD12864_InitLCD();<br>   //LCD12864_Display_String(0,1,”test”);<br>   while(1)<br>   {</p>
+<pre><code>   //LCD12864_Display_String(0,0,&quot;test&quot;);</code></pre><p>   }<br>}</p>
+<pre><code>### 参考资料
+##### 普中科技--普中单片机开发资料
+##### 蒙蒙Plus--一周学习完51单片机
+##### 海创电子--51单片机学习
+&lt;iframe src=&quot;//player.bilibili.com/player.html?aid=77185741&amp;bvid=BV1vJ411X7iZ&amp;cid=132022563&amp;page=1&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt; &lt;/iframe&gt;
+</code></pre></li>
+</ul>
+<iframe src="//player.bilibili.com/player.html?aid=56557697&bvid=BV1j4411g7vd&cid=98818572&page=8" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/05/08/timer-interrupt/">https://delehub.vercel.app/2020/05/08/timer-interrupt/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                    <span class="chip bg-color">嵌入式</span>
+                                </a>
+                            
+                                <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                    <span class="chip bg-color">51单片机</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">
+                                    <span class="chip bg-color">定时器 串口通信</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/05/08/stm32-shu-ma-guan-xian-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="STM32--数码管显示">
+                        
+                        <span class="card-title">STM32--数码管显示</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            STM32 – 数码管显示
+简介1.硬件部分STM32F103C8T6 最小系统板  一位共阴数码管2.软件部分Keil软件编程 数码管码表
+硬件部分数码管简介数码管，也称作辉光管，是一种可以显示数字和其他信息的电子设备。玻璃管中包括一个金
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                    STM32 ARM单片机
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/" class="post-category">
+                                    电子模块
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    嵌入式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                        <span class="chip bg-color">嵌入式</span>
+                    </a>
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">STM32 ARM单片机</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E7%A0%81%E7%AE%A1/">
+                        <span class="chip bg-color">数码管</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/08/stm32-esp8266/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="stm32_esp8266">
+                        
+                        <span class="card-title">stm32_esp8266</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于STM32机智云物联网环境检测系统
+简介学习STM32单片机与WIFI模块的简单的使用。STM32单片机是意法半导体公司生产的基于ARM公司的高性能Cortex-M3内核的32位微处理器。NodeMCU是一个开源的物联网平台。它使用Lu
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                    STM32 ARM单片机
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/" class="post-category">
+                                    电子模块
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    嵌入式
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E6%9C%BA%E6%99%BA%E4%BA%91/" class="post-category">
+                                    机智云
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E6%9C%BA%E6%99%BA%E4%BA%91/%E7%89%A9%E8%81%94%E7%BD%91/" class="post-category">
+                                    物联网
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/%E6%9C%BA%E6%99%BA%E4%BA%91/%E7%89%A9%E8%81%94%E7%BD%91/ESP8266/" class="post-category">
+                                    ESP8266
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                        <span class="chip bg-color">嵌入式</span>
+                    </a>
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">STM32 ARM单片机</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%9F%A9%E9%98%B5%E9%94%AE%E7%9B%98/">
+                        <span class="chip bg-color">矩阵键盘</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E6%99%BA%E4%BA%91/">
+                        <span class="chip bg-color">机智云</span>
+                    </a>
+                    
+                    <a href="/tags/ESP8266/">
+                        <span class="chip bg-color">ESP8266</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>

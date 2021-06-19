@@ -1,0 +1,1327 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="NodeMCU web网页 DH1T11温湿度显示, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>NodeMCU web网页 DH1T11温湿度显示 | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">NodeMCU web网页 DH1T11温湿度显示</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/NodeMCU/">
+                                <span class="chip bg-color">NodeMCU</span>
+                            </a>
+                        
+                            <a href="/tags/OLED/">
+                                <span class="chip bg-color">OLED</span>
+                            </a>
+                        
+                            <a href="/tags/DHT11/">
+                                <span class="chip bg-color">DHT11</span>
+                            </a>
+                        
+                            <a href="/tags/Web/">
+                                <span class="chip bg-color">Web</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                单片机
+                            </a>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/" class="post-category">
+                                电子模块
+                            </a>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/Web/" class="post-category">
+                                Web
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-08
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Nodemcu-0-96oled-dht11-web网页显示"><a href="#Nodemcu-0-96oled-dht11-web网页显示" class="headerlink" title="Nodemcu-0.96oled-dht11-web网页显示"></a>Nodemcu-0.96oled-dht11-web网页显示</h1><a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>1.软件部分<br> Arduino IDE<br>2.硬件部分<br>NodeMCU   OLED  DHT11<br>3.知识点<br>Web开发  Arduino IDE开发ESP8266 </p>
+<h2 id="软件部分"><a href="#软件部分" class="headerlink" title="软件部分"></a>软件部分</h2><h3 id="软件代码"><a href="#软件代码" class="headerlink" title="软件代码"></a>软件代码</h3><h4 id="代码分析（以后再写）"><a href="#代码分析（以后再写）" class="headerlink" title="代码分析（以后再写）"></a>代码分析（以后再写）</h4><pre class=" language-cpp"><code class="language-cpp">
+<span class="token comment" spellcheck="true">// Import required libraries</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Arduino.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ESP8266WiFi.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Hash.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ESPAsyncTCP.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ESPAsyncWebServer.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Adafruit_Sensor.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;DHT.h></span></span>
+
+<span class="token comment" spellcheck="true">// Replace with your network credentials</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> ssid <span class="token operator">=</span> <span class="token string">"MERCURY_3DE2"</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//路由器或者热点名称</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> password <span class="token operator">=</span> <span class="token string">"88888888"</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//路由器或者热点密码</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> DHTPIN 5     </span>
+<span class="token comment" spellcheck="true">// Digital pin connected to the DHT sensor</span>
+<span class="token comment" spellcheck="true">//引脚定义初始化</span>
+
+
+<span class="token macro property">#<span class="token directive keyword">define</span> DHTTYPE    DHT11     </span><span class="token comment" spellcheck="true">// DHT 11</span>
+
+DHT <span class="token function">dht</span><span class="token punctuation">(</span>DHTPIN<span class="token punctuation">,</span> DHTTYPE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// current temperature &amp; humidity, updated in loop()</span>
+<span class="token keyword">float</span> t <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> h <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Create AsyncWebServer object on port 80</span>
+AsyncWebServer <span class="token function">server</span><span class="token punctuation">(</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Generally, you should use "unsigned long" for variables that hold time</span>
+<span class="token comment" spellcheck="true">// The value will quickly become too large for an int to store</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> previousMillis <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    
+<span class="token comment" spellcheck="true">// will store last time DHT was updated</span>
+
+<span class="token comment" spellcheck="true">// Updates DHT readings every 10 seconds</span>
+<span class="token keyword">const</span> <span class="token keyword">long</span> interval <span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">;</span>  
+<span class="token comment" spellcheck="true">/*网页端代码编写*/</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> index_html<span class="token punctuation">[</span><span class="token punctuation">]</span> PROGMEM <span class="token operator">=</span> R"<span class="token function">rawliteral</span><span class="token punctuation">(</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE HTML<span class="token operator">></span><span class="token operator">&lt;</span>html<span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+  <span class="token operator">&lt;</span>meta name<span class="token operator">=</span><span class="token string">"viewport"</span> content<span class="token operator">=</span><span class="token string">"width=device-width, initial-scale=1"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>link rel<span class="token operator">=</span><span class="token string">"stylesheet"</span> href<span class="token operator">=</span><span class="token string">"https://use.fontawesome.com/releases/v5.7.2/css/all.css"</span> integrity<span class="token operator">=</span><span class="token string">"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"</span> crossorigin<span class="token operator">=</span><span class="token string">"anonymous"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>style<span class="token operator">></span>
+    html <span class="token punctuation">{</span>
+     font<span class="token operator">-</span>family<span class="token operator">:</span> Arial<span class="token punctuation">;</span>
+     display<span class="token operator">:</span> <span class="token keyword">inline</span><span class="token operator">-</span>block<span class="token punctuation">;</span>
+     margin<span class="token operator">:</span> 0px <span class="token keyword">auto</span><span class="token punctuation">;</span>
+     text<span class="token operator">-</span>align<span class="token operator">:</span> center<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    h2 <span class="token punctuation">{</span> font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">.</span>0rem<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    p <span class="token punctuation">{</span> font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">.</span>0rem<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span>units <span class="token punctuation">{</span> font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">.</span>2rem<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span>dht<span class="token operator">-</span>labels<span class="token punctuation">{</span>
+      font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">.</span>5rem<span class="token punctuation">;</span>
+      vertical<span class="token operator">-</span>align<span class="token operator">:</span>middle<span class="token punctuation">;</span>
+      padding<span class="token operator">-</span>bottom<span class="token operator">:</span> 15px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+  <span class="token operator">&lt;</span>h2<span class="token operator">></span>ESP8266 DHT Server<span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span>
+  <span class="token operator">&lt;</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>i <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"fas fa-thermometer-half"</span> style<span class="token operator">=</span><span class="token string">"color:#059e8a;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>i<span class="token operator">></span> 
+    <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"dht-labels"</span><span class="token operator">></span>Temperature<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span> 
+    <span class="token operator">&lt;</span>span id<span class="token operator">=</span><span class="token string">"temperature"</span><span class="token operator">></span><span class="token operator">%</span>TEMPERATURE<span class="token operator">%</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span>sup <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"units"</span><span class="token operator">></span><span class="token operator">&amp;</span>deg<span class="token punctuation">;</span>C<span class="token operator">&lt;</span><span class="token operator">/</span>sup<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+  <span class="token operator">&lt;</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>i <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"fas fa-tint"</span> style<span class="token operator">=</span><span class="token string">"color:#00add6;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>i<span class="token operator">></span> 
+    <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"dht-labels"</span><span class="token operator">></span>Humidity<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span>span id<span class="token operator">=</span><span class="token string">"humidity"</span><span class="token operator">></span><span class="token operator">%</span>HUMIDITY<span class="token operator">%</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span>sup <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"units"</span><span class="token operator">></span><span class="token operator">%</span><span class="token operator">&lt;</span><span class="token operator">/</span>sup<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token function">function</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  var xhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  xhttp<span class="token punctuation">.</span>onreadystatechange <span class="token operator">=</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"temperature"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>responseText<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  xhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">,</span> <span class="token string">"/temperature"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  xhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">10000</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token function">function</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  var xhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  xhttp<span class="token punctuation">.</span>onreadystatechange <span class="token operator">=</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"humidity"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>responseText<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  xhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">,</span> <span class="token string">"/humidity"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  xhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">10000</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span><span class="token punctuation">)</span>rawliteral"<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Replaces placeholder with DHT values</span>
+String <span class="token function">processor</span><span class="token punctuation">(</span><span class="token keyword">const</span> String<span class="token operator">&amp;</span> var<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//Serial.println(var);</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>var <span class="token operator">==</span> <span class="token string">"TEMPERATURE"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>var <span class="token operator">==</span> <span class="token string">"HUMIDITY"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// Serial port for debugging purposes</span>
+  Serial<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token number">115200</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//串口波特率</span>
+  dht<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Connect to Wi-Fi</span>
+  WiFi<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span>ssid<span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Connecting to WiFi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>WiFi<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> WL_CONNECTED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">// Print ESP8266 Local IP Address</span>
+  Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>WiFi<span class="token punctuation">.</span><span class="token function">localIP</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Route for root / web page</span>
+  server<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> HTTP_GET<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>AsyncWebServerRequest <span class="token operator">*</span>request<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    request<span class="token operator">-</span><span class="token operator">></span><span class="token function">send_P</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"text/html"</span><span class="token punctuation">,</span> index_html<span class="token punctuation">,</span> processor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  server<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"/temperature"</span><span class="token punctuation">,</span> HTTP_GET<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>AsyncWebServerRequest <span class="token operator">*</span>request<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    request<span class="token operator">-</span><span class="token operator">></span><span class="token function">send_P</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"text/plain"</span><span class="token punctuation">,</span> <span class="token function">String</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  server<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"/humidity"</span><span class="token punctuation">,</span> HTTP_GET<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>AsyncWebServerRequest <span class="token operator">*</span>request<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    request<span class="token operator">-</span><span class="token operator">></span><span class="token function">send_P</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"text/plain"</span><span class="token punctuation">,</span> <span class="token function">String</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Start server</span>
+  server<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+  <span class="token keyword">unsigned</span> <span class="token keyword">long</span> currentMillis <span class="token operator">=</span> <span class="token function">millis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>currentMillis <span class="token operator">-</span> previousMillis <span class="token operator">>=</span> interval<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// save the last time you updated the DHT values</span>
+    previousMillis <span class="token operator">=</span> currentMillis<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Read temperature as Celsius (the default)</span>
+    <span class="token keyword">float</span> newT <span class="token operator">=</span> dht<span class="token punctuation">.</span><span class="token function">readTemperature</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Read temperature as Fahrenheit (isFahrenheit = true)</span>
+    <span class="token comment" spellcheck="true">//float newT = dht.readTemperature(true);</span>
+    <span class="token comment" spellcheck="true">// if temperature read failed, don't change t value</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isnan</span><span class="token punctuation">(</span>newT<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Failed to read from DHT sensor!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      t <span class="token operator">=</span> newT<span class="token punctuation">;</span>
+      Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// Read Humidity</span>
+    <span class="token keyword">float</span> newH <span class="token operator">=</span> dht<span class="token punctuation">.</span><span class="token function">readHumidity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// if humidity read failed, don't change h value </span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isnan</span><span class="token punctuation">(</span>newH<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Failed to read from DHT sensor!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      h <span class="token operator">=</span> newH<span class="token punctuation">;</span>
+      Serial<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="Arduino-IDE软件-使用"><a href="#Arduino-IDE软件-使用" class="headerlink" title="Arduino IDE软件 使用"></a>Arduino IDE软件 使用</h3><h4 id="Arduino软件-IDE"><a href="#Arduino软件-IDE" class="headerlink" title="Arduino软件(IDE)"></a>Arduino软件(IDE)</h4><p>Arduino集成开发环境（或是Arduino IDE）包含了一个用于写代码的文本编辑器、一个消息区、一个文本控制台以及一个带有常用功能按钮和文本菜单的工具栏。软件连接Arduino和Genuino之后，能给所连接的控制板上传程序，还能与控制板相互通信。<br><img src="https://img-blog.csdnimg.cn/20200330203800120.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="写项目"><a href="#写项目" class="headerlink" title="写项目"></a>写项目</h4><p>使用Arduino软件（IDE）编写的代码被称为项目（sketches），这些项目写在文本编辑器中，以.ino的文件形式保存，软件中的文本编辑器有剪切/粘贴和搜索/替换功能。当保存、输出以及出现错误时消息区会显示反馈信息。控制台会文字形式显示Arduino软件（IDE）的输出信息，包括完整的错误信息以及其他消息。整个窗口的右下角会显示当前选定的控制板和串口信息。工具栏按钮包含验证、下载程序、新建、打开、保存以及串口监视器的功能。</p>
+<p>注意：Arduino软件（IDE）1.0之前的版本中项目的保存格式为.pde，你能够用1.0版本的软件打开这些文件，软件会提示你将这些项目保存为.ino的形式。</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>检查代码编译时的错误</p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>编译你的代码并且上传到选定的控制板中，细节请查看后面的 上传 内容<br>注意：如果你使用的是专门的编程器，你需要在点击按钮时按住电脑的“shift”键，显示的文字会变成“使用编程器上传”。</p>
+<h4 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h4><p>创建一个新的项目。</p>
+<h4 id="打开"><a href="#打开" class="headerlink" title="打开"></a>打开</h4><p>弹出一个包含你在项目文件夹中所有项目的菜单，选择其中一个会打开相应的代码，新的项目会覆盖当前的项目。<br>注意：因为Java中的一个问题，所以这个菜单不会滚动，如果你需要打开的项目在列表的最后，那么需要通过菜单中的文件|项目文件夹来选择。</p>
+<h4 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h4><p>保存你的项目。</p>
+<h4 id="。。。。。。。。东西太多了"><a href="#。。。。。。。。东西太多了" class="headerlink" title="。。。。。。。。东西太多了"></a>。。。。。。。。东西太多了</h4><h4 id="语言支持"><a href="#语言支持" class="headerlink" title="语言支持"></a>语言支持</h4><p>从版本1.0.1开始，Arduino软件(IDE)已被翻译成30多种语言，默认的情况下，IDE会根据系统的语言选择相应的语言（注意：在Windows中以及可以在Linux中，这是由系统的日期和时间格式来确定的，而不是由操作系统显示的语言来确定的。）<br>如果你想手动更改语言，那就打开Arduino软件，然后在首选项的对话框中选择编辑器语言，在弹出的下来菜单中选择相应的语言，然后重启软件使所选择的语言生效，如果你的操作系统不支持你所选择的语言，那么IDE会默认采用英文。<br>你能够返回Arduino的默认设置，让IDE根据系统的语言选择相应的语言，只需要在语言选择的下拉菜单中选择系统默认。当你重启软件时这个设置会生效。同样的，改变你的系统设置后，你需要重新启动Arduino软件才能变为新的默认语言。</p>
+<h3 id="简单配置（以后再写）"><a href="#简单配置（以后再写）" class="headerlink" title="简单配置（以后再写）"></a>简单配置（以后再写）</h3><h2 id="硬件部分"><a href="#硬件部分" class="headerlink" title="硬件部分"></a>硬件部分</h2><h3 id="NodeMCU"><a href="#NodeMCU" class="headerlink" title="NodeMCU"></a>NodeMCU</h3><p>NodeMCU是一个开源的物联网平台。它使用Lua脚本语言编程。该平台基于eLua 开源项目,底层使用中国乐鑫公司的ESP8266 sdk 0.9.5版本。NodeMCU包含了可以运行在 esp8266 Wi-Fi SoC芯片之上的固件,以及基于ESP-12模组的硬件。<br><img src="https://img-blog.csdnimg.cn/20200330203343829.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="nodemcu-GPIO-端口映射"><a href="#nodemcu-GPIO-端口映射" class="headerlink" title="nodemcu GPIO 端口映射"></a>nodemcu GPIO 端口映射</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t SDA <span class="token operator">=</span> PIN_WIRE_SDA<span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t SCL <span class="token operator">=</span> PIN_WIRE_SCL<span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t LED_BUILTIN <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t BUILTIN_LED <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D0   <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D1   <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D2   <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D3   <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D4   <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D5   <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D6   <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D7   <span class="token operator">=</span> <span class="token number">13</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D8   <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D9   <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> uint8_t D10  <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre>
+<h3 id="OLED"><a href="#OLED" class="headerlink" title="OLED"></a>OLED</h3><p>OLED(Organic Light-Emitting Diode)，即有机发光二极管,其实物图如下所示. OLED由于同时具备自发光，不需背光源，对比度高，厚度薄，视角广，反应速度快，可用于挠曲性面板，使用温度范围广，构造及制程简单等优异特性，被认为是下一代的平面显示器新兴应用技术。具有轻，薄，省电等特性，工作电压宽度高，从2.2V到5.5V。发光原理：有机发光显示技术由非常薄的有机材料涂层和玻璃基板构成。当有电荷通过时这些有机材料就会发光。OLED发光的颜色取决于有机发光层的材料，故厂商可由改变发光层的材料而得到所需之颜色。有源阵列有机发光显示屏具有内置的电子电路系统因此每个像素都由一个对应的电路独立驱动。<br><img src="https://img-blog.csdnimg.cn/20200330203711396.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="DHT11"><a href="#DHT11" class="headerlink" title="DHT11"></a>DHT11</h3><p>DHT11数字温湿度传感器是一款含有已校准数字信号输出的温湿度复合传感器，它应用专用的数字模块采集技术和温湿度传感技术，确保产品具有极高的可靠性和卓越的长期稳定性。传感器包括一个电阻式感湿元件和一个NTC测温元件，并与一个高性能8位单片机相连接。因此该产品具有品质卓越、超快响应、抗干扰能力强、性价比极高等优点。每个DHT11传感器都在极为精确的湿度校验室中进行校准。校准系数以程序的形式存在OTP内存中，传感器内部在检测信号的处理过程中要调用这些校准系数。单线制串行接口，使系统集成变得简易快捷。超小的体积、极低的功耗，使其成为该类应用中，在苛刻应用场合的最佳选择。产品为4针单排引脚封装，连接方便。<br><img src="https://img-blog.csdnimg.cn/20200330203725264.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Web开发"><a href="#Web开发" class="headerlink" title="Web开发"></a>Web开发</h2><ol>
+<li>web网站简单定义<br>　　web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超级链接将Internet上的信息节点组织成一个互为关联的网状结构。<br>　　1989年CERN（欧洲粒子物理研究所）中由Tim Berners-Lee领导的小组提交了一个针对Internet的新协议和一个使用该协议的文档系统，该小组将这个新系统命名为Word Wide Web，它的目的在于使全球的科学家能够利用Internet交流自己的工作文档。<br>这个新系统被设计为允许Internet上任意一个用户都可以从许多文档服务计算机的数据库中搜索和获取文档。1990年末，这个新系统的基本框架已经在CERN中的一台计算机中开发出来并实现了,1991年该系统移植到了其他计算机平台，并正式发布。</li>
+<li>web网站通常采用的是客户机-服务器架构(client – server model) ,而客户机通常情况下用户都是在浏览器里面进行操作，所以说当用户在浏览器里面输入网站地址的时候，交互就已经进行。</li>
+<li>网站内容<br>我们在进行一个项目开发的时候，这个项目里面最少会包含下面的内容，并且对于不同的内容都会存储在不同的目录(文件夹)里面。这样对于团队项目开发能够起到很好的帮助。所以说一个程序员在进入公司得一段时间里，就需要去了解这家公司制定的一些项目规则以便能够适应公司得开发。</li>
+<li>而我们常说的web网站就是指直接以浏览器为载体，通过web网络协议访问的站点，即是web网站。例如下面我们常见的这几个网站。<br>下面我们看到的这些网站，我们都可以说是web站点，简单一点说，无论你看到的网站是什么类型，只要是通过浏览器访问的，那么都可以说是web站点。而我们所熟知的一些语言，例如python、例如php、例如.net等等这些语言，当我们把这些语言用来开发网站的时候，那么我们的定位就是web开发人员。<br><img src="https://img-blog.csdnimg.cn/2020033020422634.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020033020411116.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200330204124283.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h3 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a>核心技术</h3><h4 id="HTML语言"><a href="#HTML语言" class="headerlink" title="HTML语言"></a>HTML语言</h4>掌握HTML是网页的核心，是一种制作万维网页面的标准语言，是万维网浏览器使用的一种语言，它消除了不同计算机之间信息交流的障碍。因此，它是网络上应用最为广泛的语言，也是构成网页文档的主要语言，学好HTML是成为Web开发人员的基本条件。<br>HTML是一种标记语言，能够实现Web页面并在浏览器中显示。HTML5作为HTML的最新版本，引入了多项新技术，大大增强了对于应用的支持能力，使得Web技术不再局限于呈现网页内容。<br>随着CSS、JavaScript、Flash等技术的发展，Web对于应用的处理能力逐渐增强，用户浏览网页的体验已经有了较大的改善。不过HTML5中的几项新技术实现了质的突破，使得Web技术首次被认为能够接近于本地原生应用技术，开发Web应用真正成为开发者的一个选择。<br>HTML5可以使开发者的工作大大简化，理论上单次开发就可以在不同平台借助浏览器运行，降低开发的成本，这也是产业界普遍认为HTML5技术的主要优点之一。AppMobi、摩托罗拉、Sencha、Appcelerator等公司均已推出了较为成熟的开发工具，支持HTML5应用的发展。 [3] <h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3>学好CSS是网页外观的重要一点，CSS可以帮助把网页外观做得更加美观。<h4 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h4>学习JavaScript的基本语法，以及如何使用JavaScript编程将会提高开发人员的个人技能。<h4 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h4>了解Unix和Linux的基本知识，对于开发人员有益无害。<h4 id="网络服务器"><a href="#网络服务器" class="headerlink" title="网络服务器"></a>网络服务器</h4>了解Web服务器，包括对Apache的基本配置，htaccess配置技巧的掌握等。<br>(太多了)</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>1.web网站开发基础博客 <a href="https://www.cnblogs.com/liujunhang/articles/9197151.html" target="_blank" rel="noopener">https://www.cnblogs.com/liujunhang/articles/9197151.html</a><br>2. 单片机菜鸟博哥 arduino esp8266<br><a href="https://blog.csdn.net/dpjcn1990/category_9291479.html" target="_blank" rel="noopener">https://blog.csdn.net/dpjcn1990/category_9291479.html</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/05/08/nodemcu-web-wang-ye-dh1t11-wen-shi-du-xian-shi/">https://delehub.vercel.app/2020/05/08/nodemcu-web-wang-ye-dh1t11-wen-shi-du-xian-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/NodeMCU/">
+                                    <span class="chip bg-color">NodeMCU</span>
+                                </a>
+                            
+                                <a href="/tags/OLED/">
+                                    <span class="chip bg-color">OLED</span>
+                                </a>
+                            
+                                <a href="/tags/DHT11/">
+                                    <span class="chip bg-color">DHT11</span>
+                                </a>
+                            
+                                <a href="/tags/Web/">
+                                    <span class="chip bg-color">Web</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/05/08/python-pa-chong-xue-xi-pa-qu-luo-xiang-shuo-xing-fa-zhi-zuo-dan-mu-ci-yun/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Python爬虫学习--爬取【罗翔说刑法】 制作弹幕词云">
+                        
+                        <span class="card-title">Python爬虫学习--爬取【罗翔说刑法】 制作弹幕词云</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Python爬虫学习爬取哔哩哔哩弹幕制作词云
+环境配置Pycharm开发环境 
+python 版本 python3.7
+Anconda 集成开发环境
+模块导入import requests # pip install requests 
+i
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-category">
+                                    软件开发
+                                </a>
+                            
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E7%88%AC%E8%99%AB/" class="post-category">
+                                    爬虫
+                                </a>
+                            
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E7%88%AC%E8%99%AB/wordcloud%E8%AF%8D%E4%BA%91/" class="post-category">
+                                    wordcloud词云
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%88%AC%E8%99%AB/">
+                        <span class="chip bg-color">爬虫</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
+                        <span class="chip bg-color">数据可视化</span>
+                    </a>
+                    
+                    <a href="/tags/wordcloud%E8%AF%8D%E4%BA%91/">
+                        <span class="chip bg-color">wordcloud词云</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/08/python-requests-wang-luo-shu-ju-cai-ji-xia-zai-shi-pin-ku6/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Python requests 网络数据采集 下载 视频(ku6)">
+                        
+                        <span class="card-title">Python requests 网络数据采集 下载 视频(ku6)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Python requests 网络数据采集视频下载
+环境配置Pycharm开发环境 
+python 版本 python3.7
+Anconda 集成开发环境
+爬虫的一般思路 主要流程步骤#### 1、分析目标网页，确定爬取的url路径，he
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-category">
+                                    软件开发
+                                </a>
+                            
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E7%88%AC%E8%99%AB/" class="post-category">
+                                    爬虫
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%88%AC%E8%99%AB/">
+                        <span class="chip bg-color">爬虫</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/">
+                        <span class="chip bg-color">视频下载</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>

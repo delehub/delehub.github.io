@@ -1,0 +1,1389 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="C and MicrocontrollersPlan-1, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>C and MicrocontrollersPlan-1 | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C and MicrocontrollersPlan-1</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                <span class="chip bg-color">51单片机</span>
+                            </a>
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                单片机
+                            </a>
+                        
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                C
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-09-13
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="MicrocontrollersPlan"><a href="#MicrocontrollersPlan" class="headerlink" title="MicrocontrollersPlan"></a>MicrocontrollersPlan</h1><h2 id="C程序设计复习"><a href="#C程序设计复习" class="headerlink" title="C程序设计复习"></a>C程序设计复习</h2><h2 id="单片机复习"><a href="#单片机复习" class="headerlink" title="单片机复习"></a>单片机复习</h2><ol>
+<li>单片机案例实验与仿真 (51单片机100实例源码)</li>
+<li>C51单片机开源项目合集</li>
+<li>单片机编程技巧与分析(手把手教你单片机程序框架 )(从单片机基础到程序框架.pdf)</li>
+<li>项目课程设计</li>
+</ol>
+<h3 id="参考资料-吴坚鸿《从单片机基础到程序框架》"><a href="#参考资料-吴坚鸿《从单片机基础到程序框架》" class="headerlink" title="参考资料 吴坚鸿《从单片机基础到程序框架》"></a>参考资料 吴坚鸿《从单片机基础到程序框架》</h3><p>===================================================================================</p>
+<h2 id="复习1-md-程序模块化设计"><a href="#复习1-md-程序模块化设计" class="headerlink" title="复习1.md 程序模块化设计"></a>复习1.md 程序模块化设计</h2><h3 id="程序模块化设计"><a href="#程序模块化设计" class="headerlink" title="程序模块化设计"></a>程序模块化设计</h3><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">"REG52.H"</span>   </span><span class="token comment" spellcheck="true">//进入主程序前的区域：头文件包含</span>
+
+sbit beep_dr<span class="token operator">=</span>P3<span class="token operator">^</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//进入主程序前的区域：宏定义</span>
+sbit led_dr<span class="token operator">=</span>P1<span class="token operator">^</span><span class="token number">6</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//进入主程序前的区域：宏定义</span>
+
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> i<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//进入主程序前的区域：内存分配</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//主程序入口，即将进入初始化区域</span>
+<span class="token punctuation">{</span>
+    beep_dr<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第一步：初始化区域：蜂鸣器开始鸣叫。</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">6250</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第二步：初始化区域：延时 0.5 秒左右。也就是蜂鸣器鸣叫的持续时间。</span>
+    beep_dr<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第三步：初始化区域：蜂鸣器停止鸣叫。</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//执行完上面的初始化区域，即将进入循环区域</span>
+    <span class="token punctuation">{</span>
+        led_dr<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第四步：循环区域：LED 开始点亮。</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">6250</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第五步：循环区域：延时 0.5 秒左右。也就是 LED 点亮的持续时间。</span>
+        led_dr<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第六步：循环区域：LED 开始熄灭。</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">6250</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第七步：循环区域：延时 0.5 秒左右。也就是 LED 熄灭的持续时间。</span>
+    <span class="token punctuation">}</span> 
+    <span class="token comment" spellcheck="true">//执行完上面第七步后，单片机又马上返回到上面第四步继续往下执行。</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//...进入主程序前的区域</span>
+main<span class="token punctuation">.</span>c
+<span class="token comment" spellcheck="true">// 官方库文件导入 </span>
+<span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;reg51.h></span></span>
+<span class="token comment" spellcheck="true">// 第三方库文件导入(个人)</span>
+<span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">"led.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">"oled.h"</span></span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment" spellcheck="true">// 模块引脚定义</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token function">Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//模块初始化</span>
+     <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">//代码执行部分</span>
+         <span class="token comment" spellcheck="true">//代码循环部分</span>
+
+     <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Iint</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">oled_Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">led_Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">beep_Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">dht_11_Iint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//....... </span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//...初始化区域</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//...循环区域</span>
+     <span class="token comment" spellcheck="true">// led_on;</span>
+     <span class="token comment" spellcheck="true">// led_off;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h3><p>定义变量的关键字。常用有 3 种容量的变量，每种变量的取值范围不一样。</p>
+<ol>
+<li><p>第一种是”unsigned char”  <strong>0~2^8-1</strong><br>变量，取值范围从 0 到 255，占用 RAM 一个字节，比喻成一房一厅。</p>
+</li>
+<li><p>第二种是”unsigned int”变量，取值  <strong>0~2^16-1</strong><br>范围从 0 到 65535，占用 RAM 两个字节，比喻成两房一厅。</p>
+</li>
+<li><p>第三种是“unsigned long”变量，取值范围从 0<br>到 4294967295，占用 RAM 四个字节，比喻成四房一厅。<strong>0~2^32-1</strong></p>
+</li>
+</ol>
+<p><strong>注意：多说一句，上述的变量范围是针对本教程所用的单片机，当针对不同的单片机时上述变量的范围可能会有一些小差异，比如在 stm32 单片机中，unsigned int 的字节数就不是两个字节，而是四个字节，这些都是由所选的编译器决定.</strong></p>
+<p>定义变量的语法格式</p>
+<ol>
+<li><p>关键字，变量名，分号</p>
+<pre class=" language-C"><code class="language-C">unsigned char a;
+//其中 unsigned char 就是关键字，a 就是变量名，分号”;”就是一条语句的结束符号</code></pre>
+</li>
+<li><p>关键字标识符一些注意点</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*不合法标识符*/</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> 3a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//不合法，第一个字符不能是数字。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token keyword">char</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//不合法，char 是编译器已征用的关键字。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> a b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//不合法，ab 是一个变量名，a 与 b 的中间不能有空格。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> a<span class="token punctuation">,</span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法，a 和 b 分别是一个独立的变量名，a 与 b 的中间可以用逗号隔开。</span>
+
+<span class="token comment" spellcheck="true">/*合法标识符*/</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> abc<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> _ab<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> _3ab<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> a123<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> a12ced<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法。</span></code></pre>
+<p><strong><u>规则：</u></strong></p>
+<ol>
+<li><strong>变量名的第一个字符不能是数字。</strong></li>
+<li><strong>必须是字母或者下划线，字母或者下划线后面可以带数字。</strong></li>
+<li><strong>一个变量名之间的字符不能带空格，两个独立变量名之间也不能用空格隔开（但是两个独立变量</strong><br><strong>名之间可以用逗号隔开）。</strong></li>
+<li><strong>变量名不能跟编译器已征用的关键字重名，不能跟函数名重名。</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="变量-RAM关系"><a href="#变量-RAM关系" class="headerlink" title="变量 RAM关系"></a>变量 RAM关系</h3><ol>
+<li><p>定义变量与 RAM 的内在关系。<strong>当我们定义一个变量时，相当于向单片机申请了一个 RAM 空间。</strong>C 编译器<br>会<strong>自动为这个变量名分配一个 RAM 空间</strong>，<strong>每个字节的 RAM 空间都有一个固定唯一的地址</strong>。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">char</span> a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//a 占用一个字节的 RAM 空间，这个空间的地址由 C 编译自动分配。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//b 占用一个字节的 RAM 空间，这个空间的地址由 C 编译自动分配。</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> c<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//c 占用一个字节的 RAM 空间，这个空间的地址由 C 编译自动分配。</span></code></pre>
+</li>
+<li><p>只需要记住这个变量的名称就可以了。<strong>操作某个变量名，就相当于操作某个对应地址的 RAM 空间</strong>。</p>
+</li>
+</ol>
+<h3 id="变量的赋值"><a href="#变量的赋值" class="headerlink" title="变量的赋值"></a>变量的赋值</h3><ol>
+<li><p>赋值：把右边对象的内容复制一份给左边对象。</p>
+</li>
+<li><p>特性：就是覆盖性，左边对象原来的内容会被右边对象复制过来的新内容所覆盖。</p>
+</li>
+<li><p>格式</p>
+<ol>
+<li>赋值语句的格式。赋值语句的语法格式由 4 部分组成：左边对象，关键字，右边对象，分号。</li>
+</ol>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">char</span> a<span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> b<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span>    
+a <span class="token operator">=</span> b<span class="token punctuation">;</span></code></pre>
+</li>
+<li><p>其中 a 就是左边对象。</p>
+<ol start="3">
+<li><strong>其中“=”就是关键字。</strong>写法跟我们平时用的等于号是一样，但是在 C 语言里不是等于的意思，而是代<br>表赋值的意思。</li>
+<li>它是<strong>代表中文含义的“给”</strong>，而<strong>不是用于判断的“等于”</strong>，跟等于号是两码事。</li>
+<li>其中 <strong>b 就是右边对象</strong>。</li>
+<li>其中<strong>分号“;”</strong>代表一条语句的结束符。</li>
+<li>注意C语言程序是    <strong>等于是  ——–》 “ == “</strong></li>
+</ol>
+<h3 id="单片机串口打印部分函数"><a href="#单片机串口打印部分函数" class="headerlink" title="单片机串口打印部分函数"></a>单片机串口打印部分函数</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> u32ViewData<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Su8ViewBuffer<span class="token punctuation">[</span><span class="token number">43</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    code <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Cu8_0D_0A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0x0d</span><span class="token punctuation">,</span><span class="token number">0x0a</span><span class="token punctuation">,</span><span class="token number">0x00</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    code <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Cu8Start<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"开始..."</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Su8FirstFlag<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> Su16FirstDelay<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">==</span>Su8FirstFlag<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        Su8FirstFlag<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>Su16FirstDelay<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16FirstDelay<span class="token operator">&lt;</span><span class="token number">10000</span><span class="token punctuation">;</span>Su16FirstDelay<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SendString</span><span class="token punctuation">(</span>Cu8Start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SendString</span><span class="token punctuation">(</span>Cu8_0D_0A<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SendString</span><span class="token punctuation">(</span>Cu8_0D_0A<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">to_BufferData</span><span class="token punctuation">(</span>u32ViewData<span class="token punctuation">,</span>Su8ViewBuffer<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SendString</span><span class="token punctuation">(</span>Su8ViewBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">to_BufferData</span><span class="token punctuation">(</span>u32ViewData<span class="token punctuation">,</span>Su8ViewBuffer<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SendString</span><span class="token punctuation">(</span>Su8ViewBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">to_BufferData</span><span class="token punctuation">(</span>u32ViewData<span class="token punctuation">,</span>Su8ViewBuffer<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SendString</span><span class="token punctuation">(</span>Su8ViewBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">to_BufferData</span><span class="token punctuation">(</span>u32ViewData<span class="token punctuation">,</span>Su8ViewBuffer<span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SendString</span><span class="token punctuation">(</span>Su8ViewBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SendString</span><span class="token punctuation">(</span>Cu8_0D_0A<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">to_BufferData</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> u32Data<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span>pu8Buffer<span class="token punctuation">,</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> u8Type<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    code <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Cu8Array1<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0xB5</span><span class="token punctuation">,</span><span class="token number">0xDA</span><span class="token punctuation">,</span><span class="token number">0x4E</span><span class="token punctuation">,</span><span class="token number">0xB8</span><span class="token punctuation">,</span><span class="token number">0xF6</span><span class="token punctuation">,</span><span class="token number">0xCA</span><span class="token punctuation">,</span><span class="token number">0xFD</span><span class="token punctuation">,</span><span class="token number">0x00</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+   code <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Cu8Array2<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"十进制:"</span><span class="token punctuation">;</span>
+     code <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Cu8Array3<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"十六进制:"</span><span class="token punctuation">;</span>
+   code <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Cu8Array4<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"二进制:"</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Su8SerialNumber<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span>  Su16BufferCnt<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span>  Su16TempCnt<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span>  Su16TempSet<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> Su32Temp1<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> Su32Temp2<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> Su32Temp3<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> Su8ViewFlag<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">==</span>u8Type<span class="token punctuation">)</span>
+   <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>Su16BufferCnt<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">&lt;</span><span class="token number">7</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+            pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span>Cu8Array1<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+         pu8Buffer<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span>Su8SerialNumber<span class="token operator">+</span><span class="token string">'0'</span><span class="token punctuation">;</span>
+         pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0x0d</span><span class="token punctuation">;</span>
+         pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0x0a</span><span class="token punctuation">;</span>
+         pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+       Su8SerialNumber<span class="token operator">++</span><span class="token punctuation">;</span>
+         <span class="token keyword">return</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">==</span>u8Type<span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         <span class="token keyword">for</span><span class="token punctuation">(</span>Su16BufferCnt<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">&lt;</span><span class="token number">7</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+          pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span>Cu8Array2<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+        Su32Temp1<span class="token operator">=</span><span class="token number">1000000000</span><span class="token punctuation">;</span>
+      Su32Temp2<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span>
+      Su16TempSet<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">==</span>u8Type<span class="token punctuation">)</span>
+   <span class="token punctuation">{</span>
+         <span class="token keyword">for</span><span class="token punctuation">(</span>Su16BufferCnt<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">&lt;</span><span class="token number">9</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+          pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span>Cu8Array3<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+         Su32Temp1<span class="token operator">=</span><span class="token number">0x10000000</span><span class="token punctuation">;</span>
+       Su32Temp2<span class="token operator">=</span><span class="token number">0x00000010</span><span class="token punctuation">;</span>
+       Su16TempSet<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> 
+    <span class="token punctuation">{</span>
+         <span class="token keyword">for</span><span class="token punctuation">(</span>Su16BufferCnt<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">&lt;</span><span class="token number">7</span><span class="token punctuation">;</span>Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+          pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span>Cu8Array4<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+         Su32Temp1<span class="token operator">=</span><span class="token number">0x80000000</span><span class="token punctuation">;</span>
+       Su32Temp2<span class="token operator">=</span><span class="token number">0x00000002</span><span class="token punctuation">;</span>
+       Su16TempSet<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">;</span> 
+     <span class="token punctuation">}</span>
+    Su8ViewFlag<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>Su16TempCnt<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16TempCnt<span class="token operator">&lt;</span>Su16TempSet<span class="token punctuation">;</span>Su16TempCnt<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+       Su32Temp3<span class="token operator">=</span>u32Data<span class="token operator">/</span>Su32Temp1<span class="token operator">%</span>Su32Temp2<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>Su32Temp3<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+           pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span>Su32Temp3<span class="token operator">+</span><span class="token string">'0'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+           pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span>Su32Temp3<span class="token number">-10</span><span class="token operator">+</span><span class="token string">'A'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">==</span>u32Data<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+          Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">;</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">==</span>Su8ViewFlag<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">'0'</span><span class="token operator">!=</span>pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token punctuation">)</span>
+          <span class="token punctuation">{</span>
+               Su8ViewFlag<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+            Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            Su16BufferCnt<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+       Su32Temp1<span class="token operator">=</span>Su32Temp1<span class="token operator">/</span>Su32Temp2<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0x0d</span><span class="token punctuation">;</span>
+    pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0x0a</span><span class="token punctuation">;</span>
+    pu8Buffer<span class="token punctuation">[</span>Su16BufferCnt<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">SendString</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span>pu8String<span class="token punctuation">)</span>   
+<span class="token punctuation">{</span>
+  <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> Su16SendCnt<span class="token punctuation">;</span>
+  <span class="token keyword">static</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> Su16Delay<span class="token punctuation">;</span>
+  SCON<span class="token operator">=</span><span class="token number">0x50</span><span class="token punctuation">;</span>
+  TMOD<span class="token operator">=</span><span class="token number">0X21</span><span class="token punctuation">;</span>
+  TH1<span class="token operator">=</span>TL1<span class="token operator">=</span><span class="token number">256</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">11059200</span><span class="token operator">/</span><span class="token number">12</span><span class="token operator">/</span><span class="token number">32</span><span class="token operator">/</span><span class="token number">9600</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  TR1<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+  ES <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+  TI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>Su16SendCnt<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16SendCnt<span class="token operator">&lt;</span><span class="token number">43</span><span class="token punctuation">;</span>Su16SendCnt<span class="token operator">++</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">==</span>pu8String<span class="token punctuation">[</span>Su16SendCnt<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">else</span>
+      <span class="token punctuation">{</span>
+        SBUF <span class="token operator">=</span>pu8String<span class="token punctuation">[</span>Su16SendCnt<span class="token punctuation">]</span><span class="token punctuation">;</span> 
+        <span class="token keyword">for</span><span class="token punctuation">(</span>Su16Delay<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>Su16Delay<span class="token operator">&lt;</span><span class="token number">800</span><span class="token punctuation">;</span>Su16Delay<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      TI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+</li>
+</ol>
+<pre><code>
+
+
+   ### 赋值语句的覆盖性
+
+   #### 案例 数字交换
+
+   #### demo 1
+
+   ```c
+   //view()功能相当于printf()函数，view()单片机的串口打印功能
+   void main() //主函数
+   {
+       unsigned char a=1; //定义的变量 a 被分配了 1 个字节的 RAM 空间，保存的数据被初始化成 1。
+       unsigned char b=5; //定义的变量 b 被分配了 1 个字节的 RAM 空间，保存的数据被初始化成 5。
+       b=a; //第一步：为了交换，先把 a 的数赋值给 b。
+       a=b; //第二步：为了交换，再把 b 的数赋值给 a。
+       View(a); //把第 1 个数 a 发送到电脑端的串口助手软件上观察。
+       View(b); //把第 2 个数 b 发送到电脑端的串口助手软件上观察。
+       while(1)
+       {
+       }
+   }
+   //代码分析
+   //由于b的数据在执行完“第一步”后，b自己原来的数据5被覆盖丢失了变成新的数据1，
+   //接着执行“第二步”后，此时相当于把 b的新数据1赋值给a，并没有5！所以a和b的数据都是1
+</code></pre><pre class=" language-c"><code class="language-c">   <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//主函数</span>
+   <span class="token punctuation">{</span>
+          <span class="token keyword">unsigned</span> <span class="token keyword">char</span> a<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//定义的变量a被分配了1个字节的RAM空间，保存的数据被初始化成1。</span>
+          <span class="token keyword">unsigned</span> <span class="token keyword">char</span> b<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//定义的变量b被分配了1个字节的RAM空间，保存的数据被初始化成5。</span>
+          <span class="token keyword">unsigned</span> <span class="token keyword">char</span> t<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//定义一个第三方变量t，用来临时寄存数值。</span>
+          t<span class="token operator">=</span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第一步：为了避免b的数据在赋值后被覆盖丢失，先寄存一份在第三方变量t那里。</span>
+          b<span class="token operator">=</span>a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第二步：把a的数赋值给b，b原来的数据虽然丢失，但是b在t变量那里有备份。</span>
+          a<span class="token operator">=</span>t<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第三步：再把b在t变量里的备份赋值给a。注意，这里不能用b，因b原数据已被覆盖。</span>
+          <span class="token function">View</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//把第1个数a发送到电脑端的串口助手软件上观察。</span>
+           <span class="token function">View</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//把第2个数b发送到电脑端的串口助手软件上观察。</span>
+      <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  
+      <span class="token punctuation">{</span> 
+      <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+   <span class="token comment" spellcheck="true">// 代码分析</span>
+   <span class="token comment" spellcheck="true">//中间变量t  b=a; b--> t &lt;--a </span>
+</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/09/13/c-and-microcontrollersplan-1/">https://delehub.vercel.app/2020/09/13/c-and-microcontrollersplan-1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                    <span class="chip bg-color">51单片机</span>
+                                </a>
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/09/15/c-and-microcontrollersplan-2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="C and MicrocontrollersPlan-2">
+                        
+                        <span class="card-title">C and MicrocontrollersPlan-2</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            进制1.二进制 字节单位二进制：二进制数只有0和1两个数码，它的每一位都可以用电子元件来实现，且运算规则简单，运算电路也容易实现。
+位(bit)：位的英文名是用bit来表示。一个变量的位数越大就意味着这个变量的取值范围越大。一个单片机的位数
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                    单片机
+                                </a>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">51单片机</span>
+                    </a>
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/09/12/c-yu-yan-zi-fu-chuan-han-shu-ku/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Simple Dynamic Strings">
+                        
+                        <span class="card-title">Simple Dynamic Strings</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Simple Dynamic StringsNotes about version 2: this is an updated version of SDS in an attemptto finally unify Redis, Disq
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            <a href="/categories/C/Strings/" class="post-category">
+                                    Strings
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/Simple-Dynamic-Strings/">
+                        <span class="chip bg-color">Simple Dynamic Strings</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>

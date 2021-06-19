@@ -1,0 +1,1400 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="转载博客【飞桨PaddlePaddle学习心得】day5大作业详细指南, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>转载博客【飞桨PaddlePaddle学习心得】day5大作业详细指南 | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">转载博客【飞桨PaddlePaddle学习心得】day5大作业详细指南</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%99%BE%E5%BA%A6AIstudio/">
+                                <span class="chip bg-color">百度AIstudio</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A3%9E%E6%A1%A8-paddlepaddle/">
+                                <span class="chip bg-color">百度飞桨 paddlepaddle</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Python/" class="post-category">
+                                Python
+                            </a>
+                        
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-category">
+                                软件开发
+                            </a>
+                        
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E7%99%BE%E5%BA%A6AIstudio/" class="post-category">
+                                百度AIstudio
+                            </a>
+                        
+                            <a href="/categories/Python/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E7%99%BE%E5%BA%A6AIstudio/paddlepaddle/" class="post-category">
+                                paddlepaddle
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-08
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="转载博客：【飞桨PaddlePaddle学习心得】day5大作业详细指南【源码-教程精讲】"><a href="#转载博客：【飞桨PaddlePaddle学习心得】day5大作业详细指南【源码-教程精讲】" class="headerlink" title="转载博客：【飞桨PaddlePaddle学习心得】day5大作业详细指南【源码+教程精讲】"></a>转载博客：【飞桨PaddlePaddle学习心得】day5大作业详细指南【源码+教程精讲】</h1><a id="more"></a>
+<h2 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h2><p>大作业不难，但是涉及到的技术稍微多一点，请对于各个函数耐心查看代码和注释，认真食用。（因为用心，所有动人）</p>
+<h2 id="作业内容-amp-要求"><a href="#作业内容-amp-要求" class="headerlink" title="作业内容&amp;要求"></a>作业内容&amp;要求</h2><li>
+<p>第一步：爱奇艺《青春有你2》评论数据爬取(参考链接：https://www.iqiyi.com/v_19ryfkiv8w.html#curid=15068699100_9f9bab7e0d1e30c494622af777f4ba39)<br>
+爬取任意一期正片视频下评论<br>
+评论条数不少于1000条</p>
+</li>
+<li>
+<p>第二步：词频统计并可视化展示<br>
+数据预处理：清理清洗评论中特殊字符（如：@#￥%、emoji表情符）,清洗后结果存储为txt文档<br>
+中文分词：添加新增词（如：青你、奥利给、冲鸭），去除停用词（如：哦、因此、不然、也好、但是）</p>
+</li>
+<li>
+<p>第三步：统计top10高频词并展示绘制词云<br>
+统计top10高频词<br>
+可视化展示高频词<br>
+根据词频生成词云<br>
+可选项-添加背景图片，根据背景图片轮廓生成词云</p>
+</li>
+<li>
+第四步：结合PaddleHub，对评论进行内容审核
+</li>
+
+<h2 id="需要的配置和准备"><a href="#需要的配置和准备" class="headerlink" title="需要的配置和准备"></a>需要的配置和准备</h2><ul>
+<li>中文分词需要jieba</li>
+<li>词云绘制需要wordclou</li>
+<li>可视化展示中需要的中文字体              (./source/simhei.ttf)</li>
+<li>网上公开资源中找一个中文停用词表 （./source/stopWords.txt)</li>
+<li>根据分词结果自己制作新增词表            (./source/addWords.txt)</li>
+<li>准备一张词云背景图（附加项，不做要求，可用hub抠图实现）(./source/bg.jpg)图片尽量使用白色背景或者透明背景</li>
+<li>paddlehub配置</li>
+</ul>
+<p>本次的所有资源文件和生成的文件都会放到当前路径的source包下面。<br><br>在开始之前再次将matplotlib的显示中文的坑整理一下：</p>
+<pre class=" language-python"><code class="language-python"><span class="token number">1</span><span class="token punctuation">.</span>确保系统的<span class="token punctuation">.</span>font文件下面有中文字体（这里假设中文字体就是simhei<span class="token punctuation">.</span>ttf<span class="token punctuation">)</span>如果不懂可以忽略这一条，直接跳到<span class="token number">2</span>。
+    <span class="token comment" spellcheck="true"># Linux系统默认字体文件路径</span>
+    !ls <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>fonts<span class="token operator">/</span>
+    <span class="token comment" spellcheck="true">#查看系统可用的ttf格式中文字体</span>
+    !fc<span class="token operator">-</span>list <span class="token punctuation">:</span>lang<span class="token operator">=</span>zh <span class="token operator">|</span> grep <span class="token string">".ttf"</span>
+<span class="token number">2</span><span class="token punctuation">.</span>要想matplotlib显示中文需要做到两点
+    <span class="token number">2.1</span>系统的font里面有simhei<span class="token punctuation">.</span>ttf
+    <span class="token number">2.</span>2matpltlib的mpl<span class="token operator">-</span>data<span class="token operator">/</span>fonts<span class="token operator">/</span>ttf<span class="token operator">/</span>下面也需要有这个字体
+
+    第一点不多说，对于第二点，可以使用如下命令
+    cp <span class="token punctuation">.</span><span class="token operator">/</span>resource<span class="token operator">/</span>simhei<span class="token punctuation">.</span>ttf <span class="token operator">/</span>opt<span class="token operator">/</span>conda<span class="token operator">/</span>envs<span class="token operator">/</span>python35<span class="token operator">-</span>paddle120<span class="token operator">-</span>env<span class="token operator">/</span>lib<span class="token operator">/</span>python3<span class="token number">.7</span><span class="token operator">/</span>site<span class="token operator">-</span>packages<span class="token operator">/</span>matplotlib<span class="token operator">/</span>mpl<span class="token operator">-</span>data<span class="token operator">/</span>fonts<span class="token operator">/</span>ttf<span class="token operator">/</span>
+    然后只要在调用matplotlib的时候 设置一下字体就行了，使用如下命令
+     <span class="token comment" spellcheck="true"># 设置显示中文</span>
+    matplotlib<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'font.family'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'SimHei'</span><span class="token punctuation">]</span>
+        <span class="token comment" spellcheck="true"># 解决负号'-'显示为方块的问题</span>
+    matplotlib<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.unicode_minus'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">False</span>
+</code></pre>
+<h2 id="findfont-Font-family-‘sans-serif’-not-found-Falling-back-to-Bitstream-Vera-Sans"><a href="#findfont-Font-family-‘sans-serif’-not-found-Falling-back-to-Bitstream-Vera-Sans" class="headerlink" title="findfont: Font family [‘sans-serif’] not found. Falling back to Bitstream Vera Sans"></a>findfont: Font family [‘sans-serif’] not found. Falling back to Bitstream Vera Sans</h2><p>可能经过上面的设置后还是会出现这样的错误。解决方法如下：<br><br>在mac系统下面：<br><br>删除系统根目录下面的matplotlib的隐藏文件（里面的缓存文件）即可<br><br><code>rm -r ~/.matplotlib</code><br><br>在windows系统下面：<br><br>删除系统根目录下的.cache/matplotlib目录<br><br><code>rm -r .cache/matplotlib</code><br><br>在aistudio平台：<br><br>同样删除.cache/matplotlib目录就行了。</p>
+<h3 id="如果经过上诉步骤还不行的话，可以重启服务器或者电脑。"><a href="#如果经过上诉步骤还不行的话，可以重启服务器或者电脑。" class="headerlink" title="如果经过上诉步骤还不行的话，可以重启服务器或者电脑。"></a>如果经过上诉步骤还不行的话，可以重启服务器或者电脑。</h3><h3 id="经过上面的准备，下面将正式进去整体，请打开你的pycharm-sublime-text也是可以的哟嘻嘻"><a href="#经过上面的准备，下面将正式进去整体，请打开你的pycharm-sublime-text也是可以的哟嘻嘻" class="headerlink" title="经过上面的准备，下面将正式进去整体，请打开你的pycharm(sublime text也是可以的哟嘻嘻)"></a>经过上面的准备，下面将正式进去整体，请打开你的pycharm(sublime text也是可以的哟嘻嘻)</h3><h2 id="导入需要用到的python包"><a href="#导入需要用到的python包" class="headerlink" title="导入需要用到的python包"></a>导入需要用到的python包</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> __future__ <span class="token keyword">import</span> print_function
+<span class="token keyword">import</span> requests
+<span class="token keyword">import</span> json
+<span class="token keyword">import</span> re <span class="token comment" spellcheck="true">#正则匹配</span>
+<span class="token keyword">import</span> time <span class="token comment" spellcheck="true">#时间处理模块</span>
+<span class="token keyword">import</span> jieba <span class="token comment" spellcheck="true">#中文分词</span>
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>font_manager <span class="token keyword">as</span> font_manager
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">from</span> wordcloud <span class="token keyword">import</span> WordCloud  <span class="token comment" spellcheck="true">#绘制词云模块</span>
+<span class="token keyword">import</span> paddlehub <span class="token keyword">as</span> hub
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+</code></pre>
+<h2 id="一、评论爬取"><a href="#一、评论爬取" class="headerlink" title="一、评论爬取"></a>一、评论爬取</h2><p>这次的评论爬去其实就是一个对评论接口的调用。唯一的难度就在于如何找到接口的地址。<br><br>方法如下：</p>
+<ol>
+<li>先根据前面的<a href="https://www.iqiyi.com/v_19ryfkiv8w.html#curid=15068699100_9f9bab7e0d1e30c494622af777f4ba39" target="_blank" rel="noopener">参考链接</a>，打开爱奇艺青春2的视频页面。<li>下滑页面找到**全部评论**模块，如下图的地方<br>
+<img src="https://img-blog.csdnimg.cn/20200429211241556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>然后按键盘的F12或者鼠标右键检查打开控制台，找到Network选项，并选中下面的JS<br>
+<img src="https://img-blog.csdnimg.cn/20200429211654135.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>等待页面加载一段时间（半分钟一分钟吧）等到目前页面的资源都加载完成后，将页面拉去到最下面的查看更多评论地方。此时现将控制台中的clear点击一下，因为里面加载的资源很多，我们先清空一下里面的所有内容。<br>
+<img src="https://img-blog.csdnimg.cn/20200429211804529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">5. 然后“查看更多评论”，可以发现在控制台出现了一个名为get_comments.action的js请求。我们只要打开这个请求就可以看到评论的接口url。<br>
+<img src="https://img-blog.csdnimg.cn/20200429211025323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+
+</li>
+</ol>
+<h3 id="接口参数分析"><a href="#接口参数分析" class="headerlink" title="接口参数分析"></a>接口参数分析</h3><pre class=" language-python"><code class="language-python">    <span class="token comment" spellcheck="true"># url = 'https://sns-comment.iqiyi.com/v3/comment/get_comments.action?' \</span>
+    <span class="token comment" spellcheck="true">#       'agent_type=118' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;agent_version=9.11.5' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;business_type=17' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;content_id=15068699100' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;hot_size=10' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;last_id=' \ 根据last_id来确定这一页应该从哪一个评论开始拉去</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;page=' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;page_size=10' \一次拉去的评论有多少条，最多不超过40条</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;types=hot,time' \</span>
+    <span class="token comment" spellcheck="true">#       '&amp;amp;callback=jsonp_1587883768795_67783'</span>
+</code></pre>
+<p>Function1:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">getComment</span><span class="token punctuation">(</span>lastId<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    请求爱奇艺评论接口，返回response信息
+    参数  lastId: 前10条评论的最后一条的用户的id
+    :return: 字典格式的response信息
+    '''</span>
+    headers <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'</span>
+    <span class="token punctuation">}</span>
+    url <span class="token operator">=</span> <span class="token string">'http://sns-comment.iqiyi.com/v3/comment/get_comments.action?'</span>
+    params <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string">'types'</span><span class="token punctuation">:</span> <span class="token string">'time'</span><span class="token punctuation">,</span>
+        <span class="token string">'business_type'</span><span class="token punctuation">:</span> <span class="token string">'17'</span><span class="token punctuation">,</span>
+        <span class="token string">'agent_type'</span><span class="token punctuation">:</span> <span class="token string">'118'</span><span class="token punctuation">,</span>
+        <span class="token string">'agent_version'</span><span class="token punctuation">:</span> <span class="token string">'9.11.5'</span><span class="token punctuation">,</span>
+        <span class="token string">'content_id'</span><span class="token punctuation">:</span> <span class="token string">'15068699100'</span><span class="token punctuation">,</span>
+        <span class="token string">'page_size'</span> <span class="token punctuation">:</span> <span class="token string">'10'</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> lastId <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#判断lastId是否为空，如果不为空就在url中拼接上lastId的值</span>
+        params<span class="token punctuation">[</span><span class="token string">"last_id"</span><span class="token punctuation">]</span> <span class="token operator">=</span> lastId
+    <span class="token keyword">for</span> item <span class="token keyword">in</span> params<span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#将params里面的值全部拼接到url中</span>
+        url <span class="token operator">=</span> url <span class="token operator">+</span> item <span class="token operator">+</span> <span class="token string">'='</span> <span class="token operator">+</span> params<span class="token punctuation">[</span>item<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'&amp;amp;'</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true">#根据前面拼接的url使用python的request模块爬去评论</span>
+        response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true">#评论返回的是json类型的字符串，这里将其使用json.loads解析为python的字典返回</span>
+        <span class="token keyword">return</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+</code></pre>
+<p>Function2:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">saveCommentToFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#是出货lastId为空，以为第一个10条数据不需要lastId</span>
+    lastId <span class="token operator">=</span> <span class="token string">''</span>
+    response <span class="token operator">=</span> getComment<span class="token punctuation">(</span>lastId<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#调用function1的函数，获取到前10条的评论</span>
+    <span class="token comment" spellcheck="true">#将获取的评论中的comments里面的内容提取出来，comments是一个列表，长度为10，也就是我们10条评论的所有内容</span>
+    comment_list <span class="token operator">=</span> response<span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'comments'</span><span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true">#然后开始获取第一次爬去的10条评论的最后一个用户的id，然后根据lastId去爬取新的10条评论</span>
+    lastId <span class="token operator">=</span> comment_list<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">]</span>
+    <span class="token keyword">while</span> len<span class="token punctuation">(</span>comment_list<span class="token punctuation">)</span><span class="token operator">&amp;</span>lt<span class="token punctuation">;</span><span class="token number">2000</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#总共预计爬去2000条评论</span>
+        response <span class="token operator">=</span> getComment<span class="token punctuation">(</span>lastId<span class="token punctuation">)</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            comments <span class="token operator">=</span> response<span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'comments'</span><span class="token punctuation">]</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> comments<span class="token punctuation">:</span>
+                comment_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            lastId <span class="token operator">=</span> comment_list<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">]</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>comment_list<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#将包含2000条评论数据的数据写入到./resource/day5.json文件中</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'./resource/day5.json'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+         json<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>comment_list<span class="token punctuation">,</span> f<span class="token punctuation">,</span> ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>comment_list<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+</code></pre>
+<p>通过调用saveCommentToFile函数，即可实现第一步的爬去爱奇艺青春2正片下的2000条评论。把day5.json打开可以发现里面的数据格式如下图所示：<br><br><img src="https://img-blog.csdnimg.cn/20200429221214776.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="二、统计词频并可视化展示"><a href="#二、统计词频并可视化展示" class="headerlink" title="二、统计词频并可视化展示"></a>二、统计词频并可视化展示</h2><p>在这个环节我们需要将前面爬去的每一条评论先使用jieba进行分词，然后再进行词频的统计。要实现这个功能需要进过以下4步骤：</p>
+<ol>
+<li>先对每条评论使用正则表达式去除特殊字符，以免影响后面的分词效果</li>
+<li>给jieba添加新增词表（./source/addWord.txt）（主要包括青春109位选手的姓名和一些心得网络词汇）,并使用jieba.cut()对每条评论进行分词</li>
+<li>对经过2分词后的每个评论词汇根据停用词表删除常用停用词。(./source/stopWords.txt)（停用词表博主是在github随便找的一个停用词，建议自己github搜索以下就能找到。也可以下载使用博主提供的）</li>
+<li>将经过上诉处理后的短语写入到文档（./source/day5.txt)</li>
+</ol>
+<p>Function1</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">clear_special_char</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    正则处理特殊字符
+    参数 s:原文本
+    return s: 去除特殊字符后的文本
+    '''</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span>r<span class="token string">"&amp;lt;/?(.+?)&amp;gt;|&amp;amp;nbsp;|\t|\r"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span>r<span class="token string">"\n"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span>r<span class="token string">"\*"</span><span class="token punctuation">,</span><span class="token string">"\\*"</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">"[^\u4e00-\u9fa5^a-z^A-Z^0-9]"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">"[\001\002\003\004\005\006\007\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a]+"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">"[a-zA-Z]"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    s <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">"^d+(\.\d+)?$"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> s
+</code></pre>
+<p>Function2:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">stopwordslist</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    将停用词表中的所有词汇读入到内存中，即使放入到一个list变量中存储以备使用
+    参数 file_path:停用词文本路径
+    return：停用词list
+    '''</span>
+    file_path <span class="token operator">=</span> <span class="token string">'./source/stopWords.txt'</span>
+    stopwords_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>file_path<span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> line <span class="token keyword">in</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            stopwords_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> stopwords_list
+</code></pre>
+<p>Function3</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">fenci</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    利用jieba进行分词 并删除停用词  一次只能处理一条评论
+    参数 text:需要分词的句子
+    return：分词结果 list
+    '''</span>
+    jieba<span class="token punctuation">.</span>load_userdict<span class="token punctuation">(</span><span class="token string">'./source/addWords.txt'</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#加载新增词到jieba</span>
+    seg_list <span class="token operator">=</span> jieba<span class="token punctuation">.</span>cut<span class="token punctuation">(</span>text<span class="token punctuation">,</span> cut_all<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    liststr <span class="token operator">=</span> <span class="token string">"/ "</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>seg_list<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#将单词使用‘/’链接起来，以便后面再次分开</span>
+    mywordlist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    stopwords_list <span class="token operator">=</span> stopwordslist<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#调用funciton1 获取内存中的通用词list</span>
+
+    <span class="token comment" spellcheck="true">#删除停止词</span>
+    <span class="token keyword">for</span> myword <span class="token keyword">in</span> liststr<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>myword<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token keyword">in</span> stopwords_list<span class="token punctuation">)</span> <span class="token operator">and</span> len<span class="token punctuation">(</span>myword<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>gt<span class="token punctuation">;</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            mywordlist<span class="token punctuation">.</span>append<span class="token punctuation">(</span>myword<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> mywordlist
+</code></pre>
+<p>Function4</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">writeToTxt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    遍历一中爬取保存的json数据中的所有评论，并逐个将每一条评论进行分词操作
+    :return: 
+    '''</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'./source/day5.json'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> file<span class="token punctuation">:</span>
+        json_array <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>file<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    content_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> contents <span class="token keyword">in</span> json_array<span class="token punctuation">:</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            text <span class="token operator">=</span> contents<span class="token punctuation">[</span><span class="token string">'content'</span><span class="token punctuation">]</span>
+            <span class="token comment" spellcheck="true">#移除特殊字符</span>
+            text <span class="token operator">=</span> clear_special_char<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true">#在分词的函数中 包含了对分文的分词和删除停止词操作</span>
+            text_fenci_list <span class="token operator">=</span> fenci<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+            <span class="token keyword">for</span> text_fenci <span class="token keyword">in</span> text_fenci_list<span class="token punctuation">:</span>
+                <span class="token comment" spellcheck="true">#将清洗好并分好词的list遍历，将其中的每个短语添加到content_list里面</span>
+                content_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>text_fenci<span class="token punctuation">)</span>
+        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>content_list<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'./source/day5.txt'</span><span class="token punctuation">,</span><span class="token string">'a'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> content_list<span class="token punctuation">:</span>
+            <span class="token keyword">try</span><span class="token punctuation">:</span>
+                f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
+            <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+</code></pre>
+<p>通过调用writeToTxt函数就可以实现将一中的评论数据进行数据清理后进行分词了。</p>
+<h2 id="三、统计top10高频词并展示绘制词云"><a href="#三、统计top10高频词并展示绘制词云" class="headerlink" title="三、统计top10高频词并展示绘制词云"></a>三、统计top10高频词并展示绘制词云</h2><ol>
+<li>现将第二步中保存的day5.txt中的所有词汇读取到一个list中</li>
+<li>使用pandas中的value_counts函数轻松实现词频统计</li>
+<li>将top10的单词和词频绘制到直方图中</li>
+<li>将根据2得到的词频生成词云图</li>
+</ol>
+<p>Function1</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">countwordsfre</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    统计day5.txt中的词频
+    return：每个单词和对于的词频 返回的是一个Series数据结构 类似字典可以通过键值访问
+    '''</span>
+    fenciwordlist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'./source/day5.txt'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            <span class="token keyword">for</span> line <span class="token keyword">in</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                fenciwordlist<span class="token punctuation">.</span>append<span class="token punctuation">(</span>line<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> pd<span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span>fenciwordlist<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#使用pandas的value_counts函数统计词频</span>
+</code></pre>
+<p>Function2</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">drawcounts</span><span class="token punctuation">(</span>counts<span class="token punctuation">,</span>topN<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    绘制词频统计表 top1o
+    参数 counts: 词频统计结果 num:绘制topN
+    return：none
+    '''</span>
+    x <span class="token operator">=</span> list<span class="token punctuation">(</span>counts<span class="token punctuation">.</span>index<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#得到单词列表</span>
+    x<span class="token operator">=</span> x<span class="token punctuation">[</span><span class="token punctuation">:</span>topN<span class="token punctuation">]</span><span class="token comment" spellcheck="true">#截取前10个单词</span>
+    y <span class="token operator">=</span> counts<span class="token punctuation">.</span>values<span class="token comment" spellcheck="true">#得到词频列表</span>
+    y <span class="token operator">=</span> y<span class="token punctuation">[</span><span class="token punctuation">:</span>topN<span class="token punctuation">]</span><span class="token comment" spellcheck="true">#得到前10的词频列表</span>
+
+    <span class="token comment" spellcheck="true"># 设置显示中文</span>
+    matplotlib<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'font.sans-serif'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'SimHei'</span><span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true"># 解决负号'-'显示为方块的问题</span>
+    matplotlib<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.unicode_minus'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true">#根据x和y画条形图</span>
+    plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">,</span> tick_label<span class="token operator">=</span>x<span class="token punctuation">,</span> facecolor<span class="token operator">=</span><span class="token string">'#9999ff'</span><span class="token punctuation">,</span> edgecolor<span class="token operator">=</span><span class="token string">'white'</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 这里是调节横坐标的倾斜度，rotation是度数，以及设置刻度字体大小</span>
+    plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span>rotation<span class="token operator">=</span><span class="token number">45</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>yticks<span class="token punctuation">(</span>fontsize<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token triple-quoted-string string">'''爱奇艺《青春有你2》评论Top10词频'''</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">24</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span><span class="token string">'./source/bar_result.jpg'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+</code></pre>
+<p>调用drawcounts函数即可生成top10词频的直方图<br><br>Top10词频直方图结果战术：<br><br><img src="https://img-blog.csdnimg.cn/20200429233318657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><br>Function3<br><br>注意词云的背景图可能选择纯色背景</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">drawcloud</span><span class="token punctuation">(</span>words<span class="token punctuation">,</span>img_path<span class="token operator">=</span><span class="token string">'./source/bg.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    根据词频绘制词云图
+    参数 words:统计出的词频结果
+    return：none
+    '''</span>
+    y <span class="token operator">=</span> words<span class="token punctuation">.</span>values
+    text <span class="token operator">=</span> <span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> y<span class="token punctuation">]</span>
+
+    <span class="token comment" spellcheck="true">#get color   下面的两行代码是根据背景图片的颜色来在plt中显示图片中文字的颜色</span>
+    alice_coloring <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span>img_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    image_colors <span class="token operator">=</span> ImageColorGenerator<span class="token punctuation">(</span>alice_coloring<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># get mask</span>
+    my_mask <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span>img_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># set wordcloud</span>
+    my_wordcloud <span class="token operator">=</span> WordCloud<span class="token punctuation">(</span>
+        font_path<span class="token operator">=</span><span class="token string">'./source/simhei.ttf'</span><span class="token punctuation">,</span>
+        background_color<span class="token operator">=</span><span class="token string">"white"</span><span class="token punctuation">,</span>
+        max_words<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span>
+        width<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span>
+        height<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span>
+        mask<span class="token operator">=</span>my_mask<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># words must be dict</span>
+    my_wordcloud<span class="token punctuation">.</span>generate_from_frequencies<span class="token punctuation">(</span>words<span class="token punctuation">)</span>
+    my_wordcloud<span class="token punctuation">.</span>to_file<span class="token punctuation">(</span><span class="token string">'./source/parrot_result.jpg'</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 显示图像</span>
+    plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>my_wordcloud<span class="token punctuation">.</span>recolor<span class="token punctuation">(</span>color_func<span class="token operator">=</span>image_colors<span class="token punctuation">)</span><span class="token punctuation">,</span> interpolation<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># interpolation='bilinear' 表示插值方法为双线性插值</span>
+    plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">"off"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 关掉图像的坐标</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre>
+<p>调用drawcloud函数即可生成词云图<br><br>词云效果对比图：<br><br><img src="https://img-blog.csdnimg.cn/20200430004559529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="四-结合PaddleHub，对评论进行内容审核"><a href="#四-结合PaddleHub，对评论进行内容审核" class="headerlink" title="四 结合PaddleHub，对评论进行内容审核"></a>四 结合PaddleHub，对评论进行内容审核</h2><p>主要是使用paddlehub预训练的senta_bilstm模型对句子进行情感分析，将其中是积极语言的置信度大于0.5的评论输出。其中唯一要注意的就是paddlehub模型对于要传入的数据必须是一个字典，字典的key为text，value为一个list。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">text_detection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    使用hub对评论进行内容分析
+    result：分析结果
+    '''</span>
+    <span class="token comment" spellcheck="true">#使用paddlehub加载senta_bilstm模型</span>
+    senta <span class="token operator">=</span> hub<span class="token punctuation">.</span>Module<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'senta_bilstm'</span><span class="token punctuation">,</span> version<span class="token operator">=</span><span class="token string">'1.0.0'</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#从1中得到的day5.json中获取所有评论的list</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'./source/day5.json'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> file<span class="token punctuation">:</span>
+        json_array <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>file<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    content_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> contents <span class="token keyword">in</span> json_array<span class="token punctuation">:</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            text <span class="token operator">=</span> contents<span class="token punctuation">[</span><span class="token string">'content'</span><span class="token punctuation">]</span>
+            <span class="token comment" spellcheck="true">#移除特殊字符</span>
+            text <span class="token operator">=</span> clear_special_char<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+            content_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+        <span class="token keyword">except</span><span class="token punctuation">:</span>
+            <span class="token keyword">pass</span>
+
+    <span class="token comment" spellcheck="true">#组建符合要求的data字典数据，然后遍历评论列表，对每条评论单独</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> content_list<span class="token punctuation">:</span>
+        text_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        text_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+        input_dict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"text"</span><span class="token punctuation">:</span> text_list<span class="token punctuation">}</span>
+        res <span class="token operator">=</span> senta<span class="token punctuation">.</span>sentiment_classify<span class="token punctuation">(</span>data<span class="token operator">=</span>input_dict<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> float<span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'positive_probs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>gt<span class="token punctuation">;</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'positive_probs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<p>最后调用函数即可实现对所有评论的情感分析，并输出其中的积极评论与评分。<br><br><img src="https://img-blog.csdnimg.cn/20200430005809586.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lpbnlpeXU=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="转载博客地址https-blog-csdn-net-yinyiyu-article-details-105822122"><a href="#转载博客地址https-blog-csdn-net-yinyiyu-article-details-105822122" class="headerlink" title="转载博客地址https://blog.csdn.net/yinyiyu/article/details/105822122"></a>转载博客地址<a href="https://blog.csdn.net/yinyiyu/article/details/105822122" target="_blank" rel="noopener">https://blog.csdn.net/yinyiyu/article/details/105822122</a></h2>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/05/08/zhuan-zai-bo-ke-fei-jiang-paddlepaddle-xue-xi-xin-de-day5-da-zuo-ye-xiang-xi-zhi-nan/">https://delehub.vercel.app/2020/05/08/zhuan-zai-bo-ke-fei-jiang-paddlepaddle-xue-xi-xin-de-day5-da-zuo-ye-xiang-xi-zhi-nan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%99%BE%E5%BA%A6AIstudio/">
+                                    <span class="chip bg-color">百度AIstudio</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A3%9E%E6%A1%A8-paddlepaddle/">
+                                    <span class="chip bg-color">百度飞桨 paddlepaddle</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/05/08/yi-ma-qi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="译码器">
+                        
+                        <span class="card-title">译码器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            译码器
+基本概念：译码是编码的逆过程，将输人的二进制编码转换为特定的输出信号，具有译码功能的电路称为译码器。根据输人编码位数η和输出信号的个数m是否匹配，可以将译码器分为完全译码器和部分译码器。当m=2^n时，该译码器为完全译码器或二进制译
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            dele
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/08/shu-zhi-bi-jiao-qi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="数值比较器">
+                        
+                        <span class="card-title">数值比较器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            数值比较器
+
+比较大小 A B结果可能性1. A &gt; B
+2. A = B
+3. A &lt; B数值比较器概念 ：数值比较器是对位数相同的两个无符号二进制数进行数值比较，并判断大小关系的运算电路。1位数值比较器1位数值比较器可以对两
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            dele
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>

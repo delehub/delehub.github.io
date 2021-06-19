@@ -1,0 +1,1317 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="STM32--数码管显示, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>STM32--数码管显示 | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">STM32--数码管显示</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                <span class="chip bg-color">嵌入式</span>
+                            </a>
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                            <a href="/tags/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                <span class="chip bg-color">STM32 ARM单片机</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E7%A0%81%E7%AE%A1/">
+                                <span class="chip bg-color">数码管</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                STM32 ARM单片机
+                            </a>
+                        
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                C
+                            </a>
+                        
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/" class="post-category">
+                                电子模块
+                            </a>
+                        
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                嵌入式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-08
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="STM32-–-数码管显示"><a href="#STM32-–-数码管显示" class="headerlink" title="STM32 – 数码管显示"></a>STM32 – 数码管显示</h1><a id="more"></a>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>1.硬件部分<br>STM32F103C8T6 最小系统板  一位共阴数码管<br>2.软件部分<br>Keil软件编程 数码管码表</p>
+<h2 id="硬件部分"><a href="#硬件部分" class="headerlink" title="硬件部分"></a>硬件部分</h2><h3 id="数码管"><a href="#数码管" class="headerlink" title="数码管"></a>数码管</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>数码管，也称作辉光管，是一种可以显示数字和其他信息的电子设备。玻璃管中包括一个金属丝网制成的阳极和多个阴极。大部分数码管阴极的形状为数字。管中充以低压气体，通常大部分为氖加上一些汞和/或氩。给某一个阴极充电，数码管就会发出颜色光，视乎管内的气体而定，一般都是橙色或绿色。</p>
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>数码管也称LED数码管，不同行业人士对数码管的称呼不一样，其实都是同样的产品。<br>按发光二极管单元连接方式可分为共阳极数码管和共阴极数码管。共阳数码管是指将所有发光二极管的阳极接到一起形成公共阳极(COM)的数码管，共阳数码管在应用时应将公共极COM接到+5V，当某一字段发光二极管的阴极为低电平时，相应字段就点亮，当某一字段的阴极为高电平时，相应字段就不亮。共阴数码管是指将所有发光二极管的阴极接到一起形成公共阴极(COM)的数码管，共阴数码管在应用时应将公共极COM接到地线GND上，当某一字段发光二极管的阳极为高电平时，相应字段就点亮，当某一字段的阳极为低电平时，相应字段就不亮。</p>
+<h4 id="1-共阳数码管"><a href="#1-共阳数码管" class="headerlink" title="1.共阳数码管"></a>1.共阳数码管</h4><p>共阳数码管在应用时应将公共极COM接到+5V，当某一字段发光二极管的阴极为低电平时，相应字段就点亮，当某一字段的阴极为高电平时，相应字段就不亮。</p>
+<h4 id="2-共阴数码管"><a href="#2-共阴数码管" class="headerlink" title="2.共阴数码管"></a>2.共阴数码管</h4><p>对于共阴极数码管来说，当某个发光二极管的阳极为高电平时，发光二极管点亮，相应的段被显示。同样，共阳极数码管的阳极连接在一起，公共阳极接+5V，当某个发光二极管的阴极接低电平时，该发光二极管被点亮，相应的段被显示</p>
+<p><img src="https://img-blog.csdnimg.cn/20200329160539852.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="数码管码表"><a href="#数码管码表" class="headerlink" title="数码管码表"></a>数码管码表</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">unsigned</span> <span class="token keyword">char</span> code smgduan<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0xc0</span><span class="token punctuation">,</span> <span class="token number">0xf9</span><span class="token punctuation">,</span> <span class="token number">0xa4</span><span class="token punctuation">,</span> <span class="token number">0xb0</span><span class="token punctuation">,</span> <span class="token number">0x99</span><span class="token punctuation">,</span> <span class="token number">0x92</span><span class="token punctuation">,</span> <span class="token number">0x82</span><span class="token punctuation">,</span> <span class="token number">0xf8</span><span class="token punctuation">,</span> 
+<span class="token number">0x80</span><span class="token punctuation">,</span> <span class="token number">0x90</span><span class="token punctuation">,</span> <span class="token number">0x88</span><span class="token punctuation">,</span> <span class="token number">0x83</span><span class="token punctuation">,</span> <span class="token number">0xc6</span><span class="token punctuation">,</span> <span class="token number">0xa1</span><span class="token punctuation">,</span> <span class="token number">0x86</span><span class="token punctuation">,</span> <span class="token number">0x8e</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//共阳数码管</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> code  smgduan<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0x3f</span><span class="token punctuation">,</span><span class="token number">0x06</span><span class="token punctuation">,</span><span class="token number">0x5b</span><span class="token punctuation">,</span><span class="token number">0x4f</span><span class="token punctuation">,</span><span class="token number">0x66</span><span class="token punctuation">,</span><span class="token number">0x6d</span><span class="token punctuation">,</span><span class="token number">0x7d</span><span class="token punctuation">,</span><span class="token number">0x07</span><span class="token punctuation">,</span>
+<span class="token number">0x7f</span><span class="token punctuation">,</span><span class="token number">0x6f</span><span class="token punctuation">,</span><span class="token number">0x77</span><span class="token punctuation">,</span><span class="token number">0x7c</span><span class="token punctuation">,</span><span class="token number">0x39</span><span class="token punctuation">,</span><span class="token number">0x5e</span><span class="token punctuation">,</span><span class="token number">0x79</span><span class="token punctuation">,</span><span class="token number">0x71</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">////共阴数码管</span></code></pre>
+<h4 id="静态数码管硬件电路设计"><a href="#静态数码管硬件电路设计" class="headerlink" title="静态数码管硬件电路设计"></a>静态数码管硬件电路设计</h4><p><img src="https://img-blog.csdnimg.cn/20200329160609282.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="实物"><a href="#实物" class="headerlink" title="实物"></a>实物</h4><p><img src="https://img-blog.csdnimg.cn/20200329160527185.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="软件部分"><a href="#软件部分" class="headerlink" title="软件部分"></a>软件部分</h2><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**********************************************************************
+ * 文件名  ：smg.c
+ * 描述    ：smg 应用函数库
+ * 硬件连接：-----------------
+ *          |   PA0 - A   |
+ *          |   PA1 - B   |
+ *          |   PA2 - C   |
+ *          |   PA3 - D   |
+ *          |   PA4 - E   |
+ *          |   PA5 - F   |
+ *          |   PA6 - G   |
+ *          |   PA7 - DP  |
+ *           -----------------                                                                                          
+*********************************************************************/</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"smg.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"delay.h"</span></span>
+<span class="token comment" spellcheck="true">//共阳数码管断码表</span>
+u8 <span class="token keyword">const</span> smg_data<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0xc0</span><span class="token punctuation">,</span><span class="token number">0xf9</span><span class="token punctuation">,</span><span class="token number">0xa4</span><span class="token punctuation">,</span><span class="token number">0xb0</span><span class="token punctuation">,</span><span class="token number">0x99</span><span class="token punctuation">,</span><span class="token number">0x92</span><span class="token punctuation">,</span><span class="token number">0x82</span><span class="token punctuation">,</span><span class="token number">0xf8</span><span class="token punctuation">,</span><span class="token number">0x80</span><span class="token punctuation">,</span><span class="token number">0x90</span><span class="token punctuation">,</span><span class="token number">0x88</span><span class="token punctuation">,</span><span class="token number">0x83</span><span class="token punctuation">,</span><span class="token number">0xc6</span><span class="token punctuation">,</span><span class="token number">0xa1</span><span class="token punctuation">,</span><span class="token number">0x86</span><span class="token punctuation">,</span><span class="token number">0x8e</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/*
+ * 函数名：SMG_GPIO_Config
+ * 描述  ：配置数码管用到的I/O口
+ * 输入  ：无
+ * 输出  ：无
+ */</span>
+<span class="token keyword">void</span> <span class="token function">SMG_GPIO_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    GPIO_InitTypeDef GPIO_InitStructure<span class="token punctuation">;</span>
+    <span class="token function">RCC_APB2PeriphClockCmd</span><span class="token punctuation">(</span> RCC_APB2Periph_GPIOA<span class="token punctuation">,</span> ENABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    GPIO_InitStructure<span class="token punctuation">.</span>GPIO_Pin <span class="token operator">=</span> GPIO_Pin_0 <span class="token operator">|</span> GPIO_Pin_1 <span class="token operator">|</span> GPIO_Pin_2 <span class="token operator">|</span> GPIO_Pin_3 <span class="token operator">|</span> GPIO_Pin_4 <span class="token operator">|</span> GPIO_Pin_5 <span class="token operator">|</span> GPIO_Pin_6 <span class="token operator">|</span> GPIO_Pin_7<span class="token punctuation">;</span>    
+    GPIO_InitStructure<span class="token punctuation">.</span>GPIO_Mode <span class="token operator">=</span> GPIO_Mode_Out_PP<span class="token punctuation">;</span>       
+    GPIO_InitStructure<span class="token punctuation">.</span>GPIO_Speed <span class="token operator">=</span> GPIO_Speed_50MHz<span class="token punctuation">;</span>
+    <span class="token function">GPIO_Init</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GPIO_InitStructure<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">GPIO_SetBits</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span> GPIO_Pin_0 <span class="token operator">|</span> GPIO_Pin_1 <span class="token operator">|</span> GPIO_Pin_2 <span class="token operator">|</span> GPIO_Pin_3 <span class="token operator">|</span> GPIO_Pin_4 <span class="token operator">|</span> GPIO_Pin_5 <span class="token operator">|</span> GPIO_Pin_6 <span class="token operator">|</span> GPIO_Pin_7<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// turn off all led</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*
+ * 函数名：SMG_Display
+ * 描述  ：驱动数码管显示0-F
+ * 输入  ：无
+ * 输出  ：无
+ */</span>
+<span class="token keyword">void</span> <span class="token function">SMG_Display</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    u8 i<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">16</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+            <span class="token function">GPIO_Write</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span>smg_data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">delay_ms</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Display_N</span><span class="token punctuation">(</span>u8 N<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">GPIO_Write</span><span class="token punctuation">(</span>GPIOA<span class="token punctuation">,</span>smg_data<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           
+<span class="token punctuation">}</span></code></pre>
+<h5 id="smg-h"><a href="#smg-h" class="headerlink" title="smg.h"></a>smg.h</h5><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> __SMG_H</span>
+<span class="token macro property">#<span class="token directive keyword">define</span>    __SMG_H</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"stm32f10x.h"</span> </span>
+
+<span class="token keyword">void</span> <span class="token function">SMG_GPIO_Config</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">SMG_Display</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">Display_N</span><span class="token punctuation">(</span>u8 N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">/* __SMG_H */</span>
+</code></pre>
+<h3 id="数码管案例（基于51单片机-四位数码管模块（74HC595））"><a href="#数码管案例（基于51单片机-四位数码管模块（74HC595））" class="headerlink" title="数码管案例（基于51单片机 四位数码管模块（74HC595））"></a>数码管案例（基于51单片机 四位数码管模块（74HC595））</h3><p><img src="https://img-blog.csdnimg.cn/20200329161633630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>14脚：DS（SER），串行数据输入引脚</p>
+<p>13脚：OE， 输出使能控制脚，它是低电才使能输出，所以接GND</p>
+<p>12脚：RCK，存储寄存器时钟输入引脚。上升沿时，数据从移位寄存器转存带存储寄存器。</p>
+<p>11脚：SCK，移位寄存器时钟引脚，上升沿时，移位寄存器中的bit 数据整体后移，并接受新的bit（从SER输入）。</p>
+<p>10脚：MR,低电平时，清空移位寄存器中已有的bit数据，一般不用，接 高电平即可。</p>
+<p>9 脚 ：串行数据出口引脚。当移位寄存器中的数据多于8bit时，会把已有的bit“挤出去”，就是从这里出去的。用于595的级联。</p>
+<p>Qx：并行输出引脚</p>
+<p>注意：</p>
+<p>当芯片资料上面的引脚说有横线时，属于低电平工作。否则高电平工作；</p>
+<p>共阳数码管如果要点亮，对应的引脚需要给1</p>
+<p>共阴数码管如果要点亮，对应的引脚需要给0</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">"reg51.h"</span></span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> code LED_0F<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0xC0</span><span class="token punctuation">,</span><span class="token number">0xF9</span><span class="token punctuation">,</span><span class="token number">0xA4</span><span class="token punctuation">,</span><span class="token number">0xB0</span><span class="token punctuation">,</span><span class="token number">0x99</span><span class="token punctuation">,</span><span class="token number">0x92</span><span class="token punctuation">,</span><span class="token number">0x82</span><span class="token punctuation">,</span><span class="token number">0xF8</span><span class="token punctuation">,</span><span class="token number">0x80</span><span class="token punctuation">,</span>
+<span class="token number">0x90</span><span class="token punctuation">,</span><span class="token number">0x8C</span><span class="token punctuation">,</span><span class="token number">0xBF</span><span class="token punctuation">,</span><span class="token number">0xC6</span><span class="token punctuation">,</span><span class="token number">0xA1</span><span class="token punctuation">,</span><span class="token number">0x86</span><span class="token punctuation">,</span><span class="token number">0xFF</span><span class="token punctuation">,</span><span class="token number">0xbf</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//共阳数码管码表</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> code  smgduan<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0x3f</span><span class="token punctuation">,</span><span class="token number">0x06</span><span class="token punctuation">,</span><span class="token number">0x5b</span><span class="token punctuation">,</span><span class="token number">0x4f</span><span class="token punctuation">,</span><span class="token number">0x66</span><span class="token punctuation">,</span><span class="token number">0x6d</span><span class="token punctuation">,</span><span class="token number">0x7d</span><span class="token punctuation">,</span><span class="token number">0x07</span><span class="token punctuation">,</span>
+<span class="token number">0x7f</span><span class="token punctuation">,</span><span class="token number">0x6f</span><span class="token punctuation">,</span><span class="token number">0x77</span><span class="token punctuation">,</span><span class="token number">0x7c</span><span class="token punctuation">,</span><span class="token number">0x39</span><span class="token punctuation">,</span><span class="token number">0x5e</span><span class="token punctuation">,</span><span class="token number">0x79</span><span class="token punctuation">,</span><span class="token number">0x71</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//显示0~F的值</span>
+ <span class="token comment" spellcheck="true">//-----------------------------------------------------------------------------</span>
+<span class="token comment" spellcheck="true">// 函数原形定义</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> uchar unsigned char</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> uint unsigned int</span>
+<span class="token comment" spellcheck="true">//能够使用unsigned char //unsigned int 尽量使用最原始的变量类型名字</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                    <span class="token comment" spellcheck="true">// 主函数</span>
+<span class="token keyword">void</span> <span class="token function">LED4_Display</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">// LED数码管显示</span>
+<span class="token keyword">void</span> <span class="token function">LED_OUT</span><span class="token punctuation">(</span>uchar X<span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">// LED数码管单字节串行移位函数</span>
+
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> code LED_0F<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// LED字模表</span>
+<span class="token comment" spellcheck="true">/* 端口引脚定义*/</span>
+sbit DIO <span class="token operator">=</span> P1<span class="token operator">^</span><span class="token number">0</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//串行数据输入</span>
+sbit RCLK  <span class="token operator">=</span> P1<span class="token operator">^</span><span class="token number">1</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//时钟脉冲信号――上升沿有效</span>
+sbit SCLK <span class="token operator">=</span> P1<span class="token operator">^</span><span class="token number">2</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//打入信号――――上升沿有效</span>
+
+<span class="token comment" spellcheck="true">//-----------------------------------------------------------------------------</span>
+<span class="token comment" spellcheck="true">// 全局变量</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> LED<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//用于LED的8位显示缓存</span>
+
+
+<span class="token comment" spellcheck="true">//*****************************************************************************</span>
+<span class="token comment" spellcheck="true">// 主程序</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+
+    LED<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">;</span>
+    LED<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    LED<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>
+    LED<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">LED4_Display</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span> 
+
+<span class="token comment" spellcheck="true">// LED数码管显示函数</span>
+<span class="token keyword">void</span> <span class="token function">LED4_Display</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> code <span class="token operator">*</span>led_table<span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">// 查表指针</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> i<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//显示第1位</span>
+    led_table <span class="token operator">=</span> LED_0F <span class="token operator">+</span> LED<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token operator">*</span>led_table<span class="token punctuation">;</span>
+
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>            
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span><span class="token number">0x01</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//0x01显示在第一位    </span>
+
+    RCLK <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    RCLK <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//显示第2位</span>
+    led_table <span class="token operator">=</span> LED_0F <span class="token operator">+</span> LED<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token operator">*</span>led_table<span class="token punctuation">;</span>
+
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>        
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span><span class="token number">0x02</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//0x02显示在第2位    </span>
+
+    RCLK <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    RCLK <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//显示第3位</span>
+    led_table <span class="token operator">=</span> LED_0F <span class="token operator">+</span> LED<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token operator">*</span>led_table<span class="token punctuation">;</span>
+
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>            
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span><span class="token number">0x04</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//0x04显示在第3位</span>
+
+    RCLK <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    RCLK <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//显示第4位</span>
+    led_table <span class="token operator">=</span> LED_0F <span class="token operator">+</span> LED<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token operator">*</span>led_table<span class="token punctuation">;</span>
+
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>            
+    <span class="token function">LED_OUT</span><span class="token punctuation">(</span><span class="token number">0x08</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//0x08显示在第4位    </span>
+
+    RCLK <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    RCLK <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// LED数码管单字节串行移位函数</span>
+<span class="token keyword">void</span> <span class="token function">LED_OUT</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> number<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">;</span>i<span class="token operator">>=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">&amp;</span> <span class="token number">0x80</span><span class="token punctuation">)</span>
+          <span class="token punctuation">{</span>
+               DIO<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> 
+          <span class="token keyword">else</span>
+          <span class="token punctuation">{</span>
+              DIO<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        number<span class="token operator">&lt;&lt;=</span><span class="token number">1</span><span class="token punctuation">;</span>
+        SCLK <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        SCLK <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>1.野火STM32视频学习<a href="https://space.bilibili.com/356820657/" target="_blank" rel="noopener">https://space.bilibili.com/356820657/</a><br>2.野火STM32论坛<a href="http://www.firebbs.cn/forum.php" target="_blank" rel="noopener">http://www.firebbs.cn/forum.php</a><br>3.野火STM32开源资料<a href="http://products.embedfire.com/zh_CN/latest/" target="_blank" rel="noopener">http://products.embedfire.com/zh_CN/latest/</a><br>4.畅学电子网 <a href="http://www.eeskill.com/" target="_blank" rel="noopener">http://www.eeskill.com/</a><br>5.知乎链接：<a href="https://zhuanlan.zhihu.com/p/103434229" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/103434229</a><br>6.共阳数码管字型码，共阴数码管字型码<br><img src="https://img-blog.csdnimg.cn/20200329161848727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020032916190124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzU5OTM5MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/05/08/stm32-shu-ma-guan-xian-shi/">https://delehub.vercel.app/2020/05/08/stm32-shu-ma-guan-xian-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                                    <span class="chip bg-color">嵌入式</span>
+                                </a>
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
+                                <a href="/tags/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/">
+                                    <span class="chip bg-color">STM32 ARM单片机</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E7%A0%81%E7%AE%A1/">
+                                    <span class="chip bg-color">数码管</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/05/08/stm32-gu-jian-ku-shi-yong-an-jian-shu-ru-1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="STM32--固件库使用--按键输入 (1)">
+                        
+                        <span class="card-title">STM32--固件库使用--按键输入 (1)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            STM32–固件库使用–按键输入
+简介1.硬件STM32F103C8T6 独立按键2.软件keil软件
+硬件部分1.按键分类与输入原理
+按键按照结构原理科分为两类，一类是触点式开关按键，如机械式开关、导电橡胶式开关灯；另一类是无触点式开关按
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                    STM32 ARM单片机
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/" class="post-category">
+                                    电子模块
+                                </a>
+                            
+                            <a href="/categories/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/C/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    嵌入式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                        <span class="chip bg-color">嵌入式</span>
+                    </a>
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/STM32-ARM%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">STM32 ARM单片机</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%94%AE%E7%9B%98/">
+                        <span class="chip bg-color">键盘</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/08/timer-interrupt/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Timer &amp; interrupt">
+                        
+                        <span class="card-title">Timer &amp; interrupt</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            51单片机学习–定时器–中断–串口通信
+定时器–中断–串口通信中断分类  定时器中断 外部中断  串口中断
+
+基本概念对于单片机来讲， 中断是指 CPU 在处理某一事件 A 时， 发生了另一事件 B，请求 CPU 迅速去处理(中断发生)； 
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                    单片机
+                                </a>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    定时器 串口通信
+                                </a>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    嵌入式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                        <span class="chip bg-color">嵌入式</span>
+                    </a>
+                    
+                    <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">51单片机</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">
+                        <span class="chip bg-color">定时器 串口通信</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>

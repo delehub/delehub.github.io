@@ -1,0 +1,1447 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Simple Dynamic Strings, C,C++,Python,ARM,STM32,Microcontroller development">
+    <meta name="description" content="专注于学习嵌入式开发,分享生活,分享知识">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Simple Dynamic Strings | null</title>
+    <link rel="icon" type="image/png" href="/delehub.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/delehub.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span"></span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Linux</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>CSDN</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-homes" style="zoom: 0.6;"></i>
+      
+      <span>Python在线手册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>个人导航</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>实时疫情</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/delehub.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name"></div>
+        <div class="logo-desc">
+            
+            专注于学习嵌入式开发,分享生活,分享知识
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Linux
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://blog.csdn.net/weixin_43599390" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			CSDN
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://docs.pythontab.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-homes"></i>
+			
+			Python在线手册
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://xydh.fun/delehub" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			个人导航
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://www.liuyao-blog.cn/2019-nCov" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			实时疫情
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/delehub" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>delehub
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/delehub" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="delehub" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Simple Dynamic Strings</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                            <a href="/tags/Simple-Dynamic-Strings/">
+                                <span class="chip bg-color">Simple Dynamic Strings</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C/" class="post-category">
+                                C
+                            </a>
+                        
+                            <a href="/categories/C/Strings/" class="post-category">
+                                Strings
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-09-12
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Simple-Dynamic-Strings"><a href="#Simple-Dynamic-Strings" class="headerlink" title="Simple Dynamic Strings"></a>Simple Dynamic Strings</h1><p><strong>Notes about version 2</strong>: this is an updated version of SDS in an attempt<br>to finally unify Redis, Disque, Hiredis, and the stand alone SDS versions.<br>This version is <strong>NOT* binary compatible</strong> with SDS verison 1, but the API<br>is 99% compatible so switching to the new lib should be trivial.</p>
+<p>Note that this version of SDS may be a slower with certain workloads, but<br>uses less memory compared to V1 since header size is dynamic and depends to<br>the string to alloc.</p>
+<p>Moreover it includes a few more API functions, notably <code>sdscatfmt</code> which<br>is a faster version of <code>sdscatprintf</code> that can be used for the simpler<br>cases in order to avoid the libc <code>printf</code> family functions performance<br>penalty.</p>
+<h1 id="How-SDS-strings-work"><a href="#How-SDS-strings-work" class="headerlink" title="How SDS strings work"></a>How SDS strings work</h1><p>SDS is a string library for C designed to augment the limited libc string<br>handling functionalities by adding heap allocated strings that are:</p>
+<ul>
+<li>Simpler to use.</li>
+<li>Binary safe.</li>
+<li>Computationally more efficient.</li>
+<li>But yet… Compatible with normal C string functions.</li>
+</ul>
+<p>This is achieved using an alternative design in which instead of using a C<br>structure to represent a string, we use a binary prefix that is stored<br>before the actual pointer to the string that is returned by SDS to the user.</p>
+<pre><code>+--------+-------------------------------+-----------+
+| Header | Binary safe C alike string... | Null term |
++--------+-------------------------------+-----------+
+         |
+         `-&gt; Pointer returned to the user.</code></pre><p>Because of meta data stored before the actual returned pointer as a prefix,<br>and because of every SDS string implicitly adding a null term at the end of<br>the string regardless of the actual content of the string, SDS strings work<br>well together with C strings and the user is free to use them interchangeably<br>with other std C string functions that access the string in read-only.</p>
+<p>SDS was a C string I developed in the past for my everyday C programming needs,<br>later it was moved into Redis where it is used extensively and where it was<br>modified in order to be suitable for high performance operations. Now it was<br>extracted from Redis and forked as a stand alone project.</p>
+<p>Because of its many years life inside Redis, SDS provides both higher level<br>functions for easy strings manipulation in C, but also a set of low level<br>functions that make it possible to write high performance code without paying<br>a penalty for using an higher level string library.</p>
+<h1 id="Advantages-and-disadvantages-of-SDS"><a href="#Advantages-and-disadvantages-of-SDS" class="headerlink" title="Advantages and disadvantages of SDS"></a>Advantages and disadvantages of SDS</h1><p>Normally dynamic string libraries for C are implemented using a structure<br>that defines the string. The structure has a pointer field that is managed<br>by the string function, so it looks like this:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> yourAverageStringLibrary <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>buf<span class="token punctuation">;</span>
+    size_t len<span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> possibly more fields here <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>SDS strings as already mentioned don’t follow this schema, and are instead<br>a single allocation with a prefix that lives <em>before</em> the address actually<br>returned for the string.</p>
+<p>There are advantages and disadvantages with this approach over the traditional<br>approach:</p>
+<p><strong>Disadvantage #1</strong>: many functions return the new string as value, since sometimes SDS requires to create a new string with more space, so the most SDS API calls look like this:</p>
+<pre class=" language-c"><code class="language-c">s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"Some more data"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>As you can see <code>s</code> is used as input for <code>sdscat</code> but is also set to the value<br>returned by the SDS API call, since we are not sure if the call modified the<br>SDS string we passed or allocated a new one. Not remembering to assign back<br>the return value of <code>sdscat</code> or similar functions to the variable holding<br>the SDS string will result in a bug.</p>
+<p><strong>Disadvantage #2</strong>: if an SDS string is shared in different places in your program you have to modify all the references when you modify the string. However most of the times when you need to share SDS strings it is much better to encapsulate them into structures with a <code>reference count</code> otherwise it is too easy to incur into memory leaks.</p>
+<p><strong>Advantage #1</strong>: you can pass SDS strings to functions designed for C functions without accessing a struct member or calling a function, like this:</p>
+<pre class=" language-c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> sds_string<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>In most other libraries this will be something like:</p>
+<pre class=" language-c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> string<span class="token operator">-></span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Or:</p>
+<pre class=" language-c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> <span class="token function">getStringPointer</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><strong>Advantage #2</strong>: accessing individual chars is straightforward. C is a low level language so this is an important operation in many programs. With SDS strings accessing individual chars is very natural:</p>
+<pre class=" language-c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c %c\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>With other libraries your best chance is to assign <code>string-&gt;buf</code> (or call the function to get the string pointer) to a <code>char</code> pointer and work with this. However since the other libraries may reallocate the buffer implicitly every time you call a function that may modify the string you have to get a reference to the buffer again.</p>
+<p><strong>Advantage #3</strong>: single allocation has better cache locality. Usually when you access a string created by a string library using a structure, you have two different allocations for the structure representing the string, and the actual buffer holding the string. Over the time the buffer is reallocated, and it is likely that it ends in a totally different part of memory compared to the structure itself. Since modern programs performances are often dominated by cache misses, SDS may perform better in many workloads.</p>
+<h1 id="SDS-basics"><a href="#SDS-basics" class="headerlink" title="SDS basics"></a>SDS basics</h1><p>The type of SDS strings is just the char pointer <code>char *</code>. However SDS defines<br>an <code>sds</code> type as alias of <code>char *</code> in its header file: you should use the<br><code>sds</code> type in order to make sure you remember that a given variable in your<br>program holds an SDS string and not a C string, however this is not mandatory.</p>
+<p>This is the simplest SDS program you can write that does something:</p>
+<pre class=" language-c"><code class="language-c">sds mystring <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> mystring<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsfree</span><span class="token punctuation">(</span>mystring<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> Hello World<span class="token operator">!</span></code></pre>
+<p>The above small program already shows a few important things about SDS:</p>
+<ul>
+<li>SDS strings are created, and heap allocated, via the <code>sdsnew()</code> function, or other similar functions that we’ll see in a moment.</li>
+<li>SDS strings can be passed to <code>printf()</code> like any other C string.</li>
+<li>SDS strings require to be freed with <code>sdsfree()</code>, since they are heap allocated.</li>
+</ul>
+<h2 id="Creating-SDS-strings"><a href="#Creating-SDS-strings" class="headerlink" title="Creating SDS strings"></a>Creating SDS strings</h2><pre class=" language-c"><code class="language-c">sds <span class="token function">sdsnewlen</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span>init<span class="token punctuation">,</span> size_t initlen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds <span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds <span class="token function">sdsdup</span><span class="token punctuation">(</span><span class="token keyword">const</span> sds s<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>There are many ways to create SDS strings:</p>
+<ul>
+<li><p>The <code>sdsnew</code> function creates an SDS string starting from a C null terminated string. We already saw how it works in the above example.</p>
+</li>
+<li><p>The <code>sdsnewlen</code> function is similar to <code>sdsnew</code> but instead of creating the string assuming that the input string is null terminated, it gets an additional length parameter. This way you can create a string using binary data:</p>
+<pre class=" language-c"><code class="language-c">  <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  sds mystring<span class="token punctuation">;</span>
+
+  buf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'A'</span><span class="token punctuation">;</span>
+  buf<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'B'</span><span class="token punctuation">;</span>
+  buf<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'C'</span><span class="token punctuation">;</span>
+  mystring <span class="token operator">=</span> <span class="token function">sdsnewlen</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s of len %d\n"</span><span class="token punctuation">,</span> mystring<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>mystring<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  output<span class="token operator">></span> ABC of len <span class="token number">3</span></code></pre>
+<p>Note: <code>sdslen</code> return value is casted to <code>int</code> because it returns a <code>size_t</code><br>type. You can use the right <code>printf</code> specifier instead of casting.</p>
+</li>
+<li><p>The <code>sdsempty()</code> function creates an empty zero-length string:</p>
+<pre class=" language-c"><code class="language-c">  sds mystring <span class="token operator">=</span> <span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>mystring<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  output<span class="token operator">></span> <span class="token number">0</span></code></pre>
+</li>
+<li><p>The <code>sdsdup()</code> function duplicates an already existing SDS string:</p>
+<pre class=" language-c"><code class="language-c">  sds s1<span class="token punctuation">,</span> s2<span class="token punctuation">;</span>
+
+  s1 <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  s2 <span class="token operator">=</span> <span class="token function">sdsdup</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s %s\n"</span><span class="token punctuation">,</span> s1<span class="token punctuation">,</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  output<span class="token operator">></span> Hello Hello</code></pre>
+</li>
+</ul>
+<h2 id="Obtaining-the-string-length"><a href="#Obtaining-the-string-length" class="headerlink" title="Obtaining the string length"></a>Obtaining the string length</h2><pre class=" language-c"><code class="language-c">size_t <span class="token function">sdslen</span><span class="token punctuation">(</span><span class="token keyword">const</span> sds s<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>In the examples above we already used the <code>sdslen</code> function in order to get<br>the length of the string. This function works like <code>strlen</code> of the libc<br>except that:</p>
+<ul>
+<li>It runs in constant time since the length is stored in the prefix of SDS strings, so calling <code>sdslen</code> is not expensive even when called with very large strings.</li>
+<li>The function is binary safe like any other SDS string function, so the length is the true length of the string regardless of the content, there is no problem if the string includes null term characters in the middle.</li>
+</ul>
+<p>As an example of the binary safeness of SDS strings, we can run the following<br>code:</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnewlen</span><span class="token punctuation">(</span><span class="token string">"A\0\0B"</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token number">4</span></code></pre>
+<p>Note that SDS strings are always null terminated at the end, so even in that<br>case <code>s[4]</code> will be a null term, however printing the string with <code>printf</code><br>would result in just <code>&quot;A&quot;</code> to be printed since libc will treat the SDS string<br>like a normal C string.</p>
+<h2 id="Destroying-strings"><a href="#Destroying-strings" class="headerlink" title="Destroying strings"></a>Destroying strings</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">sdsfree</span><span class="token punctuation">(</span>sds s<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The destroy an SDS string there is just to call <code>sdsfree</code> with the string<br>pointer. Note that even empty strings created with <code>sdsempty</code> need to be<br>destroyed as well otherwise they’ll result into a memory leak.</p>
+<p>The function <code>sdsfree</code> does not perform any operation if instead of an SDS<br>string pointer, <code>NULL</code> is passed, so you don’t need to check for <code>NULL</code> explicitly before calling it:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span> <span class="token function">sdsfree</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Not needed. */</span>
+<span class="token function">sdsfree</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Same effect but simpler. */</span></code></pre>
+<h2 id="Concatenating-strings"><a href="#Concatenating-strings" class="headerlink" title="Concatenating strings"></a>Concatenating strings</h2><p>Concatenating strings to other strings is likely the operation you will end<br>using the most with a dynamic C string library. SDS provides different<br>functions to concatenate strings to existing strings.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdscatlen</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span>t<span class="token punctuation">,</span> size_t len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds <span class="token function">sdscat</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The main string concatenation functions are <code>sdscatlen</code> and <code>sdscat</code> that are<br>identical, the only difference being that <code>sdscat</code> does not have an explicit<br>length argument since it expects a null terminated string.</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token string">"Hello "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token string">"World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> Hello World<span class="token operator">!</span></code></pre>
+<p>Sometimes you want to cat an SDS string to another SDS string, so you don’t<br>need to specify the length, but at the same time the string does not need to<br>be null terminated but can contain any binary data. For this there is a<br>special function:</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdscatsds</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> sds t<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Usage is straightforward:</p>
+<pre class=" language-c"><code class="language-c">sds s1 <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"aaa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds s2 <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"bbb"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s1 <span class="token operator">=</span> <span class="token function">sdscatsds</span><span class="token punctuation">(</span>s1<span class="token punctuation">,</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsfree</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> aaabbb</code></pre>
+<p>Sometimes you don’t want to append any special data to the string, but you want<br>to make sure that there are at least a given number of bytes composing the<br>whole string.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdsgrowzero</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> size_t len<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The <code>sdsgrowzero</code> function will do nothing if the current string length is<br>already <code>len</code> bytes, otherwise it will enlarge the string to <code>len</code> just padding<br>it with zero bytes.</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdsgrowzero</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'!'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* We are sure this is safe because of sdsgrowzero() */</span>
+<span class="token function">printf</span><span class="token punctuation">(</span>"<span class="token operator">%</span>s\n'<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> Hello<span class="token operator">!</span></code></pre>
+<h2 id="Formatting-strings"><a href="#Formatting-strings" class="headerlink" title="Formatting strings"></a>Formatting strings</h2><p>There is a special string concatenation function that accepts a <code>printf</code> alike<br>format specifier and cats the formatted string to the specified string.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdscatprintf</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>fmt<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></code></pre>
+<p>Example:</p>
+<pre class=" language-c"><code class="language-c">sds s<span class="token punctuation">;</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"The sum is: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscatprintf</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"%d+%d = %d"</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Often you need to create SDS string directly from <code>printf</code> format specifiers.<br>Because <code>sdscatprintf</code> is actually a function that concatenates strings, all<br>you need is to concatenate your string to an empty string:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">char</span> <span class="token operator">*</span>name <span class="token operator">=</span> <span class="token string">"Anna"</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> loc <span class="token operator">=</span> <span class="token number">2500</span><span class="token punctuation">;</span>
+sds s<span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscatprintf</span><span class="token punctuation">(</span><span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%s wrote %d lines of LISP\n"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> loc<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>You can use <code>sdscatprintf</code> in order to convert numbers into SDS strings:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> some_integer <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+sds num <span class="token operator">=</span> <span class="token function">sdscatprintf</span><span class="token punctuation">(</span><span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> some_integer<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>However this is slow and we have a special function to make it efficient.</p>
+<h2 id="Fast-number-to-string-operations"><a href="#Fast-number-to-string-operations" class="headerlink" title="Fast number to string operations"></a>Fast number to string operations</h2><p>Creating an SDS string from an integer may be a common operation in certain<br>kind of programs, and while you may do this with <code>sdscatprintf</code> the performance<br>hit is big, so SDS provides a specialized function.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdsfromlonglong</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Use it like this:</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsfromlonglong</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token number">5</span></code></pre>
+<h2 id="Trimming-strings-and-getting-ranges"><a href="#Trimming-strings-and-getting-ranges" class="headerlink" title="Trimming strings and getting ranges"></a>Trimming strings and getting ranges</h2><p>String trimming is a common operation where a set of characters are<br>removed from the left and the right of the string. Another useful operation<br>regarding strings is the ability to just take a range out of a larger<br>string.</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">sdstrim</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>cset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">sdsrange</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span> end<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>SDS provides both the operations with the <code>sdstrim</code> and <code>sdsrange</code> functions.<br>However note that both functions work differently than most functions modifying<br>SDS strings since the return value is void: basically those functions always<br>destructively modify the passed SDS string, never allocating a new one, because<br>both trimming and ranges will never need more room: the operations can only<br>remove characters from the original string.</p>
+<p>Because of this behavior, both functions are fast and don’t involve reallocation.</p>
+<p>This is an example of string trimming where newlines and spaces are removed<br>from an SDS strings:</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"         my string\n\n  "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdstrim</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">" \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-%s-\n"</span><span class="token punctuation">,</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token operator">-</span>my string<span class="token operator">-</span></code></pre>
+<p>Basically <code>sdstrim</code> takes the SDS string to trim as first argument, and a<br>null terminated set of characters to remove from left and right of the string.<br>The characters are removed as long as they are not interrupted by a character<br>that is not in the list of characters to trim: this is why the space between<br><code>&quot;my&quot;</code> and <code>&quot;string&quot;</code> was preserved in the above example.</p>
+<p>Taking ranges is similar, but instead to take a set of characters, it takes<br>to indexes, representing the start and the end as specified by zero-based<br>indexes inside the string, to obtain the range that will be retained.</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsrange</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-%s-\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token operator">-</span>ello<span class="token operator">-</span></code></pre>
+<p>Indexes can be negative to specify a position starting from the end of the<br>string, so that <code>-1</code> means the last character, <code>-2</code> the penultimate, and so forth:</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsrange</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-%s-\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsrange</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-%s-\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token operator">-</span>World<span class="token operator">!</span><span class="token operator">-</span>
+output<span class="token operator">></span> <span class="token operator">-</span>World<span class="token operator">-</span></code></pre>
+<p><code>sdsrange</code> is very useful when implementing networking servers processing<br>a protocol or sending messages. For example the following code is used<br>implementing the write handler of the Redis Cluster message bus between<br>nodes:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">clusterWriteHandler</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>privdata<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    clusterLink <span class="token operator">*</span>link <span class="token operator">=</span> <span class="token punctuation">(</span>clusterLink<span class="token operator">*</span><span class="token punctuation">)</span> privdata<span class="token punctuation">;</span>
+    ssize_t nwritten <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> link<span class="token operator">-></span>sndbuf<span class="token punctuation">,</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>link<span class="token operator">-></span>sndbuf<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nwritten <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* Error handling... */</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">sdsrange</span><span class="token punctuation">(</span>link<span class="token operator">-></span>sndbuf<span class="token punctuation">,</span>nwritten<span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> more code here <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Every time the socket of the node we want to send the message to is writable<br>we attempt to write as much bytes as possible, and we use <code>sdsrange</code> in order<br>to remove from the buffer what was already sent.</p>
+<p>The function to queue new messages to send to some node in the cluster will<br>simply use <code>sdscatlen</code> in order to put more data in the send buffer.</p>
+<p>Note that the Redis Cluster bus implements a binary protocol, but since SDS<br>is binary safe this is not a problem, so the goal of SDS is not just to provide<br>an high level string API for the C programmer but also dynamically allocated<br>buffers that are easy to manage.</p>
+<h2 id="String-copying"><a href="#String-copying" class="headerlink" title="String copying"></a>String copying</h2><p>The most dangerous and infamus function of the standard C library is probably<br><code>strcpy</code>, so perhaps it is funny how in the context of better designed dynamic<br>string libraries the concept of copying strings is almost irrelevant. Usually<br>what you do is to create strings with the content you want, or concatenating<br>more content as needed.</p>
+<p>However SDS features a string copy function that is useful in performance<br>critical code sections, however I guess its practical usefulness is limited<br>as the function never managed to get called in the context of the 50k<br>lines of code composing the Redis code base.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdscpylen</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>t<span class="token punctuation">,</span> size_t len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds <span class="token function">sdscpy</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The string copy function of SDS is called <code>sdscpylen</code> and works like that:</p>
+<pre class=" language-c"><code class="language-c">s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscpylen</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"Hello Superman!"</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>As you can see the function receives as input the SDS string <code>s</code>, but also<br>returns an SDS string. This is common to many SDS functions that modify the<br>string: this way the returned SDS string may be the original one modified<br>or a newly allocated one (for example if there was not enough room in the<br>old SDS string).</p>
+<p>The <code>sdscpylen</code> will simply replace what was in the old SDS string with the<br>new data you pass using the pointer and length argument. There is a similar<br>function called <code>sdscpy</code> that does not need a length but expects a null<br>terminated string instead.</p>
+<p>You may wonder why it makes sense to have a string copy function in the<br>SDS library, since you can simply create a new SDS string from scratch<br>with the new value instead of copying the value in an existing SDS string.<br>The reason is efficiency: <code>sdsnewlen</code> will always allocate a new string<br>while <code>sdscpylen</code> will try to reuse the existing string if there is enough<br>room to old the new content specified by the user, and will allocate a new<br>one only if needed.</p>
+<h2 id="Quoting-strings"><a href="#Quoting-strings" class="headerlink" title="Quoting strings"></a>Quoting strings</h2><p>In order to provide consistent output to the program user, or for debugging<br>purposes, it is often important to turn a string that may contain binary<br>data or special characters into a quoted string. Here for quoted string<br>we mean the common format for String literals in programming source code.<br>However today this format is also part of the well known serialization formats<br>like JSON and CSV, so it definitely escaped the simple goal of representing<br>literals strings in the source code of programs.</p>
+<p>An example of quoted string literal is the following:</p>
+<pre class=" language-c"><code class="language-c"><span class="token string">"\x00Hello World\n"</span></code></pre>
+<p>The first byte is a zero byte while the last byte is a newline, so there are<br>two non alphanumerical characters inside the string.</p>
+<p>SDS uses a concatenation function for this goal, that concatenates to an<br>existing string the quoted string representation of the input string.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdscatrepr</span><span class="token punctuation">(</span>sds s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>p<span class="token punctuation">,</span> size_t len<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The <code>scscatrepr</code> (where <code>repr</code> means <em>representation</em>) follows the usualy<br>SDS string function rules accepting a char pointer and a length, so you can<br>use it with SDS strings, normal C strings by using strlen() as <code>len</code> argument,<br>or binary data. The following is an example usage:</p>
+<pre class=" language-c"><code class="language-c">sds s1 <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"abcd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds s2 <span class="token operator">=</span> <span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+s<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+s<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
+s2 <span class="token operator">=</span> <span class="token function">sdscatrepr</span><span class="token punctuation">(</span>s2<span class="token punctuation">,</span>s1<span class="token punctuation">,</span><span class="token function">sdslen</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token string">"a\x01\x02\n"</span></code></pre>
+<p>This is the rules <code>sdscatrepr</code> uses for conversion:</p>
+<ul>
+<li><code>\</code> and <code>&quot;</code> are quoted with a backslash.</li>
+<li>It quotes special characters <code>&#39;\n&#39;</code>, <code>&#39;\r&#39;</code>, <code>&#39;\t&#39;</code>, <code>&#39;\a&#39;</code> and <code>&#39;\b&#39;</code>.</li>
+<li>All the other non printable characters not passing the <code>isprint</code> test are quoted in <code>\x..</code> form, that is: backslash followed by <code>x</code> followed by two digit hex number representing the character byte value.</li>
+<li>The function always adds initial and final double quotes characters.</li>
+</ul>
+<p>There is an SDS function that is able to perform the reverse conversion and is<br>documented in the <em>Tokenization</em> section below.</p>
+<h2 id="Tokenization"><a href="#Tokenization" class="headerlink" title="Tokenization"></a>Tokenization</h2><p>Tokenization is the process of splitting a larger string into smaller strings.<br>In this specific case, the split is performed specifying another string that<br>acts as separator. For example in the following string there are two substrings<br>that are separated by the <code>|-|</code> separator:</p>
+<pre><code>foo|-|bar|-|zap</code></pre><p>A more common separator that consists of a single character is the comma:</p>
+<pre><code>foo,bar,zap</code></pre><p>In many progrems it is useful to process a line in order to obtain the sub<br>strings it is composed of, so SDS provides a function that returns an<br>array of SDS strings given a string and a separator.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token operator">*</span><span class="token function">sdssplitlen</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>sep<span class="token punctuation">,</span> <span class="token keyword">int</span> seplen<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">sdsfreesplitres</span><span class="token punctuation">(</span>sds <span class="token operator">*</span>tokens<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>As usually the function can work with both SDS strings or normal C strings.<br>The first two arguments <code>s</code> and <code>len</code> specify the string to tokenize, and the<br>other two arguments <code>sep</code> and <code>seplen</code> the separator to use during the<br>tokenization. The final argument <code>count</code> is a pointer to an integer that will<br>be set to the number of tokens (sub strings) returned.</p>
+<p>The return value is a heap allocated array of SDS strings.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token operator">*</span>tokens<span class="token punctuation">;</span>
+<span class="token keyword">int</span> count<span class="token punctuation">,</span> j<span class="token punctuation">;</span>
+
+sds line <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+tokens <span class="token operator">=</span> <span class="token function">sdssplitlen</span><span class="token punctuation">(</span>line<span class="token punctuation">,</span><span class="token function">sdslen</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">" "</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> tokens<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsfreesplitres</span><span class="token punctuation">(</span>tokens<span class="token punctuation">,</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> Hello
+output<span class="token operator">></span> World<span class="token operator">!</span></code></pre>
+<p>The returned array is heap allocated, and the single elements of the array<br>are normal SDS strings. You can free everything calling <code>sdsfreesplitres</code><br>as in the example. Alternativey you are free to release the array yourself<br>using the <code>free</code> function and use and/or free the individual SDS strings<br>as usually.</p>
+<p>A valid approach is to set the array elements you reused in some way to<br><code>NULL</code>, and use <code>sdsfreesplitres</code> to free all the rest.</p>
+<h2 id="Command-line-oriented-tokenization"><a href="#Command-line-oriented-tokenization" class="headerlink" title="Command line oriented tokenization"></a>Command line oriented tokenization</h2><p>Splitting by a separator is a useful operation, but usually it is not enough<br>to perform one of the most common tasks involving some non trivial string<br>manipulation, that is, implementing a <strong>Command Line Interface</strong> for a program.</p>
+<p>This is why SDS also provides an additional function that allows you to split<br>arguments provided by the user via the keyboard in an interactive manner, or<br>via a file, network, or any other mean, into tokens.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token operator">*</span><span class="token function">sdssplitargs</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>line<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>argc<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The <code>sdssplitargs</code> function returns an array of SDS strings exactly like<br><code>sdssplitlen</code>. The function to free the result is also identical, and is<br><code>sdsfreesplitres</code>. The difference is in the way the tokenization is performed.</p>
+<p>For example if the input is the following line:</p>
+<pre><code>call &quot;Sabrina&quot;    and &quot;Mark Smith\n&quot;</code></pre><p>The function will return the following tokens:</p>
+<ul>
+<li>“call”</li>
+<li>“Sabrina”</li>
+<li>“and”</li>
+<li>“Mark Smith\n”</li>
+</ul>
+<p>Basically different tokens need to be separated by one or more spaces, and<br>every single token can also be a quoted string in the same format that<br><code>sdscatrepr</code> is able to emit.</p>
+<h2 id="String-joining"><a href="#String-joining" class="headerlink" title="String joining"></a>String joining</h2><p>There are two functions doing the reverse of tokenization by joining strings<br>into a single one.</p>
+<pre class=" language-c"><code class="language-c">sds <span class="token function">sdsjoin</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">,</span> <span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>sep<span class="token punctuation">,</span> size_t seplen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+sds <span class="token function">sdsjoinsds</span><span class="token punctuation">(</span>sds <span class="token operator">*</span>argv<span class="token punctuation">,</span> <span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>sep<span class="token punctuation">,</span> size_t seplen<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The two functions take as input an array of strings of length <code>argc</code> and<br>a separator and its length, and produce as output an SDS string consisting<br>of all the specified strings separated by the specified separator.</p>
+<p>The difference between <code>sdsjoin</code> and <code>sdsjoinsds</code> is that the former accept<br>C null terminated strings as input while the latter requires all the strings<br>in the array to be SDS strings. However because of this only <code>sdsjoinsds</code> is<br>able to deal with binary data.</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">char</span> <span class="token operator">*</span>tokens<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"foo"</span><span class="token punctuation">,</span><span class="token string">"bar"</span><span class="token punctuation">,</span><span class="token string">"zap"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+sds s <span class="token operator">=</span> <span class="token function">sdsjoin</span><span class="token punctuation">(</span>tokens<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">"|"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> foo<span class="token operator">|</span>bar<span class="token operator">|</span>zap</code></pre>
+<h2 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h2><p>All the SDS functions that return an SDS pointer may also return <code>NULL</code> on<br>out of memory, this is basically the only check you need to perform.</p>
+<p>However many modern C programs handle out of memory simply aborting the program<br>so you may want to do this as well by wrapping <code>malloc</code> and other related<br>memory allocation calls directly.</p>
+<h1 id="SDS-internals-and-advanced-usage"><a href="#SDS-internals-and-advanced-usage" class="headerlink" title="SDS internals and advanced usage"></a>SDS internals and advanced usage</h1><p>At the very beginning of this documentation it was explained how SDS strings<br>are allocated, however the prefix stored before the pointer returned to the<br>user was classified as an <em>header</em> without further details. For an advanced<br>usage it is better to dig more into the internals of SDS and show the<br>structure implementing it:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> sdshdr <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> free<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>As you can see, the structure may resemble the one of a conventional string<br>library, however the <code>buf</code> field of the structure is different since it is<br>not a pointer but an array without any length declared, so <code>buf</code> actually<br>points at the first byte just after the <code>free</code> integer. So in order to create<br>an SDS string we just allocate a piece of memory that is as large as the<br><code>sdshdr</code> structure plus the length of our string, plus an additional byte<br>for the mandatory null term that every SDS string has.</p>
+<p>The <code>len</code> field of the structure is quite obvious, and is the current length<br>of the SDS string, always computed every time the string is modified via<br>SDS function calls. The <code>free</code> field instead represents the amount of free<br>memory in the current allocation that can be used to store more characters.</p>
+<p>So the actual SDS layout is this one:</p>
+<pre><code>+------------+------------------------+-----------+---------------\
+| Len | Free | H E L L O W O R L D \n | Null term |  Free space   \
++------------+------------------------+-----------+---------------\
+             |
+             `-&gt; Pointer returned to the user.</code></pre><p>You may wonder why there is some free space at the end of the string, it<br>looks like a waste. Actually after a new SDS string is created, there is no<br>free space at the end at all: the allocation will be as small as possible to<br>just hold the header, string, and null term. However other access patterns<br>will create extra free space at the end, like in the following program:</p>
+<pre class=" language-c"><code class="language-c">s <span class="token operator">=</span> <span class="token function">sdsempty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"bar"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"123"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Since SDS tries to be efficient it can’t afford to reallocate the string every<br>time new data is appended, since this would be very inefficient, so it uses<br>the <strong>preallocation of some free space</strong> every time you enlarge the string.</p>
+<p>The preallocation algorithm used is the following: every time the string<br>is reallocated in order to hold more bytes, the actual allocation size performed<br>is two times the minimum required. So for instance if the string currently<br>is holding 30 bytes, and we concatenate 2 more bytes, instead of allocating 32<br>bytes in total SDS will allocate 64 bytes.</p>
+<p>However there is an hard limit to the allocation it can perform ahead, and is<br>defined by <code>SDS_MAX_PREALLOC</code>. SDS will never allocate more than 1MB of<br>additional space (by default, you can change this default).</p>
+<h2 id="Shrinking-strings"><a href="#Shrinking-strings" class="headerlink" title="Shrinking strings"></a>Shrinking strings</h2><pre class=" language-c"><code class="language-c">sds <span class="token function">sdsRemoveFreeSpace</span><span class="token punctuation">(</span>sds s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+size_t <span class="token function">sdsAllocSize</span><span class="token punctuation">(</span>sds s<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Sometimes there are class of programs that require to use very little memory.<br>After strings concatenations, trimming, ranges, the string may end having<br>a non trivial amount of additional space at the end.</p>
+<p>It is possible to resize a string back to its minimal size in order to hold<br>the current content by using the function <code>sdsRemoveFreeSpace</code>.</p>
+<pre class=" language-c"><code class="language-c">s <span class="token operator">=</span> <span class="token function">sdsRemoveFreeSpace</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>There is also a function that can be used in order to get the size of the<br>total allocation for a given string, and is called <code>sdsAllocSize</code>.</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"Ladies and gentlemen"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdscat</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"... welcome to the C language."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token function">sdsAllocSize</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdsRemoveFreeSpace</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token function">sdsAllocSize</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token number">109</span>
+output<span class="token operator">></span> <span class="token number">59</span></code></pre>
+<p>NOTE: SDS Low level API use cammelCase in order to warn you that you are playing with the fire.</p>
+<h2 id="Manual-modifications-of-SDS-strings"><a href="#Manual-modifications-of-SDS-strings" class="headerlink" title="Manual modifications of SDS strings"></a>Manual modifications of SDS strings</h2><pre><code>void sdsupdatelen(sds s);</code></pre><p>Sometimes you may want to hack with an SDS string manually, without using<br>SDS functions. In the following example we implicitly change the length<br>of the string, however we want the logical length to reflect the null terminated<br>C string.</p>
+<p>The function <code>sdsupdatelen</code> does just that, updating the internal length<br>information for the specified string to the length obtained via <code>strlen</code>.</p>
+<pre class=" language-c"><code class="language-c">sds s <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span><span class="token string">"foobar"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+s<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sdsupdatelen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token operator">></span> <span class="token number">6</span>
+output<span class="token operator">></span> <span class="token number">2</span></code></pre>
+<h2 id="Sharing-SDS-strings"><a href="#Sharing-SDS-strings" class="headerlink" title="Sharing SDS strings"></a>Sharing SDS strings</h2><p>If you are writing a program in which it is advantageous to share the same<br>SDS string across different data structures, it is absolutely advised to<br>encapsulate SDS strings into structures that remember the number of references<br>of the string, with functions to increment and decrement the number of references.</p>
+<p>This approach is a memory management technique called <em>reference counting</em> and<br>in the context of SDS has two advantages:</p>
+<ul>
+<li>It is less likely that you’ll create memory leaks or bugs due to non freeing SDS strings or freeing already freed strings.</li>
+<li>You’ll not need to update every reference to an SDS string when you modify it (since the new SDS string may point to a different memory location).</li>
+</ul>
+<p>While this is definitely a very common programming technique I’ll outline<br>the basic ideas here. You create a structure like that:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> mySharedString <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> refcount<span class="token punctuation">;</span>
+    sds string<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>When new strings are created, the structure is allocated and returned with<br><code>refcount</code> set to 1. The you have two functions to change the reference count<br>of the shared string:</p>
+<ul>
+<li><code>incrementStringRefCount</code> will simply increment <code>refcount</code> of 1 in the structure. It will be called every time you add a reference to the string on some new data structure, variable, or whatever.</li>
+<li><code>decrementStringRefCount</code> is used when you remove a reference. This function is however special since when the <code>refcount</code> drops to zero, it automatically frees the SDS string, and the <code>mySharedString</code> structure as well.</li>
+</ul>
+<h2 id="Interactions-with-heap-checkers"><a href="#Interactions-with-heap-checkers" class="headerlink" title="Interactions with heap checkers"></a>Interactions with heap checkers</h2><p>Because SDS returns pointers into the middle of memory chunks allocated with<br><code>malloc</code>, heap checkers may have issues, however:</p>
+<ul>
+<li>The popular Valgrind program will detect SDS strings are <em>possibly lost</em> memory and never as <em>definitely lost</em>, so it is easy to tell if there is a leak or not. I used Valgrind with Redis for years and every real leak was consistently detected as “definitely lost”.</li>
+<li>OSX instrumentation tools don’t detect SDS strings as leaks but are able to correctly handle pointers pointing to the middle of memory chunks.</li>
+</ul>
+<h2 id="Zero-copy-append-from-syscalls"><a href="#Zero-copy-append-from-syscalls" class="headerlink" title="Zero copy append from syscalls"></a>Zero copy append from syscalls</h2><p>At this point you should have all the tools to dig more inside the SDS<br>library by reading the source code, however there is an interesting pattern<br>you can mount using the low level API exported, that is used inside Redis<br>in order to improve performances of the networking code.</p>
+<p>Using <code>sdsIncrLen()</code> and <code>sdsMakeRoomFor()</code> it is possible to mount the<br>following schema, to cat bytes coming from the kernel to the end of an<br>sds string without copying into an intermediate buffer:</p>
+<pre class=" language-c"><code class="language-c">oldlen <span class="token operator">=</span> <span class="token function">sdslen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+s <span class="token operator">=</span> <span class="token function">sdsMakeRoomFor</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> BUFFER_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+nread <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> s<span class="token operator">+</span>oldlen<span class="token punctuation">,</span> BUFFER_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> check <span class="token keyword">for</span> nread <span class="token operator">&lt;=</span> <span class="token number">0</span> and handle it <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token function">sdsIncrLen</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> nread<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><code>sdsIncrLen</code> is documented inside the source code of <code>sds.c</code>.</p>
+<h1 id="Embedding-SDS-into-your-project"><a href="#Embedding-SDS-into-your-project" class="headerlink" title="Embedding SDS into your project"></a>Embedding SDS into your project</h1><p>This is as simple as copying the following files inside your<br>project:</p>
+<ul>
+<li>sds.c</li>
+<li>sds.h</li>
+<li>sdsalloc.h</li>
+</ul>
+<p>The source code is small and every C99 compiler should deal with<br>it without issues.</p>
+<h1 id="Using-a-different-allocator-for-SDS"><a href="#Using-a-different-allocator-for-SDS" class="headerlink" title="Using a different allocator for SDS"></a>Using a different allocator for SDS</h1><p>Internally sds.c uses the allocator defined into <code>sdsalloc.h</code>. This header<br>file just defines macros for malloc, realloc and free, and by default libc<br><code>malloc()</code>, <code>realloc()</code> and <code>free()</code> are used. Just edit this file in order<br>to change the name of the allocation functions.</p>
+<p>The program using SDS can call the SDS allocator in order to manipulate<br>SDS pointers (usually not needed but sometimes the program may want to<br>do advanced things) by using the API exported by SDS in order to call the<br>allocator used. This is especially useful when the program linked to SDS<br>is using a different allocator compared to what SDS is using.</p>
+<p>The API to access the allocator used by SDS is composed of three functions: <code>sds_malloc()</code>, <code>sds_realloc()</code> and <code>sds_free()</code>.</p>
+<h1 id="Credits-and-license"><a href="#Credits-and-license" class="headerlink" title="Credits and license"></a>Credits and license</h1><p>SDS was created by Salvatore Sanfilippo and is released under the BDS two clause license. See the LICENSE file in this source distribution for more information.</p>
+<p>Oran Agra improved SDS version 2 by adding dynamic sized headers in order to<br>save memory for small strings and allow strings greater than 4GB.</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">dele</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://delehub.vercel.app/2020/09/12/c-yu-yan-zi-fu-chuan-han-shu-ku/">https://delehub.vercel.app/2020/09/12/c-yu-yan-zi-fu-chuan-han-shu-ku/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">dele</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
+                                <a href="/tags/Simple-Dynamic-Strings/">
+                                    <span class="chip bg-color">Simple Dynamic Strings</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/09/13/c-and-microcontrollersplan-1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="C and MicrocontrollersPlan-1">
+                        
+                        <span class="card-title">C and MicrocontrollersPlan-1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MicrocontrollersPlanC程序设计复习单片机复习
+单片机案例实验与仿真 (51单片机100实例源码)
+C51单片机开源项目合集
+单片机编程技巧与分析(手把手教你单片机程序框架 )(从单片机基础到程序框架.pdf)
+项目课程设
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="post-category">
+                                    单片机
+                                </a>
+                            
+                            <a href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
+                        <span class="chip bg-color">51单片机</span>
+                    </a>
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/09/04/plan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Plan">
+                        
+                        <span class="card-title">Plan</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习内容：(√)传感器及检测技术
+(√)数字信号处理
+(√)FPGA原理
+(√)微波技术(电磁场与电磁波)
+(√)电子测量技术
+(√)嵌入式系统及应用
+(√)RFID原理及应用
+学习目标：电子专业安排
+软件安排
+以C为核心复习
+嵌入式系统开
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    嵌入式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                        <span class="chip bg-color">嵌入式</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%94%B5%E5%AD%90/">
+                        <span class="chip bg-color">电子</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BC%A0%E6%84%9F%E5%99%A8/">
+                        <span class="chip bg-color">传感器</span>
+                    </a>
+                    
+                    <a href="/tags/FPGA/">
+                        <span class="chip bg-color">FPGA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="artist"
+                   id="159300"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">dele</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/delehub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:delelemonwzx@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057527027" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057527027" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/delehub" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/delehub" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+<script type="text/javascript">
+    var OriginTitile=document.title,st;
+    document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="ヽ(●-`Д´-)ノ你要玩捉迷藏嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好哦！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+</script>
+
+
+
+
+</body>
+
+</html>
